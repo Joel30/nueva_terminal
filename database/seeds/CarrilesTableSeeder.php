@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Carril;
 
-class TransportListTableSeeder extends Seeder
+class CarrilesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class TransportListTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Carril::class, 10)->create();
     }
 }

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\TransportCompany::class, function (Faker $faker) {
+$factory->define(App\Empresa::class, function (Faker $faker) {
     return [
         'nombre' => $faker->company,
         'nro_oficina' => $faker->randomNumber($nbDigits = 2, $strict = false),

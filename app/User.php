@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Staff;
+use App\Personal;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $tabla = "users";
+    //protected $table = "users";
     
-    public function staff(){
-        return $this->belongsTo(Staff::class);
+    public function personal(){
+        return $this->belongsTo(Personal::class);
     }
     /**
      * The attributes that are mass assignable.

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLanesTable extends Migration
+class CreateEmpresasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateLanesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lanes', function (Blueprint $table) {
+        Schema::create('empresas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('carril');
-            $table->string('anden');
+            $table->string('nombre');
+            $table->integer('nro_oficina');
+            $table->string('telefono');
+            $table->integer('celular');
+            $table->string('responsable');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateLanesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lanes');
+        Schema::dropIfExists('empresas');
     }
 }

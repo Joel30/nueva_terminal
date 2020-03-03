@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
-class Staff extends Model
+class Personal extends Model
 {
-    protected $tabla = 'staff';
+    protected $table = 'personal';
 
-    public function user() {
+    public function usuario() {
         return $this->hasOne(User::class);
     }
 }

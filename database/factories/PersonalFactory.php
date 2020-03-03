@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Staff::class, function (Faker $faker) {
+$factory->define(App\Personal::class, function (Faker $faker) {
     return [
         'nombre' => $faker->firstName,
         'apellido_materno' => $faker->lastName,

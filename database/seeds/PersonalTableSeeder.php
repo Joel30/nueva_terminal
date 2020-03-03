@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Lane;
+use App\Personal;
 
-class LanesTableSeeder extends Seeder
+class PersonalTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class LanesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Lane::class, 10)->create();
+        factory(Personal::class, 5)->create();
     }
 }

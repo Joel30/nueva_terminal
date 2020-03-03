@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Department::class, function (Faker $faker) {
+$factory->define(App\Departamento::class, function (Faker $faker) {
     return [
         'nombre' => $faker->city, //town  
     ];

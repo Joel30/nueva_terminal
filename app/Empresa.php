@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Transporte;
 
-class Bus extends Model
+class Empresa extends Model
 {
-    protected $table = 'buses';
+    protected $table = "empresas";
 
     public function transportes() {
         return $this->hasMany(Transporte::class);

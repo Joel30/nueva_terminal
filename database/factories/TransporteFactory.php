@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\TrasportList::class, function (Faker $faker) {
+$factory->define(App\Transporte::class, function (Faker $faker) {
     return [
         'departamento_id'  => str_random(10),
         'empresa_transporte_id' => str_random(10),
