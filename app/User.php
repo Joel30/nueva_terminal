@@ -4,11 +4,17 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Staff;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $tabla = "users";
+    
+    public function staff(){
+        return $this->belongsTo(Staff::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
