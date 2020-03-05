@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Carril;
 
 class CarrilController extends Controller
 {
     public function index()
     {
-        return view('carril.index');
+        $carriles = Carril::all();
+        return view('carril.index', compact('carriles'));
     }
 
     public function create()
     {
-        
+        return view('carril.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $request = request();
+        
+        $carril = new Carril;
+        $carril->guardar($request);
+
+        return redirect('carril/nuevo');
     }
 
     public function show($id)
@@ -28,16 +35,21 @@ class CarrilController extends Controller
 
     public function edit($id)
     {
-        //
+        $carril = Carril::find($id);
+        return view('carril.edit', compact('carril'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Carril $carril)
     {
-        //
+        $request = request();
+        $new_carril = new Carril;
+        $new_carril->actualizar($request, $carril);
+        return redirect('carril');
     }
 
-    public function destroy($id)
+    public function destroy(Carril $carril)
     {
-        //
+        $carril->delete();
+        return redirect('carril');
     }
 }

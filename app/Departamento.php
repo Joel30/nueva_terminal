@@ -12,4 +12,24 @@ class Departamento extends Model
     public function transportes() {
         return $this->hasMany(Transporte::class);
     }
+
+    protected $fillable = [
+        'nombre',
+    ];
+
+    function guardar($request){
+        $data = $request->validate([
+            'nombre' => '',
+        ]);
+
+        Departamento::create($data);
+    }
+
+    function actualizar($request, Departamento $departamento){
+        $data = $request->validate([
+            'nombre' => '',
+        ]);
+
+        $departamento->update($data);
+    }
 }

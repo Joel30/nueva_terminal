@@ -12,4 +12,27 @@ class Carril extends Model
     public function transportes() {
         return $this->hasMany(Transporte::class);
     }
+
+    protected $fillable = [
+        'carril', 'anden',
+    ];
+
+    function guardar($request){
+        
+        $data = $request->validate([
+            'carril' => '',
+            'anden' => '',
+        ]);
+        
+        Carril::create($data);
+    }
+
+    function actualizar($request, Carril $carril){
+        $data = $request->validate([
+            'carril' => '',
+            'anden' => '', 
+        ]);
+
+        $carril->update($data);
+    }
 }

@@ -12,7 +12,7 @@
                 <th>Placa</th>
                 <th>Modelo</th>
                 <th>Color</th>
-                <th></th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
