@@ -9,7 +9,7 @@
         <label for="carril">carril</label>
         <input id="carril" type="text" name="carril" value="{{$carril->carril}}" required autofocus> <br><br>
 
-        <label for="anden">Tipo de Bus</label>
+        <label for="anden">Anden</label>
         <select name="anden" id="anden">
             <option value="A" {{ old('anden', $carril->anden)=='A' ? 'selected' : ''  }}>A</option>
             <option value="B" {{ old('anden', $carril->anden)=='B' ? 'selected' : ''  }}>B</option> 

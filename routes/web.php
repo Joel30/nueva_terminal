@@ -5,6 +5,11 @@ Route::get('/', function () {
 });
 
 Route::get('/personal', 'PersonalController@index')->name('personal.index');
+Route::get('personal/nuevo', 'PersonalController@create')->name('personal.nuevo');
+Route::post('personal', 'PersonalController@store')->name('personal.guardar');
+Route::get('personal/{id}/editar', 'PersonalController@edit')->name('personal.editar');
+Route::put('personal/{personal}', 'PersonalController@update')->name('personal.actualizar');
+Route::delete('personal/{personal}', 'PersonalController@destroy')->name('personal.eliminar');
 
 Route::get('/usuario', 'UserController@index')->name('usuario.index');
 
@@ -23,7 +28,6 @@ Route::get('carril/{id}/editar', 'CarrilController@edit')->name('carril.editar')
 Route::put('carril/{carril}', 'CarrilController@update')->name('carril.actualizar');
 Route::delete('carril/{carril}', 'CarrilController@destroy')->name('carril.eliminar');
 
-
 Route::get('departamento', 'DepartamentoController@index')->name('departamento.index');
 Route::get('departamento/nuevo', 'DepartamentoController@create')->name('departamento.nuevo');
 Route::post('departamento', 'DepartamentoController@store')->name('departamento.guardar');
@@ -32,6 +36,11 @@ Route::put('departamento/{departamento}', 'DepartamentoController@update')->name
 Route::delete('departamento/{departamento}', 'DepartamentoController@destroy')->name('departamento.eliminar');
 
 Route::get('empresa', 'EmpresaController@index')->name('empresa.index');
+Route::get('empresa/nuevo', 'EmpresaController@create')->name('empresa.nuevo');
+Route::post('empresa', 'EmpresaController@store')->name('empresa.guardar');
+Route::get('empresa/{id}/editar', 'EmpresaController@edit')->name('empresa.editar');
+Route::put('empresa/{empresa}', 'EmpresaController@update')->name('empresa.actualizar');
+Route::delete('empresa/{empresa}', 'EmpresaController@destroy')->name('empresa.eliminar');
 
 Route::get('transporte', 'TransporteController@index')->name('transporte.index');
 
