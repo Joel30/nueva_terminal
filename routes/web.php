@@ -43,5 +43,9 @@ Route::put('empresa/{empresa}', 'EmpresaController@update')->name('empresa.actua
 Route::delete('empresa/{empresa}', 'EmpresaController@destroy')->name('empresa.eliminar');
 
 Route::get('transporte', 'TransporteController@index')->name('transporte.index');
-
+Route::get('transporte/nuevo', 'TransporteController@create')->name('transporte.nuevo');
+Route::post('transporte', 'TransporteController@store')->name('transporte.guardar');
+Route::get('transporte/{id}/editar', 'TransporteController@edit')->name('transporte.editar');
+Route::put('transporte/{transporte}', 'TransporteController@update')->name('transporte.actualizar');
+Route::delete('transporte/{transporte}', 'TransporteController@destroy')->name('transporte.eliminar');
 
