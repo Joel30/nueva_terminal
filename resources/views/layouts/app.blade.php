@@ -10,6 +10,7 @@
     <body>
         <div class="container mt-5">
             <div>
+                <a href="{{route('home')}}" class="btn btn-dark">Home</a>
                 <a href="{{route('bus.index')}}" class="btn btn-info">bus</a>
                 <a href="{{route('carril.index')}}" class="btn btn-info">carril</a>
                 <a href="{{route('departamento.index')}}" class="btn btn-info">departamento</a>

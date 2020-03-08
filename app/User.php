@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'personal_id',
+        'email', 'password', 'personal_id',
     ];
 
     /**
@@ -32,4 +32,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    function guardar($request){
+        $data = $request->validate([
+            'personal_id' => '',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        User::create($data);
+    }
+
+    function actualizar($request, $usuario){
+        $data = $request->validate([
+            'personal_id' => '',
+            'email' => 'required|string|email|max:255|unique:users',
+            //'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $usuario->update($data);
+    }
 }
