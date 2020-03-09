@@ -2,9 +2,18 @@
 
 @section('content')
 
+    <div class="col-8">
+        <div class="input-group">
+            <input type="text" class="form-control" id="texto" placeholder="Ingrese nombre">
+            <div class="input-group-append"><span class="input-group-text">Buscar</span></div>
+        </div>
+        
+    </div> <br>
     <div>
         <a href="{{route('transporte.nuevo')}}" class="btn btn-primary mb-3">Nuevo</a>
-    </div>
+        <a href="{{route('transporte.tablero')}}" class="btn btn-success mb-3">Tablero</a> <br>
+
+    </div> 
     <table class="table table-light">
         <thead class="thead-light">
             <tr>
@@ -21,32 +30,23 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-        @foreach($transportes as $transporte)
-            <tr>
-                <td>{{ $transporte->departamento->nombre }}</td>
-                <td>{{ $transporte->empresa->nombre }}</td>
-                <td>{{ $transporte->empresa->telefono }}</td>
-                <td>{{ $transporte->carril->anden }}</td>
-                <td>{{ $transporte->carril->carril }}</td>
-                <td>{{ $transporte->bus->tipo_bus }}</td>
-                <td>{{ $transporte->fecha }}</td>
-                <td>{{ $transporte->hora }}</td>
-                <td>{{ $transporte->estado }}</td>
-                <td>{{ $transporte->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
-
-                <td>
-                <div class="row">
-                    <a class="btn btn-warning btn-sm mb-2 py-0 px-3 mr-2" href="{{route('transporte.editar', $transporte)}}"> Editar </a>
-                    <form action="{{route('transporte.eliminar', $transporte)}}" method="POST">
-                        {{method_field('DELETE')}}
-                        {{csrf_field()}}
-                        <button type="input" class="btn btn-danger mb-2 btn-sm py-0"  onclick="return confirm('Esta seguro de eliminar al transporte con id: {{ $transporte->id}}')">Eliminar</button>
-                    </form>
-                </div>                    
-                </td>
-            </tr>
-        @endforeach
+        <tbody id="resultados">
+            @include('transporte/buscar')
         </tbody>
     </table>
+
+
+    <script>
+
+        window.addEventListener('load',function(){
+            document.getElementById("texto").addEventListener("keyup", () => {
+                if((document.getElementById("texto").value.length)>=0)
+                    fetch(`/transporte/buscar?texto=${document.getElementById("texto").value}`,{ method:'get' })
+                    .then(response  =>  response.text() )
+                    .then(html      =>  {   document.getElementById("resultados").innerHTML = html  })
+                else
+                    document.getElementById("resultados").innerHTML = ""
+            })
+        }); 
+    </script>
 @endsection

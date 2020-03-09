@@ -53,6 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('transporte/{id}/editar', 'TransporteController@edit')->name('transporte.editar');
     Route::put('transporte/{transporte}', 'TransporteController@update')->name('transporte.actualizar');
     Route::delete('transporte/{transporte}', 'TransporteController@destroy')->name('transporte.eliminar');
+
+    Route::get('transporte/buscar','TransporteController@buscador')->name('transporte.buscador');
+    Route::get('transporte/datos_tablero','TransporteController@datos_tablero')->name('transporte.datos_tablero');
+    Route::get('transporte/tablero','TransporteController@tablero')->name('transporte.tablero');
+
 });
 
 Auth::routes();

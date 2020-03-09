@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Transporte;
 use App\Bus;
 use App\Carril;
@@ -16,6 +17,12 @@ class TransporteController extends Controller
     {
         $transportes = Transporte::all();
         return view('transporte.index', compact('transportes'));
+    }
+
+    public function buscador(Request $request){
+        $transportes = Transporte::all();
+        $nombre = $request->texto;
+        return view("transporte.buscar",compact('transportes', 'nombre'));        
     }
 
     public function create()
@@ -61,5 +68,15 @@ class TransporteController extends Controller
     {
         $transporte->delete();
         return redirect('transporte');
+    }
+
+    public function datos_tablero(){
+        $transportes = Transporte::all();
+        return view('transporte.datos_tablero', compact('transportes'));
+    }
+
+    public function tablero(){
+        
+        return view('transporte.tablero');
     }
 }
