@@ -29,7 +29,7 @@
 
         <label for="cargo">Tipo de Bus</label>
         <select name="cargo" id="cargo">
-            <option value="Usuario" {{ old('cargo', $personal->cargo)=='Usuario' ? 'selected' : ''  }}>Usuario</option>
+            <option value="Encargado" {{ old('cargo', $personal->cargo)=='Encargado' ? 'selected' : ''  }}>Encargado</option>
             <option value="Administrador" {{ old('cargo', $personal->cargo)=='Administrador' ? 'selected' : ''  }}>Administrador</option> 
         </select> <br><br>
 

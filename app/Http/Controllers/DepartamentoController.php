@@ -20,9 +20,8 @@ class DepartamentoController extends Controller
 
     public function store()
     {
-        $request = request();
         $new_departamento = new Departamento;
-        $new_departamento->guardar($request);
+        $new_departamento->guardar(request());
         return redirect('departamento/nuevo');
     }
 
@@ -39,9 +38,8 @@ class DepartamentoController extends Controller
 
     public function update(Departamento $departamento)
     {
-        $request = request();
         $new_departamento = new Departamento;
-        $new_departamento->actualizar($request, $departamento);
+        $new_departamento->actualizar(request(), $departamento);
 
         return redirect('departamento');
     }

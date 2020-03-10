@@ -19,12 +19,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('usuario/{usuario}', 'UserController@update')->name('usuario.actualizar');
     Route::delete('usuario/{usuario}', 'UserController@destroy')->name('usuario.eliminar');
 
+
     Route::get('bus', 'BusController@index')->name('bus.index');
     Route::get('bus/nuevo', 'BusController@create')->name('bus.nuevo');
     Route::post('bus', 'BusController@store')->name('bus.guardar');
     Route::get('bus/{id}/editar', 'BusController@edit')->name('bus.editar');
     Route::put('bus/{bus}', 'BusController@update')->name('bus.actualizar');
     Route::delete('bus/{bus}', 'BusController@destroy')->name('bus.eliminar');
+
 
     Route::get('carril', 'CarrilController@index')->name('carril.index');
     Route::get('carril/nuevo', 'CarrilController@create')->name('carril.nuevo');
@@ -33,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('carril/{carril}', 'CarrilController@update')->name('carril.actualizar');
     Route::delete('carril/{carril}', 'CarrilController@destroy')->name('carril.eliminar');
 
+
     Route::get('departamento', 'DepartamentoController@index')->name('departamento.index');
     Route::get('departamento/nuevo', 'DepartamentoController@create')->name('departamento.nuevo');
     Route::post('departamento', 'DepartamentoController@store')->name('departamento.guardar');
@@ -40,12 +43,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('departamento/{departamento}', 'DepartamentoController@update')->name('departamento.actualizar');
     Route::delete('departamento/{departamento}', 'DepartamentoController@destroy')->name('departamento.eliminar');
 
+
     Route::get('empresa', 'EmpresaController@index')->name('empresa.index');
     Route::get('empresa/nuevo', 'EmpresaController@create')->name('empresa.nuevo');
     Route::post('empresa', 'EmpresaController@store')->name('empresa.guardar');
     Route::get('empresa/{id}/editar', 'EmpresaController@edit')->name('empresa.editar');
     Route::put('empresa/{empresa}', 'EmpresaController@update')->name('empresa.actualizar');
     Route::delete('empresa/{empresa}', 'EmpresaController@destroy')->name('empresa.eliminar');
+
 
     Route::get('transporte', 'TransporteController@index')->name('transporte.index');
     Route::get('transporte/nuevo', 'TransporteController@create')->name('transporte.nuevo');
@@ -58,7 +63,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('transporte/datos_tablero','TransporteController@datos_tablero')->name('transporte.datos_tablero');
     Route::get('transporte/tablero','TransporteController@tablero')->name('transporte.tablero');
 
+    Route::get('reporte','TransporteController@reporte')->name('reporte');
+    Route::post('reporte','TransporteController@buscarReporte')->name('reporte.buscar');
+
 });
+
+
 
 Auth::routes();
 

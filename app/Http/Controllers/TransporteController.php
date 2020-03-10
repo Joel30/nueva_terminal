@@ -79,4 +79,22 @@ class TransporteController extends Controller
         
         return view('transporte.tablero');
     }
+
+    public function reporte(){
+        return view('reporte.index');
+    }
+
+    public function buscarReporte(){
+
+        $fecha_inicio = request()->fecha_inicio;
+        $fecha_fin = request()->fecha_fin;
+        
+        $transportes = Transporte::whereDate('created_at','>=',$fecha_inicio)
+                            ->whereDate('created_at', '<=', $fecha_fin)
+                            ->get();
+        $transportes->fecha_inicio = $fecha_inicio;
+        $transportes->fecha_fin = $fecha_fin;
+
+        return view('reporte.index', compact('transportes'));
+    }
 }

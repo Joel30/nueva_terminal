@@ -11,6 +11,6 @@ $factory->define(App\Personal::class, function (Faker $faker) {
         'fecha_nacimiento' => $faker->date,
         'celular' => $faker->randomNumber($nbDigits = 8, $strict = true),
         'direccion' => $faker->streetAddress,
-        'cargo' => $faker->randomElement($array = array ('Administrador','Usuario')),
+        'cargo' => $faker->randomElement($array = array ('Administrador','Encargado')),
     ];
 });

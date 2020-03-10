@@ -20,10 +20,8 @@ class BusController extends Controller
 
     public function store()
     {
-        $request = request();
-        //dd($request);
         $bus = new Bus;
-        $bus->guardar($request);
+        $bus->guardar(request());
 
         return redirect('bus/nuevo');
 
@@ -43,9 +41,8 @@ class BusController extends Controller
 
     public function update(Bus $bus)
     {
-        $request = request();
         $new_bus = new Bus;
-        $new_bus->actualizar($request, $bus);
+        $new_bus->actualizar(request(), $bus);
 
         return redirect('bus');
     }

@@ -20,10 +20,8 @@ class CarrilController extends Controller
 
     public function store()
     {
-        $request = request();
-        
         $carril = new Carril;
-        $carril->guardar($request);
+        $carril->guardar(request());
 
         return redirect('carril/nuevo');
     }
@@ -41,9 +39,8 @@ class CarrilController extends Controller
 
     public function update(Carril $carril)
     {
-        $request = request();
         $new_carril = new Carril;
-        $new_carril->actualizar($request, $carril);
+        $new_carril->actualizar(request(), $carril);
         return redirect('carril');
     }
 

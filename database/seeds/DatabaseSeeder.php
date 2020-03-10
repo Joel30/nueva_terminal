@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(PersonalTableSeeder::class);
-        //$this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
         $this->call(CarrilesTableSeeder::class);
         $this->call(BusesTableSeeder::class);

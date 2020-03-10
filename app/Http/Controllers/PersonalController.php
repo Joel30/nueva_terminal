@@ -10,6 +10,8 @@ class PersonalController extends Controller
 {
     public function index()
     {
+        $this->autorizacion('Administrador');
+
         $personal = Personal::select(
             'id', 
             (
@@ -31,6 +33,8 @@ class PersonalController extends Controller
 
     public function store()
     {
+        $this->autorizacion('Administrador');
+
         $new_personal = new Personal;
         $new_personal->guardar(request());
         
@@ -44,12 +48,16 @@ class PersonalController extends Controller
 
     public function edit($id)
     {
+        $this->autorizacion('Administrador');
+
         $personal = Personal::find($id);
         return view('personal.edit', compact('personal'));
     }
 
     public function update(Personal $personal)
     {
+        $this->autorizacion('Administrador');
+
         $new_personal = new Personal;
         $new_personal->actualizar(request(), $personal);
         return redirect('personal');
@@ -57,6 +65,8 @@ class PersonalController extends Controller
 
     public function destroy(Personal $personal)
     {
+        $this->autorizacion('Administrador');
+
         $personal->delete();
         return redirect('personal');
     }

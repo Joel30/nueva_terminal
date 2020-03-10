@@ -28,7 +28,7 @@
 
         <label for="cargo">Cargo</label>
         <select name="cargo" id="cargo">
-            <option value="Usuario" {{ old('cargo')=='Usuario' ? 'selected' : ''  }}>Usuario</option>
+            <option value="Encargado" {{ old('cargo')=='Encargado' ? 'selected' : ''  }}>Encargado</option>
             <option value="Administrador" {{ old('cargo')=='Administrador' ? 'selected' : ''  }}>Administrador</option> 
         </select> <br><br>
 
