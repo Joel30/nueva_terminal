@@ -1,4 +1,11 @@
-@extends('layouts.basic')
+@extends('layouts.app')
+
+@section('title') <a href="{{route('empresa.index')}}" class="btn btn-danger">EMPRESA DE TRANSPORTE</a> @endsection
+
+@section('breadcrumb')
+    <li> <a href="{{route('empresa.index')}}">Empresa</a></li>
+    <li class="active">Nuevo</li>
+@endsection
 
 @section('content')
     <form method="POST" action="{{route('empresa.guardar')}}">

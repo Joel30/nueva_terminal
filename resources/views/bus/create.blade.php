@@ -1,7 +1,14 @@
-@extends('layouts.basic')
+@extends('layouts.app')
+
+@section('title') <a href="{{route('bus.index')}}" class="btn btn-danger">BUSES</a> @endsection
+
+@section('breadcrumb')
+    <li><a href="{{route('bus.index')}}">Buses</a></li>
+    <li class="active">Nuevo</li>
+@endsection
 
 @section('content')
-    <form method="POST" action="{{url(route('bus.guardar'))}}">
+    <form method="POST" action="{{route('bus.guardar')}}">
         
         {{ csrf_field() }}
         

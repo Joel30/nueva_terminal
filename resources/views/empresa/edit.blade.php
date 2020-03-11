@@ -1,4 +1,13 @@
-@extends('layouts.basic')
+@extends('layouts.app')
+
+@extends('layouts.app')
+
+@section('title') <a href="{{route('empresa.index')}}" class="btn btn-danger">EMPRESA DE TRANSPORTE</a> @endsection
+
+@section('breadcrumb')
+    <li> <a href="{{route('empresa.index')}}">Empresa</a></li>
+    <li class="active">Editar</li>
+@endsection
 
 @section('content')
     <form method="POST" action="{{route('empresa.actualizar', $empresa)}}">

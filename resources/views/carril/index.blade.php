@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    <h4 class="page-title">Carril - Anden</h4>
+@endsection
+
+@section('breadcrumb')
+    <li class="active">Carril-Anden</li>
+@endsection
+
 @section('content')
 
     <div>

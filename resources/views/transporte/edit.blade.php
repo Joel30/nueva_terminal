@@ -1,4 +1,11 @@
-@extends('layouts.basic')
+@extends('layouts.app')
+
+@section('title') <a href="{{route('transporte.index')}}" class="btn btn-danger">LISTA DE TRANSPORTE</a> @endsection
+
+@section('breadcrumb')
+    <li> <a href="{{route('transporte.index')}}">Transporte</a></li>
+    <li class="active">Editar</li>
+@endsection
 
 @section('content')
 

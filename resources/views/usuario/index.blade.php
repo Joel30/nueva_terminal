@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    <h4 class="page-title">Usuarios</h4>
+@endsection
+
+@section('breadcrumb')
+    <li class="active">Usuarios</li>
+@endsection
+
 @section('content')
 
     <div>

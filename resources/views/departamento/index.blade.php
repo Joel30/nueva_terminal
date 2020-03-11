@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    <h4 class="page-title">Departamento</h4>
+@endsection
+
+@section('breadcrumb')
+    <li class="active">Departamento</li>
+@endsection
+
 @section('content')
 
     <div>

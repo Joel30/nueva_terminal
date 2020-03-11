@@ -1,4 +1,11 @@
-@extends('layouts.basic')
+@extends('layouts.app')
+
+@section('title') <a href="{{route('carril.index')}}" class="btn btn-danger">CARRIL</a> @endsection
+
+@section('breadcrumb')
+    <li> <a href="{{route('carril.index')}}">Carril</a></li>
+    <li class="active">Editar</li>
+@endsection
 
 @section('content')
     <form method="POST" action="{{url(route('carril.actualizar', $carril))}}">

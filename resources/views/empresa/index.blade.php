@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    <h4 class="page-title">Empresa de Transporte</h4>
+@endsection
+
+@section('breadcrumb')
+    <li class="active">Empresa de Transporte</li>
+@endsection
+
 @section('content')
 
     <div>
