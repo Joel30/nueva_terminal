@@ -1,46 +1,137 @@
 @extends('layouts.app')
 
-@extends('layouts.app')
-
 @section('title') <a href="{{route('personal.index')}}" class="btn btn-danger">PERSONAL</a> @endsection
 
 @section('breadcrumb')
-    <li> <a href="{{route('personal.index')}}">Personal</a></li>
-    <li class="active">Nuevo</li>
+    <li> <a href="{{route('personal.index')}}">&nbsp;/ Personal</a></li>
+    <li class="active">&nbsp;/ Nuevo</li>
 @endsection
 
 @section('content')
     <form method="POST" action="{{route('personal.guardar')}}">
         
         {{ csrf_field() }}
-        
-        <label for="nombre">nombre</label>
-        <input id="nombre" type="text" name="nombre" value="{{ old('nombre')  }}" required autofocus> <br><br>
-        
-        <label for="apellido_paterno">Apellido Paterno</label>
-        <input id="apellido_paterno" type="text" name="apellido_paterno" value="{{ old('apellido_paterno')  }}" required autofocus> <br><br>
 
-        <label for="apellido_materno">Apellido Materno</label>
-        <input id="apellido_materno" type="text" name="apellido_materno" value="{{ old('apellido_materno')  }}" required autofocus> <br><br>
+        <div class="form-group row">
+            <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre: </label>
 
-        <label for="ci">C. I.</label>
-        <input id="ci" type="text" name="ci" value="{{ old('ci')  }}" required autofocus> <br><br>
+            <div class="col-md-6">
+                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre')}}" required autofocus>
 
-        <label for="fecha_nacimiento">fecha_nacimiento</label>
-        <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" value="{{ old('fecha_nacimiento')  }}" required autofocus> <br><br>
+                @if ($errors->has('nombre'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('nombre') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
-        <label for="celular">Celular</label>
-        <input id="celular" type="number" name="celular" value="{{ old('celular')  }}" required autofocus> <br><br>
+        <div class="form-group row">
+            <label for="apellido_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno: </label>
 
-        <label for="direccion">Direccion</label>
-        <input id="direccion" type="text" name="direccion" value="{{ old('direccion')  }}" required autofocus> <br><br>
+            <div class="col-md-6">
+                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{ old('apellido_paterno')}}" required autofocus>
 
-        <label for="cargo">Cargo</label>
-        <select name="cargo" id="cargo">
-            <option value="Encargado" {{ old('cargo')=='Encargado' ? 'selected' : ''  }}>Encargado</option>
-            <option value="Administrador" {{ old('cargo')=='Administrador' ? 'selected' : ''  }}>Administrador</option> 
-        </select> <br><br>
+                @if ($errors->has('apellido_paterno'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('apellido_paterno') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <div class="form-group row">
+            <label for="apellido_materno" class="col-md-4 col-form-label text-md-right">Apellido Materno: </label>
+
+            <div class="col-md-6">
+                <input id="apellido_materno" type="text" class="form-control{{ $errors->has('apellido_materno') ? ' is-invalid' : '' }}" name="apellido_materno" value="{{ old('apellido_materno')}}" required autofocus>
+
+                @if ($errors->has('apellido_materno'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('apellido_materno') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="ci" class="col-md-4 col-form-label text-md-right">Cédula de Identidad: </label>
+
+            <div class="col-md-6">
+                <input id="ci" type="text" class="form-control{{ $errors->has('ci') ? ' is-invalid' : '' }}" name="ci" value="{{ old('ci')}}" required autofocus>
+
+                @if ($errors->has('ci'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('ci') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="fecha_nacimiento" class="col-md-4 col-form-label text-md-right">Fecha de Nacimiento: </label>
+
+            <div class="col-md-6">
+                <input id="fecha_nacimiento" type="date" class="form-control{{ $errors->has('fecha_nacimiento') ? ' is-invalid' : '' }}" name="fecha_nacimiento" value="{{ old('fecha_nacimiento')}}" required autofocus>
+
+                @if ($errors->has('fecha_nacimiento'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('fecha_nacimiento') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="celular" class="col-md-4 col-form-label text-md-right">Celular: </label>
+
+            <div class="col-md-6">
+                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular')}}" required autofocus>
+
+                @if ($errors->has('celular'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('celular') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="direccion" class="col-md-4 col-form-label text-md-right">Direccion: </label>
+
+            <div class="col-md-6">
+                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" value="{{ old('direccion')}}" required autofocus>
+
+                @if ($errors->has('direccion'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('direccion') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="cargo" class="col-md-4 col-form-label text-md-right">Cargo (Rol): </label>
+            <div class="col-md-6">
+                <select class="form-control{{ $errors->has('cargo') ? ' is-invalid' : '' }}" name="cargo" id="cargo" required>
+                    <option value="Encargado" {{ old('cargo')=='Encargado' ? 'selected' : ''  }}>Encargado</option>
+                    <option value="Administrador" {{ old('cargo')=='Administrador' ? 'selected' : ''  }}>Administrador</option> 
+                </select>
+                @if ($errors->has('cargo'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('cargo') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row mb-0">
+            <div class="col-md-4 offset-md-4">
+                <button type="submit" class="btn btn-primary1 btn-block mt-4">
+                    Guardar
+                </button>
+            </div>
+        </div>
+
     </form>
 @endsection

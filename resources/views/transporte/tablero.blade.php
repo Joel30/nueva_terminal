@@ -1,28 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Terminal</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title')
+    Vusualización de Información de Buses
+@endsection
+
+@section('breadcrumb')
+    <li class="active"></li>
+@endsection
+
+@section('content')
     
     <img src="https://previews.123rf.com/images/mathess/mathess1612/mathess161200609/69580248-potos%C3%8D-bolivia-20-de-abril-2015-interior-de-la-terminal-de-autobuses-en-potos%C3%AD-bolivia.jpg" alt="" width="100%" height="500px">
         
-    <table class="table table-light">
-        <thead class="thead-light">
-            <tr>
-                <th>Destino</th>
-                <th>Empresa de Transporte</th>
-                <th>Anden</th>
-                <th>Carril</th>
-                <th>Hora</th>
-                <th>Estado</th>
-                <th>salida/llegada</th>
+    <table class="table">
+        <thead class="text-center">
+            <tr style="background-color:#077afe">
+                <th colspan="7" class="p-2 h5 text-white">SALIDA Y LLEGADA DE BUSES</th>
+            </tr>
+            <tr style="background-color:#ceeafe;">
+                <th class="text-dark py-1">Destino</th>
+                <th class="text-dark py-1">Empresa de Transporte</th>
+                <th class="text-dark py-1">Anden</th>
+                <th class="text-dark py-1">Carril</th>
+                <th class="text-dark py-1">Hora</th>
+                <th class="text-dark py-1">Estado</th>
+                <th class="text-dark py-1">Salida / Llegada</th>
             </tr>
         </thead>
-        <tbody id="seccionload">
+        <tbody id="seccionload" class="text-white text-uppercase text-monospace">
             
         </tbody>
     </table>
@@ -40,5 +45,4 @@
         }
        
     </script>
-</body>
-</html>
+@endsection

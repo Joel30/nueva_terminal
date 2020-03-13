@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    <h4 class="page-title">Lista de Transporte</h4>
+    <a href="{{route('transporte.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">Lista de Transporte</li>
+    <li class="active">&nbsp;/ Lista de Transporte</li>
 @endsection
 
 @section('content')
@@ -17,31 +17,29 @@
         </div>
         
     </div> <br>
-    <div>
-        <a href="{{route('transporte.nuevo')}}" class="btn btn-primary mb-3">Nuevo</a>
-        <a href="{{route('transporte.tablero')}}" class="btn btn-success mb-3">Tablero</a> <br>
-
-    </div> 
-    <table class="table table-light">
-        <thead class="thead-light">
-            <tr>
-                <th>Destino</th>
-                <th>Empresa de Transporte</th>
-                <th>Telefono</th>
-                <th>Anden</th>
-                <th>Carril</th>
-                <th>Tipo de Bus</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Estado</th>
-                <th>salida/llegada</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="resultados">
-            @include('transporte/buscar')
-        </tbody>
-    </table>
+    <div style="overflow-x:auto;">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Destino</th>
+                    <th>Empresa de Transporte</th>
+                    <th>Telefono</th>
+                    <th>Anden</th>
+                    <th>Carril</th>
+                    <th>Tipo de Bus</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th>salida/llegada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="resultados">
+                @include('transporte/buscar')
+            </tbody>
+        </table>
+    </div>
 
 
     <script>

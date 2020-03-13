@@ -1,41 +1,48 @@
 @extends('layouts.app')
 
 @section('title')
-    <h4 class="page-title">Departamento</h4>
+    <a href="{{route('departamento.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR DEPARTAMENTO</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">Departamento</li>
+    <li class="active">&nbsp;/ Departamento</li>
 @endsection
 
 @section('content')
 
-    <div>
-        <a href="{{route('departamento.nuevo')}}" class="btn btn-primary mb-3">Nuevo</a>
-    </div>
-    <table class="table table-light">
-        <thead class="thead-light">
+<div style="overflow-x:auto;">
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
+                <th>#</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
+        <?php $cont = 1; ?>
         @foreach($departamentos as $departamento)
             <tr>
+                <td><b>{{ $cont++ }}</b></td>
                 <td>{{ $departamento->nombre }}</td>
                 <td>
-                <div class="row">
-                    <a class="btn btn-warning btn-sm mb-2 py-0 px-3 mr-2" href="{{route('departamento.editar', $departamento)}}"> Editar </a>
-                    <form action="{{route('departamento.eliminar', $departamento)}}" method="POST">
-                        {{method_field('DELETE')}}
-                        {{csrf_field()}}
-                        <button type="input" class="btn btn-danger mb-2 btn-sm py-0"  onclick="return confirm('Esta seguro de eliminar el departamento con id: {{ $departamento->id}}')">Eliminar</button>
-                    </form>
-                </div>                    
+                    <div class="row justify-content-start">
+                        <div class="col-4">
+                            <a href="{{route('departamento.editar', $departamento)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
+                        </div>
+                        <div class="col-4">
+                            <form action="{{route('departamento.eliminar', $departamento)}}" method="POST">
+                                {{method_field('DELETE')}}
+                                {{csrf_field()}}
+
+                                <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Destino con id: {{ $departamento->id}}')">
+                            </form>
+                        </div>
+                    </div>                        
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+</div>
 @endsection

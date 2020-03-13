@@ -1,4 +1,4 @@
-
+<?php $cont = 1; ?>
 @foreach($transportes as $transporte)
 <?php 
     if(!isset($nombre)){
@@ -11,6 +11,7 @@
 ?>
 @if ( $nombre == null || strpos($nombre_empresa, $buscar) !== false)
     <tr>
+        <td><b>{{ $cont++ }}</b></td>
         <td>{{ $transporte->departamento->nombre }}</td>
         <td>{{ $transporte->empresa->nombre }}</td>
         <td>{{ $transporte->empresa->telefono }}</td>
@@ -23,14 +24,20 @@
         <td>{{ $transporte->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
 
         <td>
-        <div class="row">
-            <a class="btn btn-warning btn-sm mb-2 py-0 px-3 mr-2" href="{{route('transporte.editar', $transporte)}}"> Editar </a>
-            <form action="{{route('transporte.eliminar', $transporte)}}" method="POST">
-                {{method_field('DELETE')}}
-                {{csrf_field()}}
-                <button type="input" class="btn btn-danger mb-2 btn-sm py-0"  onclick="return confirm('Esta seguro de eliminar al transporte con id: {{ $transporte->id}}')">Eliminar</button>
-            </form>
-        </div>                    
+            <div class="row justify-content-start">
+                <div class="col-4">
+                    <a href="{{route('transporte.editar', $transporte)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
+
+                </div>
+                <div class="col-4">
+                    <form action="{{route('transporte.eliminar', $transporte)}}" method="POST">
+                        {{method_field('DELETE')}}
+                        {{csrf_field()}}
+
+                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Transporte con id: {{ $transporte->id}}')">
+                    </form>
+                </div>
+            </div>                        
         </td>
     </tr>
 @endif

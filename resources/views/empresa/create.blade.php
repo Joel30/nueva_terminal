@@ -3,8 +3,8 @@
 @section('title') <a href="{{route('empresa.index')}}" class="btn btn-danger">EMPRESA DE TRANSPORTE</a> @endsection
 
 @section('breadcrumb')
-    <li> <a href="{{route('empresa.index')}}">Empresa</a></li>
-    <li class="active">Nuevo</li>
+    <li> <a href="{{route('empresa.index')}}">&nbsp;/ Empresa</a></li>
+    <li class="active">&nbsp;/ Nuevo</li>
 @endsection
 
 @section('content')
@@ -12,21 +12,82 @@
         
         {{ csrf_field() }}
         
-        <label for="nombre">nombre</label>
-        <input id="nombre" type="text" name="nombre" value="{{ old('nombre')  }}" required autofocus> <br><br>
+        <div class="form-group row">
+            <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre: </label>
 
-        <label for="nro_oficina">Nro de Oficina</label>
-        <input id="nro_oficina" type="number" name="nro_oficina" value="{{ old('nro_oficina')  }}" required autofocus> <br><br>
-        
-        <label for="telefono">Telefono</label>
-        <input id="telefono" type="text" name="telefono" value="{{ old('telefono')  }}" required autofocus> <br><br>
-        
-        <label for="celular">Celular</label>
-        <input id="celular" type="number" name="celular" value="{{ old('celular')  }}" required autofocus> <br><br>
-        
-        <label for="responsable">responsable</label>
-        <input id="responsable" type="text" name="responsable" value="{{ old('responsable')  }}" required autofocus> <br><br>
+            <div class="col-md-6">
+                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre')}}" required autofocus>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
+                @if ($errors->has('nombre'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('nombre') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nro_oficina" class="col-md-4 col-form-label text-md-right">Numero de Oficina: </label>
+
+            <div class="col-md-6">
+                <input id="nro_oficina" type="number" class="form-control{{ $errors->has('nro_oficina') ? ' is-invalid' : '' }}" name="nro_oficina" value="{{ old('nro_oficina')}}" required autofocus>
+
+                @if ($errors->has('nro_oficina'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('nro_oficina') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono: </label>
+
+            <div class="col-md-6">
+                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono')}}" required autofocus>
+
+                @if ($errors->has('telefono'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('telefono') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="celular" class="col-md-4 col-form-label text-md-right">Celular: </label>
+
+            <div class="col-md-6">
+                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular')}}" required autofocus>
+
+                @if ($errors->has('celular'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('celular') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="responsable" class="col-md-4 col-form-label text-md-right">Responsable: </label>
+
+            <div class="col-md-6">
+                <input id="responsable" type="text" class="form-control{{ $errors->has('responsable') ? ' is-invalid' : '' }}" name="responsable" value="{{ old('responsable')}}" required autofocus>
+
+                @if ($errors->has('responsable'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('responsable') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row mb-0">
+            <div class="col-md-4 offset-md-4">
+                <button type="submit" class="btn btn-primary1 btn-block mt-4">
+                    Guardar
+                </button>
+            </div>
+        </div>
     </form>
 @endsection

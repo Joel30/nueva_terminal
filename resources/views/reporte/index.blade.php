@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    REPORTES
+@endsection
+
+@section('breadcrumb')
+    <li class="active">&nbsp;/ Reportes</li>
+@endsection
+
 @section('content')
 
     <form  method="POST" action="{{route('reporte.buscar')}}">
@@ -20,9 +28,11 @@
         <p>Busqueda entre las fechas: {{$transportes->fecha_inicio}} y {{$transportes->fecha_fin}}</p>
     </div>
     @endif
-        <table class="table table-light">
-        <thead class="thead-light">
+    <div style="overflow-x:auto;">
+        <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
+                <th>#</th>
                 <th>Destino</th>
                 <th>Empresa de Transporte</th>
                 <th>Anden</th>
@@ -38,9 +48,11 @@
         
 
         @if(isset($transportes))
+            <?php $cont = 1; ?>
             @foreach($transportes as $transporte)
             
             <tr>
+                <td><b>{{ $cont++ }}</b></td>
                 <td>{{ $transporte->departamento->nombre }}</td>
                 <td>{{ $transporte->empresa->nombre }}</td>
                 <td>{{ $transporte->carril->anden }}</td>
@@ -55,6 +67,7 @@
             @endforeach
         @endif
         </tbody>
-    </table>
+        </table>
+    </div>    
 
 @endsection
