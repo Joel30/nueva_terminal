@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('carril.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR CARRIL-ANDEN</a>
+    <a href="{{route('carril.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Carril-Anden</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Carril-Anden</li>
+    <li class="breadcrumb-item active">Carril-Anden</li>
 @endsection
 
 @section('content')
 
 <div style="overflow-x:auto;">
     <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="th-dark">
             <tr>
                 <th>#</th>
                 <th>Carril</th>

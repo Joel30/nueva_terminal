@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('bus.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR BUS</a>
+    <a href="{{route('bus.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Bus</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Buses</li>
+    <li class="breadcrumb-item active">Buses</li>
 @endsection
 
 @section('content')
 
 <div style="overflow-x:auto;">
     <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="th-dark">
             <tr>
                 <th>#</th>
                 <th>Tipo de Bus</th>

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('personal.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR PERSONAL</a>
+    <a href="{{route('personal.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Personal</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Personal</li>
+    <li class="breadcrumb-item active">Personal</li>
 @endsection
 
 @section('content')
 <div style="overflow-x:auto;">
     <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="th-dark">
             <tr>
                 <th>#</th>
                 <th>Nombre</th>

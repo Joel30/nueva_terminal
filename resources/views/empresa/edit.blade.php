@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
-@extends('layouts.app')
-
-@section('title') <a href="{{route('empresa.index')}}" class="btn btn-danger">EMPRESA DE TRANSPORTE</a> @endsection
+@section('title') 
+    <a href="{{route('empresa.index')}}" class="btn btn-danger py-1 ">
+        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
+        Regresar
+    </a> 
+@endsection
 
 @section('breadcrumb')
-    <li> <a href="{{route('empresa.index')}}">&nbsp;/ Empresa</a></li>
-    <li class="active">&nbsp;/ Editar</li>
+    <li class="breadcrumb-item"> <a href="{{route('empresa.index')}}">Empresa</a></li>
+    <li class="breadcrumb-item active">Editar</li>
 @endsection
 
 @section('content')

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('transporte.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR</a>
+    <a href="{{route('transporte.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Lista de Transporte</li>
+    <li class="breadcrumb-item active">Lista de Transporte</li>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
     </div> <br>
     <div style="overflow-x:auto;">
         <table class="table table-striped">
-            <thead class="thead-dark">
+            <thead class="th-dark">
                 <tr>
                     <th>#</th>
                     <th>Destino</th>
@@ -27,7 +27,7 @@
                     <th>Telefono</th>
                     <th>Anden</th>
                     <th>Carril</th>
-                    <th>Tipo de Bus</th>
+                    <th>Bus</th>
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Estado</th>
@@ -47,7 +47,7 @@
         window.addEventListener('load',function(){
             document.getElementById("texto").addEventListener("keyup", () => {
                 if((document.getElementById("texto").value.length)>=0)
-                    fetch(`/transporte/buscar?texto=${document.getElementById("texto").value}`,{ method:'get' })
+                    fetch(`{{route('transporte.buscador')}}?texto=${document.getElementById("texto").value}`,{ method:'get' })
                     .then(response  =>  response.text() )
                     .then(html      =>  {   document.getElementById("resultados").innerHTML = html  })
                 else

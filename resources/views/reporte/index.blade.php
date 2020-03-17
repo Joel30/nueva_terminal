@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Reportes</li>
+    <li class="breadcrumb-item active">Reportes</li>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
     @endif
     <div style="overflow-x:auto;">
         <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="th-dark">
             <tr>
                 <th>#</th>
                 <th>Destino</th>

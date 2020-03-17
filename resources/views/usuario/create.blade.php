@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
-@section('title') <a href="{{route('usuario.index')}}" class="btn btn-danger">USUARIOS</a> @endsection
+@section('title') 
+    <a href="{{route('usuario.index')}}" class="btn btn-danger py-1 ">
+        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
+        Regresar
+    </a> 
+@endsection
 
 @section('breadcrumb')
-    <li> <a href="{{route('usuario.index')}}">&nbsp;/ Usuario</a></li>
-    <li class="active">&nbsp;/ Nuevo</li>
+    <li class="breadcrumb-item"> <a href="{{route('usuario.index')}}">Usuario</a></li>
+    <li class="breadcrumb-item active">Nuevo</li>
 @endsection
 
 @section('content')

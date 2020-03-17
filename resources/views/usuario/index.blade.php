@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('usuario.nuevo')}}" class="btn btn-outline-primary py-1 btn-block">AGREGAR USUARIO</a>
+    <a href="{{route('usuario.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Usuario</a>
 @endsection
 
 @section('breadcrumb')
-    <li class="active">&nbsp;/ Usuarios</li>
+    <li class="breadcrumb-item active">Usuarios</li>
 @endsection
 
 @section('content')
 
 <div style="overflow-x:auto;">
     <table class="table table-striped">
-        <thead class="thead-dark">
+        <thead class="th-dark">
             <tr>
                 <th>#</th>
                 <th>E-mail</th>
