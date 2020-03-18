@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <!-- <div class="panel-heading">Dashboard</div> -->
-                <a href="{{route('transporte.tablero')}}" class="btn btn-success">Tablero</a>
+                <a href="{{route('viaje.tablero')}}" class="btn btn-success">Tablero</a>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">

@@ -19,12 +19,6 @@ class CreateTransportesTable extends Migration
             $table->unsignedInteger('empresa_id');
             $table->unsignedInteger('carril_id');
             $table->unsignedInteger('bus_id');
-            $table->date('fecha');
-            $table->time('hora');
-            //$table->date('fecha_llegada');
-            //$table->time('hora_llegada');
-            $table->string('estado');
-            $table->boolean('llegada_salida')->default(true);
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('carril_id')->references('id')->on('carriles');

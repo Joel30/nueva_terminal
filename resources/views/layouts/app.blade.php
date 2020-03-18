@@ -107,6 +107,10 @@
                         <a href="{{route('home')}}" class="nav-link"><i class="fa fa-home fa-fw"
                                 aria-hidden="true"></i>Home</a>
                     </li>
+                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
+                        <a href="{{route('viaje.index')}}" class="nav-link text-secondary"><i class="fa fa-desktop fa-fw text-primary"
+                                aria-hidden="true"></i>Tablero</a>
+                    </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
                         <a href="{{route('personal.index')}}" class="nav-link text-secondary"><i class="fa fa-file-text fa-fw"
                                 aria-hidden="true"></i>Personal</a>

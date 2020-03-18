@@ -60,11 +60,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('transporte/{transporte}', 'TransporteController@destroy')->name('transporte.eliminar');
 
     Route::get('transporte/buscar','TransporteController@buscador')->name('transporte.buscador');
-    Route::get('transporte/datos_tablero','TransporteController@datos_tablero')->name('transporte.datos_tablero');
-    Route::get('transporte/tablero','TransporteController@tablero')->name('transporte.tablero');
 
-    Route::get('reporte','TransporteController@reporte')->name('reporte');
-    Route::post('reporte','TransporteController@buscarReporte')->name('reporte.buscar');
+
+    Route::get('viaje','ViajeController@index')->name('viaje.index');
+    Route::get('viaje/nuevo', 'ViajeController@create')->name('viaje.nuevo');
+    Route::post('viaje', 'ViajeController@store')->name('viaje.guardar');
+    Route::get('viaje/{id}/editar', 'ViajeController@edit')->name('viaje.editar');
+    Route::put('viaje/{viaje}', 'ViajeController@update')->name('viaje.actualizar');
+    Route::delete('viaje/{viaje}', 'ViajeController@destroy')->name('viaje.eliminar');
+    Route::get('viaje/datos_tablero','ViajeController@datos_tablero')->name('viaje.datos_tablero');
+    Route::get('viaje/tablero','ViajeController@tablero')->name('viaje.tablero');
+
+    Route::get('reporte','ViajeController@reporte')->name('reporte');
+    Route::post('reporte','ViajeController@buscarReporte')->name('reporte.buscar');
 
 });
 

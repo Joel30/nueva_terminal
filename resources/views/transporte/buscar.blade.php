@@ -18,10 +18,6 @@
         <td>{{ $transporte->carril->anden }}</td>
         <td>{{ $transporte->carril->carril }}</td>
         <td>{{ $transporte->bus->tipo_bus }}</td>
-        <td>{{ $transporte->fecha }}</td>
-        <td>{{ $transporte->hora }}</td>
-        <td>{{ $transporte->estado }}</td>
-        <td>{{ $transporte->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
 
         <td>
             <div class="row justify-content-start">

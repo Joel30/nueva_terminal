@@ -1,5 +1,5 @@
 <?php $i = 0;?>
-@foreach($transportes as $transporte)
+@foreach($viajes as $viaje)
 @if($i == 0)
     <tr style="background-color:#3c5ea5;" class="p-0">
     <?php $i = 1;?>
@@ -7,19 +7,19 @@
     <tr style="background-color:#2e3069;" class="p-0">
     <?php $i = 0;?>
 @endif
-        <td class="py-1">{{ $transporte->departamento->nombre }}</td>
-        <td class="py-1">{{ $transporte->empresa->nombre }}</td>
-        <td class="text-center py-1">{{ $transporte->carril->anden }}</td>
-        <td class="text-center py-1">{{ $transporte->carril->carril }}</td>
-        <td class="text-center py-1">{{ $transporte->hora }}</td>
+        <td class="py-1">{{ $viaje->transporte->departamento->nombre }}</td>
+        <td class="py-1">{{ $viaje->transporte->empresa->nombre }}</td>
+        <td class="text-center py-1">{{ $viaje->transporte->carril->anden }}</td>
+        <td class="text-center py-1">{{ $viaje->transporte->carril->carril }}</td>
+        <td class="text-center py-1">{{ $viaje->hora }}</td>
       
-        @switch($transporte->estado)
+        @switch($viaje->estado)
             @case('retrasado')
-                <td class="text-center  py-1"><div style="background-color:#2f2a52; color:#ffc300">{{ $transporte->estado }}</div></td>
+                <td class="text-center  py-1"><div style="background-color:#2f2a52; color:#ffc300">{{ $viaje->estado }}</div></td>
                 @break
 
             @case('cancelado')
-                <td class="text-center py-1"><div style="background-color:#2f2a52; color:#f00">{{ $transporte->estado }}</div></td>
+                <td class="text-center py-1"><div style="background-color:#2f2a52; color:#f00">{{ $viaje->estado }}</div></td>
                 @break
             
             @case('llegado')
@@ -27,11 +27,11 @@
                 @break
 
             @default
-                <td class="text-center py-1"><div style="background-color:#2f2a52; color:#fff">{{ $transporte->estado }}</div></td>
+                <td class="text-center py-1"><div style="background-color:#2f2a52; color:#fff">{{ $viaje->estado }}</div></td>
                 @break
         @endswitch
         
-        @switch($transporte->llegada_salida)
+        @switch($viaje->llegada_salida)
                 @case(1)
                     <td class="text-center  py-1"><div style="background-color:#2f2a52; color:#fff">Llegada</div></td>
                     @break

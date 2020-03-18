@@ -23,9 +23,9 @@
         
     </form>
 
-    @if(isset($transportes))
+    @if(isset($viajes))
     <div>
-        <p>Busqueda entre las fechas: {{$transportes->fecha_inicio}} y {{$transportes->fecha_fin}}</p>
+        <p>Busqueda entre las fechas: {{$viajes->fecha_inicio}} y {{$viajes->fecha_fin}}</p>
     </div>
     @endif
     <div style="overflow-x:auto;">
@@ -47,21 +47,21 @@
         <tbody id="resultados">
         
 
-        @if(isset($transportes))
+        @if(isset($viajes))
             <?php $cont = 1; ?>
-            @foreach($transportes as $transporte)
+            @foreach($viajes as $viaje)
             
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
-                <td>{{ $transporte->departamento->nombre }}</td>
-                <td>{{ $transporte->empresa->nombre }}</td>
-                <td>{{ $transporte->carril->anden }}</td>
-                <td>{{ $transporte->carril->carril }}</td>
-                <td>{{ $transporte->bus->tipo_bus }}</td>
-                <td>{{ $transporte->fecha }}</td>
-                <td>{{ $transporte->hora }}</td>
-                <td>{{ $transporte->estado }}</td>
-                <td>{{ $transporte->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
+                <td>{{ $viaje->transporte->departamento->nombre }}</td>
+                <td>{{ $viaje->transporte->empresa->nombre }}</td>
+                <td>{{ $viaje->transporte->carril->anden }}</td>
+                <td>{{ $viaje->transporte->carril->carril }}</td>
+                <td>{{ $viaje->transporte->bus->tipo_bus }}</td>
+                <td>{{ $viaje->fecha }}</td>
+                <td>{{ $viaje->hora }}</td>
+                <td>{{ $viaje->estado }}</td>
+                <td>{{ $viaje->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
 
             </tr>
             @endforeach

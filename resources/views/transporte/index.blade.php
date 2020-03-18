@@ -28,10 +28,6 @@
                     <th>Anden</th>
                     <th>Carril</th>
                     <th>Bus</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Estado</th>
-                    <th>salida/llegada</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
