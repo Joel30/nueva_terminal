@@ -59,7 +59,7 @@
                         <b class="navbar-brand font-italic">Nueva Terminal</b>
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                            <a class=" open-close nav-link pl-4 text-white"
+                            <a class=" open-close nav-link pl-5 text-white"
                                     href="javascript:void(0)"><i class="fa fa-bars"></i></a>
                             </li>
                         </ul>
@@ -99,48 +99,48 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
 
-        <div  class="navbar-default sidebar" style="background-image: url({{asset('images/fondo1.jpg')}});" role="navigation" >
+        <div  class="navbar-default sidebar bg-dark" style="background-image: url({{asset('images/fondo-negro.jpg')}});" role="navigation" >
             <div class="sidebar-nav slimscrollsidebar">
                 
                 <ul class="nav" id="side-menu">
                     <li style="padding: 70px 0 0;">
-                        <a href="{{route('home')}}" class="nav-link"><i class="fa fa-home fa-fw"
+                        <a href="{{route('home')}}" class="nav-link text-lb"><i class="fa fa-home fa-fw"
                                 aria-hidden="true"></i>Home</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('viaje.index')}}" class="nav-link text-secondary"><i class="fa fa-desktop fa-fw text-primary"
+                        <a href="{{route('viaje.index')}}" class="nav-link text-lb"><i class="fa fa-desktop fa-fw text-primary"
                                 aria-hidden="true"></i>Tablero</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
-                        <a href="{{route('personal.index')}}" class="nav-link text-secondary"><i class="fa fa-file-text fa-fw"
+                        <a href="{{route('personal.index')}}" class="nav-link text-lb"><i class="fa fa-file-text fa-fw"
                                 aria-hidden="true"></i>Personal</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
-                        <a href="{{route('usuario.index')}}" class="nav-link text-secondary"><i class="fa fa-users fa-fw"
+                        <a href="{{route('usuario.index')}}" class="nav-link text-lb"><i class="fa fa-users fa-fw"
                                 aria-hidden="true"></i>Usuarios</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('reporte')}}" class="nav-link text-secondary"><i class="fa fa-book fa-fw"
+                        <a href="{{route('reporte')}}" class="nav-link text-lb"><i class="fa fa-book fa-fw"
                                 aria-hidden="true"></i>Reporte</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('bus.index')}}" class="nav-link text-secondary"><i class="fa fa-automobile fa-fw"
+                        <a href="{{route('bus.index')}}" class="nav-link text-lb"><i class="fa fa-automobile fa-fw"
                                 aria-hidden="true"></i>Buses</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('carril.index')}}" class="nav-link text-secondary"><i class="fa fa-road fa-fw"
+                        <a href="{{route('carril.index')}}" class="nav-link text-lb"><i class="fa fa-road fa-fw"
                                 aria-hidden="true"></i>Carril -  Anden</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('departamento.index')}}" class="nav-link text-secondary"><i class="fa fa-map-marker fa-fw"
+                        <a href="{{route('departamento.index')}}" class="nav-link text-lb"><i class="fa fa-map-marker fa-fw"
                                 aria-hidden="true"></i>Departamento</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('empresa.index')}}" class="nav-link text-secondary"><i class="fa fa-bank fa-fw"
+                        <a href="{{route('empresa.index')}}" class="nav-link text-lb"><i class="fa fa-bank fa-fw"
                                 aria-hidden="true"></i>Empresa de Transporte</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('transporte.index')}}" class="nav-link text-secondary"><i class="fa fa-th-list fa-fw"
+                        <a href="{{route('transporte.index')}}" class="nav-link text-lb"><i class="fa fa-th-list fa-fw"
                                 aria-hidden="true"></i>Lista de Transporte</a>
                     </li>
                     
@@ -171,6 +171,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
+                            @if (session('good'))
+                                <div class="alert alert-success">
+                                    <i class="fa fa-check-circle fa-fw" aria-hidden="true"></i>{{ session('good') }}
+                                </div>
+                            @endif
+                            @if (session('err'))
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-warning fa-fw" aria-hidden="true"></i>{{ session('err') }}
+                                </div>
+                            @endif
+                            
                             @yield('content')
                         </div>
                     </div>

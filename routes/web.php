@@ -1,10 +1,7 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::group(['middleware' => 'auth'], function () {
-
+   
     Route::get('/personal', 'PersonalController@index')->name('personal.index');
     Route::get('personal/nuevo', 'PersonalController@create')->name('personal.nuevo');
     Route::post('personal', 'PersonalController@store')->name('personal.guardar');
@@ -72,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('viaje/tablero','ViajeController@tablero')->name('viaje.tablero');
 
     Route::get('reporte','ViajeController@reporte')->name('reporte');
-    Route::post('reporte','ViajeController@buscarReporte')->name('reporte.buscar');
+    Route::get('reporte/buscar','ViajeController@buscar')->name('reporte.buscar');
 
 });
 
@@ -80,4 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('nacional', 'TerminalController@nacional')->name('terminal.nacional');
+Route::get('internacional', 'TerminalController@internacional')->name('terminal.internacional');
+

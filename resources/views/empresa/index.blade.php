@@ -34,20 +34,16 @@
                 <td>{{ $empresa->celular }}</td>
                 <td>{{ $empresa->responsable }}</td>
                 <td>  
-                    <div class="row justify-content-start">
-                        <div class="col-4">
-                            <a href="{{route('empresa.editar', $empresa)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
 
-                        </div>
-                        <div class="col-4">
-                            <form action="{{route('empresa.eliminar', $empresa)}}" method="POST">
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
+                    <a href="{{route('empresa.editar', $empresa)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
 
-                                <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar la Empresa de Transporte con id: {{ $empresa->id}}')">
-                            </form>
-                        </div>
-                    </div>                   
+                    <form action="{{route('empresa.eliminar', $empresa)}}" method="POST">
+                        {{method_field('DELETE')}}
+                        {{csrf_field()}}
+
+                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar la Empresa de Transporte con id: {{ $empresa->id}}')" title="Eliminar">
+                    </form>
+                 
                 </td>
             </tr>
         @endforeach

@@ -19,7 +19,7 @@
         {{ csrf_field() }}
 
         <div class="form-group row">
-            <label for="carril" class="col-md-4 col-form-label text-md-right">Numero Carril: </label>
+            <label for="carril" class="col-md-4 col-form-label text-md-right">Numero de Carril: </label>
 
             <div class="col-md-6">
                 <input id="carril" type="number" class="form-control{{ $errors->has('carril') ? ' is-invalid' : '' }}" name="carril" value="{{$carril->carril}}" required autofocus>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="anden" class="col-md-4 col-form-label text-md-right">Tipo de Bus: </label>
+            <label for="anden" class="col-md-4 col-form-label text-md-right">Anden: </label>
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('anden') ? ' is-invalid' : '' }}" name="anden" id="anden" required>
                     <option value="A" {{ old('anden', $carril->anden)=='A' ? 'selected' : ''  }}>A</option>

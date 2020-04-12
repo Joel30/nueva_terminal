@@ -1,23 +1,12 @@
-@extends('layouts.app')
-
-@section('title')
-
-<div class="row">
-    <div class="col">
-        <a href="{{route('viaje.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar</a>
-    </div>
-    <div class="col">
-        <a href="{{route('viaje.tablero')}}" class="nav-link"><i class="fa fa-eye text-danger" aria-hidden="true"></i></a>
-    </div>  
-</div>
-@endsection
-
-@section('breadcrumb')
-    <li class="breadcrumb-item active">Tablero</li>
-@endsection
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{asset('ample/bootstrap/bootstrap.min.css')}}" crossorigin="anonymous">
+</head>
+<body>
     <div style="overflow-x:auto;">
         <table class="table table-striped">
             <thead class="th-dark">
@@ -53,21 +42,25 @@
                     <td>{{ $viaje->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
 
                     <td>
+                        <div class="row justify-content-start">
+                            <div class="col-4">
+                                <a href="{{route('viaje.editar', $viaje)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
 
-                        <a href="{{route('viaje.editar', $viaje)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
+                            </div>
+                            <div class="col-4">
+                                <form action="{{route('viaje.eliminar', $viaje)}}" method="POST">
+                                    {{method_field('DELETE')}}
+                                    {{csrf_field()}}
 
-                        <form action="{{route('viaje.eliminar', $viaje)}}" method="POST">
-                            {{method_field('DELETE')}}
-                            {{csrf_field()}}
-
-                            <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el viaje con id: {{ $viaje->id}}')" title="Eliminar">
-                        </form>
-                     
+                                    <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el viaje con id: {{ $viaje->id}}')" title="Eliminar">
+                                </form>
+                            </div>
+                        </div>                        
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-    </div>
-
-@endsection
+    </div>  
+</body>
+</html>

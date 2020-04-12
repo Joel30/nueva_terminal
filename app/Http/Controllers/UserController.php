@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $usuario = new User;
         $usuario->guardar(request());
-        return redirect('usuario');
+        return redirect('usuario')->with('good', 'Registro exitoso');
     }
 
     public function show($id)
@@ -53,14 +53,20 @@ class UserController extends Controller
 
         $new_usuario = new User;
         $new_usuario->actualizar(request(), $usuario);
-        return redirect('usuario');
+        return redirect('usuario')->with('good', 'Modificación exitosa');
     }
 
     public function destroy(User $usuario)
     {
         $this->autorizacion('Administrador');
 
-        $usuario->delete();
-        return redirect('usuario');
+        $status ='Eliminación exitosa';
+        try {
+            $usuario->delete();
+            return redirect('usuario')->with('good', $status);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        }
+        return redirect('usuario')->with('err', $status);
     }
 }

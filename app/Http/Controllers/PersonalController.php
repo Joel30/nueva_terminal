@@ -38,7 +38,7 @@ class PersonalController extends Controller
         $new_personal = new Personal;
         $new_personal->guardar(request());
         
-        return redirect('personal/nuevo');
+        return redirect('personal/nuevo')->with('good', 'Registro exitoso');
     }
 
     public function show($id)
@@ -60,14 +60,20 @@ class PersonalController extends Controller
 
         $new_personal = new Personal;
         $new_personal->actualizar(request(), $personal);
-        return redirect('personal');
+        return redirect('personal')->with('good', 'Modificación exitosa');
     }
 
     public function destroy(Personal $personal)
     {
         $this->autorizacion('Administrador');
 
-        $personal->delete();
-        return redirect('personal');
+        $status ='Eliminación exitosa';
+        try {
+            $personal->delete();
+            return redirect('personal')->with('good', $status);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        }
+        return redirect('personal')->with('err', $status);   
     }
 }

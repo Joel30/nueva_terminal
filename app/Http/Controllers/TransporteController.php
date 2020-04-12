@@ -15,11 +15,16 @@ class TransporteController extends Controller
 {
     public function index()
     {
+        $this->autorizacion('Encargado');
+
         $transportes = Transporte::all();
         return view('transporte.index', compact('transportes'));
     }
 
-    public function buscador(Request $request){
+    public function buscador(Request $request)
+    {
+        $this->autorizacion('Encargado');
+
         $transportes = Transporte::all();
         $nombre = $request->texto;
         return view("transporte.buscar",compact('transportes', 'nombre'));        
@@ -27,6 +32,8 @@ class TransporteController extends Controller
 
     public function create()
     {
+        $this->autorizacion('Encargado');
+
         $buses = Bus::all();
         $carriles = Carril::all();
         $departamentos = Departamento::all();
@@ -37,12 +44,13 @@ class TransporteController extends Controller
 
     public function store()
     {
-        
+        $this->autorizacion('Encargado');
+   
         $transporte = new Transporte;
         //dd(request());
         $transporte->guardar(request());
 
-        return redirect('transporte/nuevo');
+        return redirect('transporte/nuevo')->with('good', 'Registro exitoso');
     }
 
     public function show($id)
@@ -52,22 +60,34 @@ class TransporteController extends Controller
 
     public function edit($id)
     {
+        $this->autorizacion('Encargado');
+
         $transporte = Transporte::find($id);
         return view('transporte.edit', compact('transporte')); 
     }
 
     public function update(Transporte $transporte)
     {
+        $this->autorizacion('Encargado');
+
         //dd(request());
         $new_trasporte = new Transporte;
         $new_trasporte->actualizar(request(), $transporte);
-        return redirect('transporte');
+        return redirect('transporte')->with('good', 'Modificación exitosa');
     }
 
     public function destroy(Transporte $transporte)
     {
-        $transporte->delete();
-        return redirect('transporte');
+        $this->autorizacion('Encargado');
+
+        $status ='Eliminación exitosa';
+        try {
+            $transporte->delete();
+            return redirect('transporte')->with('good', $status);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        }
+        return redirect('transporte')->with('err', $status);    
     }
 
 }

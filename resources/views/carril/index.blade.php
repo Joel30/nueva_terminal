@@ -28,19 +28,15 @@
                 <td>{{ $carril->carril }}</td>
                 <td>{{ $carril->anden }}</td>
                 <td>
-                    <div class="row justify-content-start">
-                        <div class="col-4">
-                            <a href="{{route('carril.editar', $carril)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
-                        </div>
-                        <div class="col-4">
-                            <form action="{{route('carril.eliminar', $carril)}}" method="POST">
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
 
-                                <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Carril con id: {{ $carril->id}}')">
-                            </form>
-                        </div>
-                    </div>                        
+                    <a href="{{route('carril.editar', $carril)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
+
+                    <form action="{{route('carril.eliminar', $carril)}}" method="POST">
+                        {{method_field('DELETE')}}
+                        {{csrf_field()}}
+
+                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Carril con id: {{ $carril->id}}')" title="Eliminar">
+                    </form>                      
                 </td>
             </tr>
         @endforeach

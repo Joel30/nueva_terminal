@@ -33,19 +33,16 @@
                 <td>{{ $bus->modelo }}</td>
                 <td>{{ $bus->color }}</td>
                 <td>
-                    <div class="row justify-content-start">
-                        <div class="col-4">
-                            <a href="{{route('bus.editar', $bus)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
-                        </div>
-                        <div class="col-4">
-                            <form action="{{route('bus.eliminar', $bus)}}" method="POST">
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
+                
+                    <a href="{{route('bus.editar', $bus)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
 
-                                <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Bus con id: {{ $bus->id}}')">
-                            </form>
-                        </div>
-                    </div>            
+                    <form action="{{route('bus.eliminar', $bus)}}" method="POST">
+                        {{method_field('DELETE')}}
+                        {{csrf_field()}}
+
+                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Bus con id: {{ $bus->id}}')" title="Eliminar">
+                    </form>
+                      
                 </td>
             </tr>
         @endforeach

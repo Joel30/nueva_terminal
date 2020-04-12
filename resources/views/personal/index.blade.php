@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+<div>
 <div style="overflow-x:auto;">
     <table class="table table-striped">
         <thead class="th-dark">
@@ -36,24 +37,21 @@
                 <td>{{ $personal->cargo }}</td>
 
                 <td>    
-                    <div class="row justify-content-start">
-                        <div class="col-4">
-                            <a href="{{route('personal.editar', $personal)}}"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20"></a>
 
-                        </div>
-                        <div class="col-4">
-                            <form action="{{route('personal.eliminar', $personal)}}" method="POST">
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
+                    <a href="{{route('personal.editar', $personal)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
 
-                                <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar al Personal con id: {{ $personal->id}}')">
-                            </form>
-                        </div>
-                    </div>                  
+                    <form action="{{route('personal.eliminar', $personal)}}" method="POST">
+                        {{method_field('DELETE')}}
+                        {{csrf_field()}}
+
+                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar al Personal con id: {{ $personal->id}}')" title="Eliminar">
+                    </form>
+              
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+</div>
 </div>
 @endsection

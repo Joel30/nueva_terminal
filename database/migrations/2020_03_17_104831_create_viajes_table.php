@@ -16,6 +16,10 @@ class CreateViajesTable extends Migration
         Schema::create('viajes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('transporte_id');
+            $table->json('departamento');
+            $table->json('empresa');
+            $table->json('carril');
+            $table->json('bus');
             $table->date('fecha');
             $table->time('hora');
             $table->string('estado');
