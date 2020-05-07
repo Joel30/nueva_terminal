@@ -36,6 +36,8 @@
             </tbody>
         </table>
     </div>
+    
+    {{ $transportes->links() }}
 
 
     <script>

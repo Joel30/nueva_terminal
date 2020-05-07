@@ -15,7 +15,8 @@
         <thead class="th-dark">
             <tr>
                 <th>#</th>
-                <th>Nombre</th>
+                <th>Destino</th>
+                <th>Transporte</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -24,7 +25,8 @@
         @foreach($departamentos as $departamento)
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
-                <td>{{ $departamento->nombre }}</td>
+                <td>{{ $departamento->destino }}</td>
+                <td>{{ $departamento->tipo }}</td>
                 <td>
 
                     <a href="{{route('departamento.editar', $departamento)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
@@ -42,4 +44,5 @@
         </tbody>
     </table>
 </div>
+{{ $departamentos->links() }}
 @endsection

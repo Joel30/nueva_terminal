@@ -49,4 +49,5 @@
         </tbody>
     </table>
 </div>
+{{ $buses->links() }}
 @endsection

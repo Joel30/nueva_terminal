@@ -11,7 +11,7 @@ class BusController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $buses = Bus::all();
+        $buses = Bus::paginate($this->getNumPagination());
         return view('bus.index', compact('buses'));
     }
 

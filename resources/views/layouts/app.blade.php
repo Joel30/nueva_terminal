@@ -17,6 +17,7 @@
     <link href=" {{asset('ample/css/animate.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href=" {{asset('ample/css/style.css')}}" rel="stylesheet">
+    <link href=" {{asset('css/style.css')}}" rel="stylesheet">
     <!-- color CSS -->
     <link href=" {{asset('ample/css/colors/default.css')}}" id="theme" rel="stylesheet">
 

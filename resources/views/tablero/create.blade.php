@@ -23,7 +23,7 @@
                 <select class="form-control{{ $errors->has('transporte_id') ? ' is-invalid' : '' }}" name="transporte_id" id="transporte_id" required>
                     <option> </option>
                     @foreach($transportes as $transporte)
-                        <option value="{{$transporte->id}}" {{ old('transporte_id')=='$transporte->id' ? 'selected' : ''  }}>{{$transporte->empresa->nombre.' | '.$transporte->departamento->nombre}}</option>
+                        <option value="{{$transporte->id}}" {{ old('transporte_id')=='$transporte->id' ? 'selected' : ''  }}>{{$transporte->empresa->nombre.' | '.$transporte->departamento->destino}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('transporte_id'))

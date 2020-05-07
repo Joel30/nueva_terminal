@@ -41,7 +41,7 @@
             @foreach($viajes as $viaje)
                 <tr>
                     <td><b>{{ $cont++ }}</b></td>
-                    <td>{{ $viaje->transporte->departamento->nombre }}</td>
+                    <td>{{ $viaje->transporte->departamento->destino }}</td>
                     <td>{{ $viaje->transporte->empresa->nombre }}</td>
                     <td>{{ $viaje->transporte->empresa->telefono }}</td>
                     <td>{{ $viaje->transporte->carril->anden }}</td>

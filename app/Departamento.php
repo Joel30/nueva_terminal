@@ -14,12 +14,13 @@ class Departamento extends Model
     }
 
     protected $fillable = [
-        'nombre',
+        'destino', 'tipo',
     ];
 
     function guardar($request){
         $data = $request->validate([
-            'nombre' => '',
+            'destino' => '',
+            'tipo' => '',
         ]);
 
         Departamento::create($data);
@@ -28,6 +29,7 @@ class Departamento extends Model
     function actualizar($request, Departamento $departamento){
         $data = $request->validate([
             'nombre' => '',
+            'tipo' => '',
         ]);
 
         $departamento->update($data);

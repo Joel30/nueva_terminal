@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BusesTableSeeder::class);
         $this->call(DepartamentosTableSeeder::class);
         $this->call(EmpresasTableSeeder::class);
-        //$this->call(TransportesTableSeeder::class);
+        $this->call(TransportesTableSeeder::class);
     }
 
     protected function truncateTable(array $tables){

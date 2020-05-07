@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" required>
                     @foreach($transporte->departamento->all() as $departamento)
-                        <option value="{{$departamento->id}}" {{ old('departamento_id', $transporte->departamento_id) == $departamento->id ? 'selected' : ''  }}>{{$departamento->nombre}}</option>
+                        <option value="{{$departamento->id}}" {{ old('departamento_id', $transporte->departamento_id) == $departamento->id ? 'selected' : ''  }}>{{$departamento->destino}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('departamento_id'))

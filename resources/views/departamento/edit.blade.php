@@ -19,16 +19,31 @@
         {{ csrf_field() }}
 
         <div class="form-group row">
-            <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre: </label>
+            <label for="destino" class="col-md-4 col-form-label text-md-right">Destino: </label>
             <div class="col-md-6">
-                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{$departamento->nombre}}" required autofocus>
-                @if ($errors->has('nombre'))
+                <input id="destino" type="text" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{$departamento->destino}}" required autofocus>
+                @if ($errors->has('destino'))
                     <span class="invalid-feedback">
-                        <strong>{{ $errors->first('nombre') }}</strong>
+                        <strong>{{ $errors->first('destino') }}</strong>
                     </span>
                 @endif
             </div>
         </div>
+
+        <div class="form-group row">
+            <label for="tipo" class="col-md-4 col-form-label text-md-right">Transporte: </label>
+            <div class="col-md-6">
+                <select class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" name="tipo" id="tipo" required>
+                    <option value="Nacional" {{ old('tipo', $departamento->tipo)=='Nacional' ? 'selected' : ''  }}>Nacional</option>
+                    <option value="Internacional" {{ old('tipo', $departamento->tipo)=='Internacional' ? 'selected' : ''  }}>Internacional</option> 
+                </select>
+                @if ($errors->has('tipo'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('tipo') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div> 
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">

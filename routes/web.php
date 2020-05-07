@@ -82,4 +82,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('nacional', 'TerminalController@nacional')->name('terminal.nacional');
 Route::get('internacional', 'TerminalController@internacional')->name('terminal.internacional');
+Route::get('destino','TerminalController@destino')->name('terminal.destino');
 

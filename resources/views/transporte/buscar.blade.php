@@ -12,7 +12,7 @@
 @if ( $nombre == null || strpos($nombre_empresa, $buscar) !== false)
     <tr>
         <td><b>{{ $cont++ }}</b></td>
-        <td>{{ $transporte->departamento->nombre }}</td>
+        <td>{{ $transporte->departamento->destino }}</td>
         <td>{{ $transporte->empresa->nombre }}</td>
         <td>{{ $transporte->empresa->telefono }}</td>
         <td>{{ $transporte->carril->anden }}</td>

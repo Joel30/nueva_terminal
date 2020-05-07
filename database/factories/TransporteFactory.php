@@ -4,15 +4,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Transporte::class, function (Faker $faker) {
     return [
-        'departamento_id'  => str_random(10),
-        'empresa_transporte_id' => str_random(10),
-        'carril_id' => str_random(10),
-        'bus_id' => str_random(10),
-        'fecha_salida' => $faker->date,
-        'hora_salida' => $faker->time,
-        'fecha_llegada' => $faker->date,
-        'hora_llegada' => $faker->time,
-        'estado' => str_random(10),
-        'departamento_id' => str_random(10),
+        'departamento_id'  => $faker->randomElement($array = App\Departamento::pluck('id')),
+        'empresa_id' => $faker->randomElement($array = App\Empresa::pluck('id')),
+        'carril_id' => $faker->randomElement($array = App\Carril::pluck('id')),
+        'bus_id' => $faker->randomElement($array = App\Bus::pluck('id')),
     ];
 });

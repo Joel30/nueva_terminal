@@ -11,7 +11,7 @@ class DepartamentoController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $departamentos = Departamento::all();
+        $departamentos = Departamento::paginate($this->getNumPagination());
         return view('departamento.index', compact('departamentos'));
     }
 
