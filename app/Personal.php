@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\User;
 
 class Personal extends Model
@@ -22,7 +23,7 @@ class Personal extends Model
             'nombre' => '', 
             'apellido_paterno' => '',
             'apellido_materno' => '', 
-            'ci' => '', 
+            'ci' => 'unique:personal', 
             'fecha_nacimiento' => '', 
             'celular' => '', 
             'direccion' => '', 
@@ -37,7 +38,7 @@ class Personal extends Model
             'nombre' => '', 
             'apellido_paterno' => '',
             'apellido_materno' => '', 
-            'ci' => '', 
+            'ci' => [Rule::unique('personal')->ignore($personal->id)], 
             'fecha_nacimiento' => '', 
             'celular' => '', 
             'direccion' => '', 

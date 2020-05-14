@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Bus;
+use App\Empresa;
 
 class BusController extends Controller
 {
@@ -19,7 +20,8 @@ class BusController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        return view('bus.create');
+        $empresas = Empresa::orderBy('nombre')->get();
+        return view('bus.create', compact('empresas'));
     }
 
     public function store()

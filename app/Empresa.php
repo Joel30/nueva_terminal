@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Transporte;
+use App\Bus;
 
 class Empresa extends Model
 {
@@ -13,14 +15,18 @@ class Empresa extends Model
         return $this->hasMany(Transporte::class);
     }
 
+    public function buses() {
+        return $this->hasMany(Bus::class);
+    }
+
     protected $fillable = [
         'nombre', 'nro_oficina', 'telefono', 'celular', 'responsable',
     ];
 
     function guardar($request){
         $data = $request->validate([
-            'nombre' => '',
-            'nro_oficina' => '',
+            'nombre' => 'unique:empresas',
+            'nro_oficina' => 'unique:empresas',
             'telefono' => '',
             'celular' => '',
             'responsable' => '',
@@ -31,8 +37,8 @@ class Empresa extends Model
 
     function actualizar($request, Empresa $empresa){
         $data = $request->validate([
-            'nombre' => '',
-            'nro_oficina' => '',
+            'nombre' => [Rule::unique('empresas')->ignore($empresa->id)],
+            'nro_oficina' => [Rule::unique('empresas')->ignore($empresa->id)],
             'telefono' => '',
             'celular' => '',
             'responsable' => '',

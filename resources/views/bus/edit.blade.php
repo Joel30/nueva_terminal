@@ -19,6 +19,22 @@
         {{ csrf_field() }}
 
         <div class="form-group row">
+            <label for="empresa_id" class="col-md-4 col-form-label text-md-right">Empresa de Transporte: </label>
+            <div class="col-md-6">
+                <select class="form-control{{ $errors->has('empresa_id') ? ' is-invalid' : '' }}" name="empresa_id" id="empresa_id" required>
+                    @foreach($bus->empresa->orderBy('nombre')->get() as $empresa)
+                        <option value="{{$empresa->id}}" {{ old('empresa_id', $bus->empresa_id)== $empresa->id ? 'selected' : ''  }}>{{$empresa->nombre}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('empresa_id'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('empresa_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="tipo_bus" class="col-md-4 col-form-label text-md-right">Tipo de Bus: </label>
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('tipo_bus') ? ' is-invalid' : '' }}" name="tipo_bus" id="tipo_bus" required>
@@ -39,7 +55,7 @@
             <label for="placa" class="col-md-4 col-form-label text-md-right">Placa: </label>
 
             <div class="col-md-6">
-                <input id="placa" type="text" class="form-control{{ $errors->has('placa') ? ' is-invalid' : '' }}" name="placa" value="{{$bus->placa}}" required autofocus>
+                <input id="placa" type="text" class="form-control{{ $errors->has('placa') ? ' is-invalid' : '' }}" name="placa" value="{{old('placa', $bus->placa)}}" required autofocus>
 
                 @if ($errors->has('placa'))
                     <span class="invalid-feedback">
@@ -53,7 +69,7 @@
             <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo: </label>
 
             <div class="col-md-6">
-                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{$bus->modelo}}" required autofocus>
+                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{old('modelo',$bus->modelo)}}" required autofocus>
 
                 @if ($errors->has('modelo'))
                     <span class="invalid-feedback">
@@ -67,7 +83,7 @@
             <label for="color" class="col-md-4 col-form-label text-md-right">Color: </label>
 
             <div class="col-md-6">
-                <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{$bus->color}}" required autofocus>
+                <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{old('color', $bus->color)}}" required autofocus>
 
                 @if ($errors->has('color'))
                     <span class="invalid-feedback">

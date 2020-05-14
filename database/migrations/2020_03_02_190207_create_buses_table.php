@@ -15,10 +15,12 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('empresa_id');
             $table->string('tipo_bus');
             $table->string('placa');
             $table->string('modelo');
             $table->string('color');
+            $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->timestamps();
         });
     }

@@ -18,6 +18,22 @@
         
         {{ csrf_field() }}
         
+        <div class="form-group row">
+            <label for="empresa_id" class="col-md-4 col-form-label text-md-right">Empresa de Transporte: </label>
+            <div class="col-md-6">
+                <select class="form-control{{ $errors->has('empresa_id') ? ' is-invalid' : '' }}" name="empresa_id" id="empresa_id" required>
+                    <option> </option>
+                    @foreach($empresas as $empresa)
+                        <option value="{{$empresa->id}}" {{ old('empresa_id')== $empresa->id ? 'selected' : ''  }}>{{$empresa->nombre}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('empresa_id'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('empresa_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
         <div class="form-group row">
             <label for="tipo_bus" class="col-md-4 col-form-label text-md-right">Tipo de Bus: </label>

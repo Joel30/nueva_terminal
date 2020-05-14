@@ -8,7 +8,7 @@
     <?php $i = 0;?>
 @endif
         <td class="py-1">{{ $viaje->transporte->departamento->destino }}</td>
-        <td class="py-1">{{ $viaje->transporte->empresa->nombre }}</td>
+        <td class="py-1">{{ $viaje->transporte->bus->empresa->nombre }}</td>
         <td class="text-center py-1">{{ $viaje->transporte->carril->anden }}</td>
         <td class="text-center py-1">{{ $viaje->transporte->carril->carril }}</td>
         <td class="text-center py-1">{{ $viaje->hora }}</td>

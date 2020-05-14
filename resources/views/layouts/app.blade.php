@@ -125,10 +125,6 @@
                                 aria-hidden="true"></i>Reporte</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('bus.index')}}" class="nav-link text-lb"><i class="fa fa-automobile fa-fw"
-                                aria-hidden="true"></i>Buses</a>
-                    </li>
-                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
                         <a href="{{route('carril.index')}}" class="nav-link text-lb"><i class="fa fa-road fa-fw"
                                 aria-hidden="true"></i>Carril -  Anden</a>
                     </li>
@@ -139,6 +135,10 @@
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
                         <a href="{{route('empresa.index')}}" class="nav-link text-lb"><i class="fa fa-bank fa-fw"
                                 aria-hidden="true"></i>Empresa de Transporte</a>
+                    </li>
+                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
+                        <a href="{{route('bus.index')}}" class="nav-link text-lb"><i class="fa fa-automobile fa-fw"
+                                aria-hidden="true"></i>Buses</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
                         <a href="{{route('transporte.index')}}" class="nav-link text-lb"><i class="fa fa-th-list fa-fw"
@@ -208,6 +208,11 @@
     <script src="{{asset('ample/js/waves.js')}}"></script>
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('ample/js/custom.min.js')}}"></script>
+    <script>
+        function prevent_multiple_submits(){
+            $('#register').attr('disabled','disabled');
+        }
+    </script>
 </body>
 
 </html>

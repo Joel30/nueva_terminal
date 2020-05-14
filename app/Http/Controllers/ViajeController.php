@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Viaje;
 use App\Transporte;
+use App\Bus;
+use App\Departamento;
 
 class ViajeController extends Controller
 {
@@ -26,11 +29,24 @@ class ViajeController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $transportes = Transporte::all();
-        $carbon = Carbon::now();
-        $today = $carbon->format('Y-m-d');
-        $time = $carbon->format('h:i');
-        return view('tablero.create', compact('transportes','today','time'));
+        $today = Carbon::now()->format('Y-m-d');
+
+        $departamento_id = Transporte::where('estado','activo')->pluck('departamento_id');
+        $bus_id = Transporte::where('estado','activo')->pluck('bus_id');
+        $nombre_empresa = DB::table('buses')
+            ->join('transportes','transportes.bus_id','buses.id')
+            ->join('empresas','empresas.id','buses.empresa_id')
+            ->where('estado','activo')
+            ->select('nombre', 'empresa_id', 'departamento_id')
+            ->distinct()
+            ->orderBy('nombre','asc')
+            ->get();
+
+        $destinos = Departamento::whereIn('id', $departamento_id)->orderBy('destino', 'asc')->get();
+        $empresas = $nombre_empresa;
+        $buses = Bus::whereIn('id', $bus_id)->orderBy('tipo_bus','asc')->get();
+
+        return view('tablero.create', compact('destinos', 'empresas', 'buses', 'today'));
     }
 
     public function store()
@@ -53,8 +69,23 @@ class ViajeController extends Controller
     {
         $this->autorizacion('Encargado');
 
+        $departamento_id = Transporte::where('estado','activo')->pluck('departamento_id');
+        $bus_id = Transporte::where('estado','activo')->pluck('bus_id');
+        $nombre_empresa = DB::table('buses')
+            ->join('transportes','transportes.bus_id','buses.id')
+            ->join('empresas','empresas.id','buses.empresa_id')
+            ->where('estado','activo')
+            ->select('nombre', 'empresa_id', 'departamento_id')
+            ->distinct()
+            ->orderBy('nombre','asc')
+            ->get();
+
+        $destinos = Departamento::whereIn('id', $departamento_id)->orderBy('destino', 'asc')->get();
+        $empresas = $nombre_empresa;
+        $buses = Bus::whereIn('id', $bus_id)->orderBy('tipo_bus','asc')->get();
+
         $viaje = Viaje::find($id);
-        return view('tablero.edit', compact('viaje')); 
+        return view('tablero.edit', compact('viaje', 'destinos', 'empresas', 'buses')); 
     }
 
     public function update(Viaje $viaje)

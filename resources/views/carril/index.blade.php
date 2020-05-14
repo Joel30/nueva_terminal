@@ -15,8 +15,8 @@
         <thead class="th-dark">
             <tr>
                 <th>#</th>
-                <th>Carril</th>
                 <th>Anden</th>
+                <th>Carril</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -25,8 +25,8 @@
         @foreach($carriles as $carril)
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
-                <td>{{ $carril->carril }}</td>
                 <td>{{ $carril->anden }}</td>
+                <td>{{ $carril->carril }}</td>
                 <td>
 
                     <a href="{{route('carril.editar', $carril)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>

@@ -16,11 +16,11 @@ class CreateTransportesTable extends Migration
         Schema::create('transportes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('departamento_id');
-            $table->unsignedInteger('empresa_id');
             $table->unsignedInteger('carril_id');
             $table->unsignedInteger('bus_id');
+            $table->time('hora');
+            $table->string('estado');
             $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('carril_id')->references('id')->on('carriles');
             $table->foreign('bus_id')->references('id')->on('buses');
             $table->timestamps();

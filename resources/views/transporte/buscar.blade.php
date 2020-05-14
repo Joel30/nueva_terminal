@@ -5,7 +5,7 @@
         $nombre = null;
     } else {
         $buscar = strtolower($nombre);
-        $nombre_empresa = strtolower($transporte->empresa->nombre);
+        $nombre_empresa = strtolower($transporte->bus->empresa->nombre);
     }
  
 ?>
@@ -13,11 +13,13 @@
     <tr>
         <td><b>{{ $cont++ }}</b></td>
         <td>{{ $transporte->departamento->destino }}</td>
-        <td>{{ $transporte->empresa->nombre }}</td>
-        <td>{{ $transporte->empresa->telefono }}</td>
+        <td>{{ $transporte->bus->empresa->nombre }}</td>
+        <td>{{ $transporte->bus->empresa->telefono }}</td>
         <td>{{ $transporte->carril->anden }}</td>
         <td>{{ $transporte->carril->carril }}</td>
         <td>{{ $transporte->bus->tipo_bus }}</td>
+        <td>{{ $transporte->hora }}</td>
+        <td>{{ $transporte->estado }}</td>
 
         <td>
             <!-- <div class="row justify-content-start">

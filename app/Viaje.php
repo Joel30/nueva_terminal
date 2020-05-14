@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Viaje extends Model
@@ -27,16 +28,21 @@ class Viaje extends Model
     function guardar($request){
         //dd($request);
         $data = $request->validate([
-            'transporte_id' => '',  
+            'transporte_id' => '',
             'fecha'=> '', 
             'hora'=> '', 
             'estado' => '', 
             'llegada_salida' => '',
         ]);
 
-        $t = Transporte::find($request->transporte_id);
+        $transporte_id = Transporte::where('departamento_id',$request->departamento_id)
+            ->where('bus_id', $request->bus_id)
+            ->get()[0]->id; 
+        $t = Transporte::find($transporte_id);
+        //dd($re);
+        $data['transporte_id'] = $transporte_id;
         $data['departamento'] = $t->departamento;
-        $data['empresa'] = $t->empresa;
+        $data['empresa'] = $t->bus->empresa;
         $data['carril'] = $t->carril;
         $data['bus'] = $t->bus;
         //dd($data);
@@ -55,9 +61,15 @@ class Viaje extends Model
             'llegada_salida' => '',
         ]);
         // llegada = 1(true) , salida = 0(false)
-        $t = Transporte::find($request->transporte_id);
+
+        $transporte_id = Transporte::where('departamento_id',$request->departamento_id)
+            ->where('bus_id', $request->bus_id)
+            ->get()[0]->id; 
+        $t = Transporte::find($transporte_id);
+        //$t = Transporte::find($request->transporte_id);
+        $data['transporte_id'] = $transporte_id;
         $data['departamento'] = $t->departamento;
-        $data['empresa'] = $t->empresa;
+        $data['empresa'] = $t->bus->empresa;
         $data['carril'] = $t->carril;
         $data['bus'] = $t->bus;
         

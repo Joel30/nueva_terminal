@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Bus;
 use App\Departamento;
 use App\Carril;
@@ -15,10 +16,6 @@ class Transporte extends Model
 
     public function departamento(){
         return $this->belongsTo(Departamento::class);
-    }
-
-    public function empresa(){
-        return $this->belongsTo(Empresa::class);
     }
 
     public function carril(){
@@ -34,16 +31,17 @@ class Transporte extends Model
     }
 
     protected $fillable = [
-        'departamento_id', 'empresa_id', 'carril_id', 'bus_id',
+        'departamento_id', 'carril_id', 'bus_id', 'hora', 'estado',
     ];
 
     function guardar($request){
         //dd($request);
         $data = $request->validate([
             'departamento_id' => '', 
-            'empresa_id' => '', 
             'carril_id' => '', 
-            'bus_id' => '', 
+            'bus_id' => 'unique:transportes',
+            'hora' => '', 
+            'estado' => '', 
         ]);
         
         Transporte::create($data);
@@ -53,9 +51,10 @@ class Transporte extends Model
         //dd($request);
         $data = $request->validate([
             'departamento_id' => '', 
-            'empresa_id' => '', 
             'carril_id' => '', 
-            'bus_id' => '', 
+            'bus_id' => [Rule::unique('transportes')->ignore($transporte->id)], 
+            'hora' => '', 
+            'estado' => '', 
         ]);
         // llegada = 1(true) , salida = 0(false)
         $transporte->update($data);

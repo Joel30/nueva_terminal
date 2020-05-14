@@ -34,10 +34,14 @@ class TransporteController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $buses = Bus::all();
-        $carriles = Carril::all();
-        $departamentos = Departamento::all();
-        $empresas = Empresa::all();
+        //$empresas =  Bus::whereNotIn('id',$bus_id)->select('empresa_id')->distinct()->get();
+        $bus_id = Transporte::all()->pluck('bus_id');
+
+        $empresa_id = Bus::whereNotIn('id',$bus_id)->select('empresa_id')->distinct()->pluck('empresa_id');
+        $empresas = Empresa::whereIn('id', $empresa_id)->orderBy('nombre')->get();
+        $buses = Bus::whereNotIn('id',$bus_id)->orderBy('tipo_bus')->get();
+        $carriles = Carril::orderBy('carril')->get();
+        $departamentos = Departamento::orderBy('destino')->get();
         
         return view('transporte.create', compact('buses', 'carriles', 'departamentos', 'empresas'));
     }
@@ -63,7 +67,18 @@ class TransporteController extends Controller
         $this->autorizacion('Encargado');
 
         $transporte = Transporte::find($id);
-        return view('transporte.edit', compact('transporte')); 
+
+        $bus_id = Transporte::all()->pluck('bus_id');
+ 
+        $find_empresa = sizeof(Bus::whereNotIn('id', $bus_id)->select('empresa_id')->distinct()->where('empresa_id',$transporte->bus->empresa_id)->get());
+
+
+        $empresa_id = Bus::whereNotIn('id',$bus_id)->select('empresa_id')->distinct()->pluck('empresa_id');
+        $empresas = Empresa::whereIn('id', $empresa_id)->orderBy('nombre')->get();
+        $buses = Bus::whereNotIn('id',$bus_id)->orderBy('tipo_bus')->get();
+
+
+        return view('transporte.edit', compact('transporte', 'buses', 'empresas', 'find_empresa')); 
     }
 
     public function update(Transporte $transporte)

@@ -12,7 +12,7 @@ class TerminalController extends Controller
     {
         $transportes = Transporte::whereHas('departamento',function($query){
             $query->where('tipo','Nacional');
-        })->get()->sortBy('departamento.destino');
+        })->where('estado','activo')->get()->sortBy('departamento.destino');
             
         $departamentos = $transportes->unique('departamento.destino')->pluck('departamento.destino');
         //dd($departamentos);
@@ -27,7 +27,7 @@ class TerminalController extends Controller
         //dd(request()->destino);
         $transportes = Transporte::whereHas('departamento',function($query){
             $query->where('tipo',request()->tipo)->where('destino',request()->destino);
-        })->get()->sortBy('departamento.destino');
+        })->where('estado','activo')->get()->sortBy('departamento.destino');
  
         return view('tablero.terminal.transporte', compact('transportes'));
     }
@@ -44,7 +44,7 @@ class TerminalController extends Controller
     public function internacional() {
         $transportes = Transporte::whereHas('departamento',function($query){
             $query->where('tipo','Internacional');
-        })->get()->sortBy('departamento.destino');
+        })->where('estado','activo')->get()->sortBy('departamento.destino');
             
         $departamentos = $transportes->unique('departamento.destino')->pluck('departamento.destino');
         //dd($departamentos);

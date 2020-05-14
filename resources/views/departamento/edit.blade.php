@@ -21,7 +21,7 @@
         <div class="form-group row">
             <label for="destino" class="col-md-4 col-form-label text-md-right">Destino: </label>
             <div class="col-md-6">
-                <input id="destino" type="text" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{$departamento->destino}}" required autofocus>
+                <input id="destino" type="text" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{old('destino', $departamento->destino)}}" required autofocus>
                 @if ($errors->has('destino'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('destino') }}</strong>

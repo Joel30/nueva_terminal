@@ -22,7 +22,7 @@
             <label for="carril" class="col-md-4 col-form-label text-md-right">Numero de Carril: </label>
 
             <div class="col-md-6">
-                <input id="carril" type="number" class="form-control{{ $errors->has('carril') ? ' is-invalid' : '' }}" name="carril" value="{{$carril->carril}}" required autofocus>
+                <input id="carril" type="number" class="form-control{{ $errors->has('carril') ? ' is-invalid' : '' }}" name="carril" value="{{old('carril', $carril->carril)}}" required autofocus>
 
                 @if ($errors->has('carril'))
                     <span class="invalid-feedback">

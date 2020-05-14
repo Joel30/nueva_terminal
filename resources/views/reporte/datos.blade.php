@@ -33,7 +33,7 @@
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
                 <td>{{ $viaje->transporte->departamento->destino }}</td>
-                <td>{{ $viaje->transporte->empresa->nombre }}</td>
+                <td>{{ $viaje->transporte->bus->empresa->nombre }}</td>
                 <td>{{ $viaje->transporte->carril->anden }}</td>
                 <td>{{ $viaje->transporte->carril->carril }}</td>
                 <td>{{ $viaje->transporte->bus->tipo_bus }}</td>

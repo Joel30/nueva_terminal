@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Carril extends Model
@@ -20,7 +21,7 @@ class Carril extends Model
     function guardar($request){
         
         $data = $request->validate([
-            'carril' => '',
+            'carril' => 'unique:carriles',
             'anden' => '',
         ]);
         
@@ -29,7 +30,7 @@ class Carril extends Model
 
     function actualizar($request, Carril $carril){
         $data = $request->validate([
-            'carril' => '',
+            'carril' => [Rule::unique('carriles')->ignore($carril->id)],
             'anden' => '', 
         ]);
 

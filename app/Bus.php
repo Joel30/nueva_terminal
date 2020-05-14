@@ -3,14 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Bus extends Model
 {
     protected $table = 'buses';
 
-    public function transportes() {
-        return $this->hasMany(Transporte::class);
+    public function transporte() {
+        return $this->hasOne(Transporte::class);
+    }
+
+    public function empresa(){
+        return $this->belongsTo(Empresa::class);
     }
 
     function guardar($request){
@@ -18,7 +23,8 @@ class Bus extends Model
         
         $data = $request->validate([
             'tipo_bus' => '',
-            'placa' => '',
+            'empresa_id' => '',
+            'placa' => 'unique:buses',
             'modelo' => '',
             'color' => '',
         ]);
@@ -32,13 +38,14 @@ class Bus extends Model
     }
 
     protected $fillable = [
-        'tipo_bus', 'placa', 'modelo', 'color',
+        'empresa_id', 'tipo_bus', 'placa', 'modelo', 'color',
     ];
 
     function actualizar($request, Bus $bus){
         $data = $request->validate([
             'tipo_bus' => '',
-            'placa' => '',
+            'empresa_id' => '',
+            'placa' => [Rule::unique('buses')->ignore($bus->id)],
             'modelo' => '',
             'color' => '',
         ]);

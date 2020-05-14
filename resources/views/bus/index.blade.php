@@ -15,6 +15,7 @@
         <thead class="th-dark">
             <tr>
                 <th>#</th>
+                <th>Empresa de Transporte</th>
                 <th>Tipo de Bus</th>
                 <th>Placa</th>
                 <th>Modelo</th>
@@ -28,6 +29,7 @@
             <tr>
                 
                 <td><b>{{ $cont++ }}</b></td>
+                <td>{{ $bus->empresa->nombre }}</td>
                 <td>{{ $bus->tipo_bus }}</td>
                 <td>{{ $bus->placa }}</td>
                 <td>{{ $bus->modelo }}</td>

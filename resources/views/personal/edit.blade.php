@@ -22,7 +22,7 @@
             <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre: </label>
 
             <div class="col-md-6">
-                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{$personal->nombre}}" required autofocus>
+                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{old('nombre', $personal->nombre)}}" required autofocus>
 
                 @if ($errors->has('nombre'))
                     <span class="invalid-feedback">
@@ -36,7 +36,7 @@
             <label for="apellido_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno: </label>
 
             <div class="col-md-6">
-                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{$personal->apellido_paterno}}" required autofocus>
+                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{old('apellido_paterno', $personal->apellido_paterno)}}" required autofocus>
 
                 @if ($errors->has('apellido_paterno'))
                     <span class="invalid-feedback">
@@ -50,7 +50,7 @@
             <label for="apellido_materno" class="col-md-4 col-form-label text-md-right">Apellido Materno: </label>
 
             <div class="col-md-6">
-                <input id="apellido_materno" type="text" class="form-control{{ $errors->has('apellido_materno') ? ' is-invalid' : '' }}" name="apellido_materno" value="{{$personal->apellido_materno}}" required autofocus>
+                <input id="apellido_materno" type="text" class="form-control{{ $errors->has('apellido_materno') ? ' is-invalid' : '' }}" name="apellido_materno" value="{{old('apellido_materno', $personal->apellido_materno)}}" required autofocus>
 
                 @if ($errors->has('apellido_materno'))
                     <span class="invalid-feedback">
@@ -64,7 +64,7 @@
             <label for="ci" class="col-md-4 col-form-label text-md-right">Cédula de Identidad: </label>
 
             <div class="col-md-6">
-                <input id="ci" type="text" class="form-control{{ $errors->has('ci') ? ' is-invalid' : '' }}" name="ci" value="{{$personal->ci}}" required autofocus>
+                <input id="ci" type="text" class="form-control{{ $errors->has('ci') ? ' is-invalid' : '' }}" name="ci" value="{{old('ci', $personal->ci)}}" required autofocus>
 
                 @if ($errors->has('ci'))
                     <span class="invalid-feedback">
@@ -78,7 +78,7 @@
             <label for="fecha_nacimiento" class="col-md-4 col-form-label text-md-right">Fecha de Nacimiento: </label>
 
             <div class="col-md-6">
-                <input id="fecha_nacimiento" type="date" class="form-control{{ $errors->has('fecha_nacimiento') ? ' is-invalid' : '' }}" name="fecha_nacimiento" value="{{$personal->fecha_nacimiento}}" required autofocus>
+                <input id="fecha_nacimiento" type="date" class="form-control{{ $errors->has('fecha_nacimiento') ? ' is-invalid' : '' }}" name="fecha_nacimiento" value="{{old('fecha_nacimiento', $personal->fecha_nacimiento)}}" required autofocus>
 
                 @if ($errors->has('fecha_nacimiento'))
                     <span class="invalid-feedback">
@@ -92,7 +92,7 @@
             <label for="celular" class="col-md-4 col-form-label text-md-right">Celular: </label>
 
             <div class="col-md-6">
-                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{$personal->celular}}" required autofocus>
+                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{old('celular', $personal->celular)}}" required autofocus>
 
                 @if ($errors->has('celular'))
                     <span class="invalid-feedback">
@@ -106,7 +106,7 @@
             <label for="direccion" class="col-md-4 col-form-label text-md-right">Dirección: </label>
 
             <div class="col-md-6">
-                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" value="{{$personal->direccion}}" required autofocus>
+                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" value="{{old('direccion', $personal->direccion)}}" required autofocus>
 
                 @if ($errors->has('direccion'))
                     <span class="invalid-feedback">

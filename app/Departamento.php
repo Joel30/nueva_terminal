@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Departamento extends Model
@@ -19,7 +20,7 @@ class Departamento extends Model
 
     function guardar($request){
         $data = $request->validate([
-            'destino' => '',
+            'destino' => 'unique:departamentos',
             'tipo' => '',
         ]);
 
@@ -28,7 +29,7 @@ class Departamento extends Model
 
     function actualizar($request, Departamento $departamento){
         $data = $request->validate([
-            'nombre' => '',
+            'destino' => [Rule::unique('departamentos')->ignore($departamento->id)],
             'tipo' => '',
         ]);
 

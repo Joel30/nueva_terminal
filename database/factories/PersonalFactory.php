@@ -7,7 +7,7 @@ $factory->define(App\Personal::class, function (Faker $faker) {
         'nombre' => $faker->firstName,
         'apellido_materno' => $faker->lastName,
         'apellido_paterno' => $faker->lastName,
-        'ci' => $faker->randomNumber($nbDigits = 7, $strict = true),
+        'ci' => $faker->unique()->randomNumber($nbDigits = 7, $strict = true),
         'fecha_nacimiento' => $faker->date,
         'celular' => $faker->randomNumber($nbDigits = 8, $strict = true),
         'direccion' => $faker->streetAddress,

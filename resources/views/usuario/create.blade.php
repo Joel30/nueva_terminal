@@ -23,7 +23,7 @@
                 <select class="form-control{{ $errors->has('personal_id') ? ' is-invalid' : '' }}" name="personal_id" id="personal_id" required>
                     <option> </option>
                     @foreach($personal as $personal)
-                        <option value="{{$personal->id}}" {{ old('personal_id')=='$personal->id' ? 'selected' : ''  }}>{{$personal->nombre}} {{$personal->apellido_paterno}} {{$personal->apellido_materno}}</option>
+                        <option value="{{$personal->id}}" {{ old('personal_id')== $personal->id ? 'selected' : ''  }}>{{$personal->nombre}} {{$personal->apellido_paterno}} {{$personal->apellido_materno}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('personal_id'))

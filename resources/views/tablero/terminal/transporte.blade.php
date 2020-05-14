@@ -18,8 +18,8 @@
                 <tr>
                     <!-- <td><b>{{ $cont++ }}</b></td> -->
                     <td>{{ $transporte->departamento->destino }}</td>
-                    <td>{{ $transporte->empresa->nombre }}</td>
-                    <td>{{ $transporte->empresa->telefono }}</td>
+                    <td>{{ $transporte->bus->empresa->nombre }}</td>
+                    <td>{{ $transporte->bus->empresa->telefono }}</td>
                     <td>{{ $transporte->carril->anden }}</td>
                     <td>{{ $transporte->carril->carril }}</td>
                     <td>{{ $transporte->bus->tipo_bus }}</td>
