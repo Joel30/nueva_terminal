@@ -12,7 +12,7 @@
 
     <div class="col-8">
         <div class="input-group">
-            <input type="text" class="form-control" id="texto" placeholder="Ingrese nombre">
+            <input type="text" class="form-control" id="texto" placeholder="Ingrese nombre de la Empresa">
             <div class="input-group-append"><span class="input-group-text">Buscar</span></div>
         </div>
         

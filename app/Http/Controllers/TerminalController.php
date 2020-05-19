@@ -16,8 +16,11 @@ class TerminalController extends Controller
             
         $departamentos = $transportes->unique('departamento.destino')->pluck('departamento.destino');
         //dd($departamentos);
-
-        $transportes = $transportes->where('departamento.destino',$departamentos[0]);
+        if(sizeof($departamentos) != 0){
+            $transportes = $transportes->where('departamento.destino',$departamentos[0]);
+        } else {
+            $transportes = [];
+        }
 
         return view('tablero.terminal.nacional', compact('transportes', 'departamentos'));
     }
@@ -48,8 +51,11 @@ class TerminalController extends Controller
             
         $departamentos = $transportes->unique('departamento.destino')->pluck('departamento.destino');
         //dd($departamentos);
-
-        $transportes = $transportes->where('departamento.destino',$departamentos[0]);
+        if(sizeof($departamentos) != 0){
+            $transportes = $transportes->where('departamento.destino',$departamentos[0]);
+        } else {
+            $transportes = [];
+        }
 
         return view('tablero.terminal.internacional', compact('transportes', 'departamentos'));
     }
