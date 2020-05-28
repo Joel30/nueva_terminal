@@ -11,7 +11,7 @@ class EmpresaController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $empresas = Empresa::orderBy('nombre', 'asc')->paginate($this->getNumPagination());
+        $empresas = Empresa::all();
 
         return view('empresa.index', compact('empresas'));
     }

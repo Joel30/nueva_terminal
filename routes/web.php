@@ -56,8 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('transporte/{transporte}', 'TransporteController@update')->name('transporte.actualizar');
     Route::delete('transporte/{transporte}', 'TransporteController@destroy')->name('transporte.eliminar');
 
-    Route::get('transporte/buscar','TransporteController@buscador')->name('transporte.buscador');
-
 
     Route::get('viaje','ViajeController@index')->name('viaje.index');
     Route::get('viaje/nuevo', 'ViajeController@create')->name('viaje.nuevo');

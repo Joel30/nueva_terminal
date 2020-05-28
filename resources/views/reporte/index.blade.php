@@ -9,9 +9,9 @@
 @endsection
 
 @section('content')
-<div id="buscador" class="mb-3">
+<div id="buscador" class="mb-3 row justify-content-end">
     <div class="col col-sm-8 col-md-6 col-lg-4">
-        <div class="input-group input-group">
+        <div class="input-group input-group-sm">
             <div class="input-group-prepend">
                 <label class="input-group-text input-color1" for="fecha" id="buscar" onclick="buscar()"><i class="fa fa-search"></i></label>
             </div>
@@ -24,8 +24,7 @@
 </div>
 
 <div id="resultados">
-    <div style="overflow-x:auto;">
-        <table class="table table-striped">
+    <table class="table table-striped" id="nt_table">
         <thead class="th-dark">
             <tr>
                 <th>#</th>
@@ -61,8 +60,7 @@
             @endforeach
         @endif
         </tbody>
-        </table>
-    </div> 
+    </table>
 </div>
     <script>
 
@@ -103,11 +101,13 @@
                             .then(html      =>  {document.getElementById("resultados").innerHTML = html});
                 }
             }
+            //prueba();
+            
         }
         
         function uno(){
             document.getElementById("buscador").innerHTML =`<div class="col col-sm-8 col-md-6 col-lg-4">
-                <div class="input-group input-group">
+                <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
                         <label class="input-group-text input-color1" for="fecha" onclick="buscar()"><i class="fa fa-search"></i></label>
                     </div>
@@ -120,7 +120,7 @@
         }
         function dos(){
             document.getElementById("buscador").innerHTML = `<div class="col col-sm-8 col-md-7 col-lg-5">
-                <div class="input-group input-group">
+                <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
                         <label class="input-group-text input-color1" for="fecha" onclick="buscar()"><i class="fa fa-search"></i></label>
                     </div>

@@ -1,10 +1,10 @@
 <?php $i = 0;?>
 @foreach($viajes as $viaje)
 @if($i == 0)
-    <tr style="background-color:#3c5ea5;" class="p-0">
+    <tr style="background-color:#3c5ea5; border: hidden" class="p-0">
     <?php $i = 1;?>
     @else
-    <tr style="background-color:#2e3069;" class="p-0">
+    <tr style="background-color:#2e3069; border: hidden" class="p-0">
     <?php $i = 0;?>
 @endif
         <td class="py-1">{{ $viaje->transporte->departamento->destino }}</td>

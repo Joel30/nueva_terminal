@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('transporte.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar</a>
+    <a href="{{route('transporte.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar</a>
 @endsection
 
 @section('breadcrumb')
@@ -10,49 +10,48 @@
 
 @section('content')
 
-    <div class="col-8">
-        <div class="input-group">
-            <input type="text" class="form-control" id="texto" placeholder="Ingrese nombre de la Empresa">
-            <div class="input-group-append"><span class="input-group-text">Buscar</span></div>
-        </div>
-        
-    </div> <br>
-    <div style="overflow-x:auto;">
-        <table class="table table-striped">
-            <thead class="th-dark">
+    <table class="table table-striped" id="nt_table">
+        <thead class="th-dark">
+            <tr>
+                <th>#</th>
+                <th>Destino</th>
+                <th>Empresa de Transporte</th>
+                <th>Telefono</th>
+                <th>Anden</th>
+                <th>Carril</th>
+                <th>Bus</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $cont = 1; ?>
+            @foreach($transportes as $transporte)
                 <tr>
-                    <th>#</th>
-                    <th>Destino</th>
-                    <th>Empresa de Transporte</th>
-                    <th>Telefono</th>
-                    <th>Anden</th>
-                    <th>Carril</th>
-                    <th>Bus</th>
-                    <th>Hora</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <td><b>{{ $cont++ }}</b></td>
+                    <td>{{ $transporte->departamento->destino }}</td>
+                    <td>{{ $transporte->bus->empresa->nombre }}</td>
+                    <td>{{ $transporte->bus->empresa->telefono }}</td>
+                    <td>{{ $transporte->carril->anden }}</td>
+                    <td>{{ $transporte->carril->carril }}</td>
+                    <td>{{ $transporte->bus->tipo_bus }}</td>
+                    <td>{{ $transporte->hora }}</td>
+                    <td>{{ $transporte->estado }}</td>
+
+                    <td>
+                        <a href="{{route('transporte.editar', $transporte)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
+
+                        <form action="{{route('transporte.eliminar', $transporte)}}" method="POST">
+                            {{method_field('DELETE')}}
+                            {{csrf_field()}}
+
+                            <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar el Transporte con id: {{ $transporte->id}}')" title="Eliminar">
+                        </form>                    
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="resultados">
-                @include('transporte/buscar')
-            </tbody>
-        </table>
-    </div>
-    
-    {{ $transportes->links() }}
+            @endforeach
+        </tbody>
+    </table>
 
-
-    <script>
-
-        window.addEventListener('load',function(){
-            document.getElementById("texto").addEventListener("keyup", () => {
-                if((document.getElementById("texto").value.length)>=0)
-                    fetch(`{{route('transporte.buscador')}}?texto=${document.getElementById("texto").value}`,{ method:'get' })
-                    .then(response  =>  response.text() )
-                    .then(html      =>  {   document.getElementById("resultados").innerHTML = html  })
-                else
-                    document.getElementById("resultados").innerHTML = ""
-            })
-        }); 
-    </script>
 @endsection

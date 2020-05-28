@@ -116,7 +116,7 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
-                <button type="submit" class="btn btn-primary1 btn-block mt-4" id="register">
+                <button type="submit" class="btn btn-primary1 btn-block mt-4" id="register_btn">
                     Guardar
                 </button>
             </div>

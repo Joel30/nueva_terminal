@@ -25,12 +25,12 @@
             <iframe src="https://www.youtube.com/embed/wLnyRcJHlhc?autoplay=1&controls=0&start=40&rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="div2">
-            <table class="table table-dark">
+            <table class="table">
                 <thead class="text-center">
-                    <tr style="background-color:#077afe">
+                    <tr style="background-color:#077afe; border: hidden">
                         <th colspan="7" class="p-2 h5 text-white">SALIDA Y LLEGADA DE BUSES</th>
                     </tr>
-                    <tr style="background-color:#ceeafe;">
+                    <tr style="background-color:#ceeafe; border: hidden">
                         <th class="text-dark py-1">Destino</th>
                         <th class="text-dark py-1">Empresa de Transporte</th>
                         <th class="text-dark py-1">Anden</th>

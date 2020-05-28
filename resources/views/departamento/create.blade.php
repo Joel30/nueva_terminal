@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form method="POST" action="{{url(route('departamento.guardar'))}}">
+    <form method="POST" action="{{url(route('departamento.guardar'))}}" onsubmit="prevent_multiple_submits()">
         
         {{ csrf_field() }}
         
@@ -49,7 +49,7 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
-                <button type="submit" class="btn btn-primary1 btn-block mt-4">
+                <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4">
                     Guardar
                 </button>
             </div>

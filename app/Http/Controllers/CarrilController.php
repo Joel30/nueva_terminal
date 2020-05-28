@@ -11,7 +11,7 @@ class CarrilController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $carriles = Carril::orderBy('anden','asc')->paginate($this->getNumPagination());
+        $carriles = Carril::all();
         return view('carril.index', compact('carriles'));
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('personal.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Personal</a>
+    <a href="{{route('personal.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar Personal</a>
 @endsection
 
 @section('breadcrumb')
@@ -9,9 +9,8 @@
 @endsection
 
 @section('content')
-<div>
-<div style="overflow-x:auto;">
-    <table class="table table-striped">
+
+    <table class="table table-striped" id="nt_table">
         <thead class="th-dark">
             <tr>
                 <th>#</th>
@@ -52,6 +51,5 @@
         @endforeach
         </tbody>
     </table>
-</div>
-</div>
+
 @endsection

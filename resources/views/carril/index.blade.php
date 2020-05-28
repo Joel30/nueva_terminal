@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('carril.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Carril-Anden</a>
+    <a href="{{route('carril.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar Carril-Anden</a>
 @endsection
 
 @section('breadcrumb')
@@ -10,8 +10,7 @@
 
 @section('content')
 
-<div style="overflow-x:auto;">
-    <table class="table table-striped">
+    <table class="table table-striped" id="nt_table">
         <thead class="th-dark">
             <tr>
                 <th>#</th>
@@ -42,6 +41,5 @@
         @endforeach
         </tbody>
     </table>
-</div>
-{{ $carriles->links() }}
+
 @endsection

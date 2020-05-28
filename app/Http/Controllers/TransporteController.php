@@ -17,17 +17,8 @@ class TransporteController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $transportes = Transporte::paginate($this->getNumPagination());
-        return view('transporte.index', compact('transportes'));
-    }
-
-    public function buscador(Request $request)
-    {
-        $this->autorizacion('Encargado');
-
         $transportes = Transporte::all();
-        $nombre = $request->texto;
-        return view("transporte.buscar",compact('transportes', 'nombre'));        
+        return view('transporte.index', compact('transportes'));
     }
 
     public function create()

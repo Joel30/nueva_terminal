@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('bus.nuevo')}}" class="btn btn-info py-1 btn-block">Agregar Bus</a>
+    <a href="{{route('bus.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar Bus</a>
 @endsection
 
 @section('breadcrumb')
@@ -10,8 +10,7 @@
 
 @section('content')
 
-<div style="overflow-x:auto;">
-    <table class="table table-striped">
+    <table class="table table-striped" id="nt_table" >
         <thead class="th-dark">
             <tr>
                 <th>#</th>
@@ -50,6 +49,5 @@
         @endforeach
         </tbody>
     </table>
-</div>
-{{ $buses->links() }}
+
 @endsection

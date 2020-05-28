@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form method="POST" action="{{url(route('carril.actualizar', $carril))}}">
+    <form method="POST" action="{{url(route('carril.actualizar', $carril))}}" onsubmit="prevent_multiple_submits()">
         
         {{ method_field('PUT') }}
         {{ csrf_field() }}
@@ -50,7 +50,7 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
-                <button type="submit" class="btn btn-warning btn-block mt-4">
+                <button id="register_btn" type="submit" class="btn btn-warning btn-block mt-4">
                     Actualizar
                 </button>
             </div>

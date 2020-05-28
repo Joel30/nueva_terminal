@@ -22,6 +22,11 @@
     <link href=" {{asset('ample/css/colors/default.css')}}" id="theme" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('ample/bootstrap/bootstrap.min.css')}}" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{asset('datatables/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css')}}">
+
+
     <!--link href=" {{asset('ample/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet"-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -210,9 +215,11 @@
     <script src="{{asset('ample/js/custom.min.js')}}"></script>
     <script>
         function prevent_multiple_submits(){
-            $('#register').attr('disabled','disabled');
+            $('#register_btn').attr('disabled','disabled');
         }
     </script>
+    <script type="text/javascript" src="{{asset('datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('js/datatable.js')}}"></script>
 </body>
 
 </html>

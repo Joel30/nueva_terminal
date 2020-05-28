@@ -10,8 +10,7 @@
     @endif
 </div>
     
-<div style="overflow-x:auto;">
-    <table class="table table-striped">
+    <table class="table table-striped" id="nt_table">
         <thead class="th-dark">
             <tr>
                 <th>#</th>
@@ -45,5 +44,4 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
 </div>  
