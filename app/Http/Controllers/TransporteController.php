@@ -21,6 +21,18 @@ class TransporteController extends Controller
         return view('transporte.index', compact('transportes'));
     }
 
+    public function data_index()
+    {
+        $transportes = Transporte::with(['departamento:id,destino', 'carril:id,carril,anden'])
+            ->with('bus.empresa:id,nombre,telefono')->get();
+        
+        return datatables()
+            ->of($transportes)
+            ->addColumn('btn','/transporte/actions')
+            ->rawColumns(['btn'])
+            ->toJson();
+    }
+
     public function create()
     {
         $this->autorizacion('Encargado');
@@ -82,13 +94,13 @@ class TransporteController extends Controller
         return redirect('transporte')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Transporte $transporte)
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
         try {
-            $transporte->delete();
+            Transporte::destroy($id);
             return redirect('transporte')->with('good', $status);
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 'Registro relacionado, imposible de eliminar';

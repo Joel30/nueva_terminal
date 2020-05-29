@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('bus', 'BusController@store')->name('bus.guardar');
     Route::get('bus/{id}/editar', 'BusController@edit')->name('bus.editar');
     Route::put('bus/{bus}', 'BusController@update')->name('bus.actualizar');
-    Route::delete('bus/{bus}', 'BusController@destroy')->name('bus.eliminar');
+    Route::get('bus/{id}/eliminar', 'BusController@destroy')->name('bus.eliminar');
 
 
     Route::get('carril', 'CarrilController@index')->name('carril.index');
@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('transporte', 'TransporteController@store')->name('transporte.guardar');
     Route::get('transporte/{id}/editar', 'TransporteController@edit')->name('transporte.editar');
     Route::put('transporte/{transporte}', 'TransporteController@update')->name('transporte.actualizar');
-    Route::delete('transporte/{transporte}', 'TransporteController@destroy')->name('transporte.eliminar');
+    Route::get('transporte/{id}/eliminar', 'TransporteController@destroy')->name('transporte.eliminar');
 
 
     Route::get('viaje','ViajeController@index')->name('viaje.index');

@@ -28,7 +28,6 @@ let language_es = {
 };
 
 var my_data_table = "";
-$(document).ready(data_table);
 
 function data_table() {
     my_data_table = $('#nt_table').DataTable({
@@ -36,5 +35,9 @@ function data_table() {
     });
 
     $('#nt_table').parent().css('overflow-x', 'auto');
-    $('#nt_table_info').addClass("text-info");  
+    $('#nt_table_info').removeClass("dataTables_info");  
+    $('#nt_table_info').addClass("text-info text-center");  
 } 
+$(document).ready(data_table);
+
+

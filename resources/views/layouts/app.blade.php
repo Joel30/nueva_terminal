@@ -220,6 +220,57 @@
     </script>
     <script type="text/javascript" src="{{asset('datatables/datatables.min.js')}}"></script>
     <script src="{{asset('js/datatable.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#nt_table1').DataTable( {
+                //"processing": true,
+                "serverSide": true,
+                language: language_es,
+                ajax:{
+                    url : `{{route('bus.data_index')}}`,
+                },
+                "columns": [
+                    {data: 'id'},
+                    {data: 'empresa.nombre'},
+                    {data: 'tipo_bus'},
+                    {data: 'placa'},
+                    {data: 'modelo'},
+                    {data: 'color'},
+                    {data: 'btn'}
+                ]            
+            });
+            $('#nt_table1').parent().css('overflow-x', 'auto');
+            $('#nt_table1_info').removeClass("dataTables_info");  
+            $('#nt_table1_info').addClass("text-info text-center");  
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#nt_table2').DataTable( {
+                //"processing": true,
+                "serverSide": true,
+                language: language_es,
+                ajax:{
+                    url : `{{route('transporte.data_index')}}`,
+                },
+                "columns": [
+                    {data: 'id'},
+                    {data: 'departamento.destino'},
+                    {data: 'bus.empresa.nombre'},
+                    {data: 'bus.empresa.telefono'},
+                    {data: 'carril.anden'},
+                    {data: 'carril.carril'},
+                    {data: 'bus.tipo_bus'},
+                    {data: 'hora'},
+                    {data: 'estado'},
+                    {data: 'btn'}
+                ]            
+            });
+            $('#nt_table2').parent().css('overflow-x', 'auto');
+            $('#nt_table2_info').removeClass("dataTables_info");  
+            $('#nt_table2_info').addClass("text-info text-center");  
+        });
+    </script>
 </body>
 
 </html>

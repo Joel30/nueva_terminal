@@ -1,11 +1,11 @@
 .th-dark tr{
     color:#e9ebed;
     background-color:#1d96b2;
-    border-color:#0f0;border-bottom: 1px solid #e9ebed;
 }
 .th-dark th{
     color:#ffffff;
     font-weight: bold;
+    border-right: 1px solid #fff !important;
 }
 
 .bg-light-blue{

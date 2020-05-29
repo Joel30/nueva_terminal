@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('bus/datatable', 'BusController@data_index')->name('bus.data_index');
+
+Route::get('transporte/datatable', 'TransporteController@data_index')->name('transporte.data_index');
+

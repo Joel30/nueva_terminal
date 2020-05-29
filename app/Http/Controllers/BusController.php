@@ -16,6 +16,16 @@ class BusController extends Controller
         return view('bus.index', compact('buses'));
     }
 
+    public function data_index()
+    {
+        $buses = Bus::with('empresa:id,nombre')->get();
+        return datatables()
+            ->of($buses)
+            ->addColumn('btn','/bus/actions')
+            ->rawColumns(['btn'])
+            ->toJson();
+    }
+
     public function create()
     {
         $this->autorizacion('Encargado');
@@ -59,13 +69,13 @@ class BusController extends Controller
         return redirect('bus')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Bus $bus)
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
         try {
-            $bus->delete();
+            Bus::destroy($id);
             return redirect('bus')->with('good', $status);
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 'Registro relacionado, imposible de eliminar';
