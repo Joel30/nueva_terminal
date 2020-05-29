@@ -61,7 +61,7 @@
                     <option> </option>
                     @foreach($buses as $bus)
                         @if(old('empresa_id', $viaje->transporte->bus->empresa_id) == $bus->empresa_id && $bus->transporte->departamento_id == old('departamento_id',  $viaje->transporte->departamento_id))
-                            <option value="{{$bus->id}}" {{ old('bus_id', $viaje->transporte->bus_id)== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa_id}})</option>
+                            <option value="{{$bus->id}}" {{ old('bus_id', $viaje->transporte->bus_id)== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>
                         @endif
                     @endforeach
                 </select>
@@ -89,8 +89,8 @@
             <label for="llegada_salida" class="col-md-4 col-form-label text-md-right">Llegada / Salida:</label>
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('llegada_salida') ? ' is-invalid' : '' }}" name="llegada_salida" id="llegada_salida" onchange="hora_transporte(this.value)" required>
-                    <option value='salida' {{ old('llegada_salida', $viaje->llegada_salida)== 0 ? 'selected' : ''  }}>Salida</option>
-                    <option value='llegada' {{ old('llegada_salida', $viaje->llegada_salida)== 1 ? 'selected' : ''  }}>Llegada</option> 
+                    <option value='salida' {{ old('llegada_salida', $viaje->llegada_salida)== 'salida' ? 'selected' : ''  }}>Salida</option>
+                    <option value='llegada' {{ old('llegada_salida', $viaje->llegada_salida)== 'llegada' ? 'selected' : ''  }}>Llegada</option> 
                 </select>
                 @if ($errors->has('llegada_salida'))
                     <span class="invalid-feedback">
@@ -184,7 +184,7 @@
                 //departamento = {{$bus->transporte->where('bus_id',$bus->id)->pluck('departamento_id')}}.includes(parseInt(cod, 10));
 
                 if({{$bus->empresa->id}} == val && {{$bus->transporte->departamento_id}} == cod){
-                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa->id}})</option>`;
+                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
                 }
             @endforeach    
             document.getElementById("bus_id").innerHTML = html;     

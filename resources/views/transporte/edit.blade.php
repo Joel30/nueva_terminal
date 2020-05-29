@@ -62,12 +62,12 @@
                 <select class="form-control{{ $errors->has('bus_id') ? ' is-invalid' : '' }}" name="bus_id" id="bus_id" required>
                     @foreach($buses as $bus)
                         @if(old('empresa_id', $transporte->bus->empresa_id) == $bus->empresa_id)
-                            <option value="{{$bus->id}}" {{ old('bus_id', $transporte->bus_id)== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa_id}} )</option>
+                            <option value="{{$bus->id}}" {{ old('bus_id', $transporte->bus_id)== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>
                         @endif
                     @endforeach
 
                     @if(old('empresa_id', $transporte->bus->empresa_id) == $transporte->bus->empresa_id)
-                        <option value="{{$transporte->bus->id}}" {{ old('bus_id', $transporte->bus_id)== $transporte->bus->id ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus.' ('.$transporte->bus->modelo.' - '.$transporte->bus->color.' - '.$transporte->bus->empresa_id.')'}}</option>
+                        <option value="{{$transporte->bus->id}}" {{ old('bus_id', $transporte->bus_id)== $transporte->bus->id ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus.' ( P: '.$transporte->bus->placa.' - M: '.$transporte->bus->modelo.' )'}}</option>
                     @endif
 
                 </select>
@@ -112,7 +112,7 @@
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('estado') ? ' is-invalid' : '' }}" name="estado" id="estado" required>
                     <option value="activo" {{ old('estado', $transporte->estado)=='activo' ? 'selected' : ''  }}>Activo</option>
-                    <option value="cancelado" {{ old('estado', $transporte->estado)=='cancelado' ? 'selected' : ''  }}>Cancelado</option> 
+                    <option value="cancelado" {{ old('estado', strtolower($transporte->estado))=='cancelado' ? 'selected' : ''  }}>Cancelado</option> 
 
                 </select>
                 @if ($errors->has('estado'))
@@ -138,12 +138,12 @@
             
             @foreach($buses as $bus)
                 if({{$bus->empresa->id}} == val){
-                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa->id}})</option>`;
+                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->modelo}} - M: {{$bus->color}} )</option>`;
                 }
             @endforeach
             
             if(val == {{$transporte->bus->empresa_id}}){
-                html = html + `<option value="{{$transporte->bus->id}}" {{ old('bus_id')=='$transporte->bus->id' ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus }} ( {{$transporte->bus->modelo}} - {{$transporte->bus->color}} - {{$transporte->bus->empresa->id}})</option>`;
+                html = html + `<option value="{{$transporte->bus->id}}" {{ old('bus_id')=='$transporte->bus->id' ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus }} ( P: {{$transporte->bus->placa}} - M: {{$transporte->bus->modelo}} )</option>`;
             }   
                
             document.getElementById("bus_id").innerHTML = html;  

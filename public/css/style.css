@@ -125,3 +125,7 @@ a.bg-light-blue:focus,a.bg-light-blue:hover,button.bg-light-blue:focus,button.bg
     background-color: #fff;
     border-color: #ddd;
 }
+
+td:first-letter {
+    text-transform: uppercase;
+}

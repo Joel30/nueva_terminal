@@ -61,7 +61,7 @@
                     <option> </option>
                     @foreach($buses as $bus)
                         @if(old('empresa_id') == $bus->empresa_id && $bus->transporte->departamento_id == old('departamento_id'))
-                            <option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa_id}})</option>
+                            <option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>
                         @endif
                     @endforeach
                 </select>
@@ -189,7 +189,7 @@
                 //departamento = {{$bus->transporte->where('bus_id',$bus->id)->pluck('departamento_id')}}.includes(parseInt(cod, 10));
                 
                 if({{$bus->empresa->id}} == val && {{$bus->transporte->departamento_id}} == cod){
-                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa->id}})</option>`;
+                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
                 }
             @endforeach    
             document.getElementById("bus_id").innerHTML = html;     

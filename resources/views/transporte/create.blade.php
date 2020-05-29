@@ -58,7 +58,7 @@
                     <option> </option>
                     @foreach($buses as $bus)
                         @if(old('empresa_id') == $bus->empresa_id)
-                            <option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa->id}})</option>
+                            <option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>
                         @endif
                     @endforeach
                 </select>
@@ -140,7 +140,7 @@
             var html ="<option></option>";
             @foreach($buses as $bus)
                 if({{$bus->empresa->id}} == val){
-                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( {{$bus->modelo}} - {{$bus->color}} - {{$bus->empresa->id}})</option>`;
+                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')== $bus->id ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
                 }
             @endforeach    
             document.getElementById("bus_id").innerHTML = html;   

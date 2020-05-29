@@ -49,7 +49,7 @@
                 <td>{{ $viaje->fecha }}</td>
                 <td>{{ $viaje->hora }}</td>
                 <td>{{ $viaje->estado }}</td>
-                <td>{{ $viaje->llegada_salida == 1 ? 'Llegada' : 'Salida'}}</td>
+                <td>{{ $viaje->llegada_salida}}</td>
 
                 <td>
 

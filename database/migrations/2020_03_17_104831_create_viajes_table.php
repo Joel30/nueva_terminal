@@ -23,7 +23,7 @@ class CreateViajesTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->string('estado');
-            $table->boolean('llegada_salida')->default(true);
+            $table->string('llegada_salida');
             $table->foreign('transporte_id')->references('id')->on('transportes');
             $table->timestamps();
         });
