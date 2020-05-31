@@ -1,13 +1,14 @@
 @extends('layouts.errors')
 
 @section('err')
-    401
+    404
 @endsection
 
 @section('first_message')
-    No Autorizado!
+    Página no encontrada!
 @endsection
 
 @section('second_message')
-    Esta acccion no esta autorizada
+    La página que estás buscando no está disponible
 @endsection
+

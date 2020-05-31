@@ -22,7 +22,6 @@ class PersonalController extends Controller
             'celular',
             'direccion', 
             'cargo')
-            ->orderBy('nombre', 'asc')
             ->get();
         return view('personal.index', compact('personal'));
     }

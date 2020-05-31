@@ -21,7 +21,7 @@ class ViajeController extends Controller
         $this->autorizacion('Encargado');
 
         $viajes = Viaje::select()
-                    ->whereDate('created_at', Carbon::today()
+                    ->whereDate('fecha', Carbon::today()
                         ->format('Y-m-d'))
                     ->get();
 

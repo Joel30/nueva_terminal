@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'empresas',
             'buses',
             'carriles',
+            'viajes'
         ]);
 
         $this->call(PersonalTableSeeder::class);
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BusesTableSeeder::class);
         $this->call(DepartamentosTableSeeder::class);
         $this->call(TransportesTableSeeder::class);
+        $this->call(ViajesTableSeeder::class);
     }
 
     protected function truncateTable(array $tables){

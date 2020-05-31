@@ -46,7 +46,7 @@
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
                 <td>{{ array_get($viaje->departamento,'destino','') }}</td>
-                <td>{{ array_get($viaje->bus['empresa'],'nombre','') }}</td>
+                <td>{{ array_get($viaje->empresa,'nombre','') }}</td>
                 <td>{{ array_get($viaje->carril,'anden','') }}</td>
                 <td>{{ array_get($viaje->carril,'carril','') }}</td>
                 <td>{{ array_get($viaje->bus,'tipo_bus','') }}</td>

@@ -1,13 +1,13 @@
 @extends('layouts.errors')
 
 @section('err')
-    401
+    405
 @endsection
 
 @section('first_message')
-    No Autorizado!
+    Método no permitido!
 @endsection
 
 @section('second_message')
-    Esta acccion no esta autorizada
+    El método de solicitud no está permitido
 @endsection
