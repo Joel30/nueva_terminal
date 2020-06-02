@@ -22,7 +22,7 @@
         <div class="form-group row">
             <label for="personal_id" class="col-md-4 col-form-label text-md-right">Nombre: </label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('personal_id') ? ' is-invalid' : '' }}" name="personal_id" id="personal_id" required>
+                <select class="form-control{{ $errors->has('personal_id') ? ' is-invalid' : '' }}" name="personal_id" id="personal_id" required autofocus>
                     @foreach($usuario->personal->all() as $personal)
                         <option value="{{$personal->id}}" {{ old('personal_id', $usuario->personal_id) == $personal->id ? 'selected' : ''  }}>{{$personal->nombre}} {{$personal->apellido_paterno}} {{$personal->apellido_materno}}</option>
                     @endforeach

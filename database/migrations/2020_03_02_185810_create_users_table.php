@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->unsignedInteger('personal_id');
             $table->foreign('personal_id')->references('id')->on('personal');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

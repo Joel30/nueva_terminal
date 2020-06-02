@@ -12,17 +12,7 @@ class PersonalController extends Controller
     {
         $this->autorizacion('Administrador');
 
-        $personal = Personal::select(
-            'id', 
-            (
-                DB::raw("CONCAT(nombre,' ',apellido_paterno,' ',apellido_materno) AS nombre")
-            ), 
-            'ci',
-            'fecha_nacimiento', 
-            'celular',
-            'direccion', 
-            'cargo')
-            ->get();
+        $personal = Personal::all();
         return view('personal.index', compact('personal'));
     }
 
@@ -68,11 +58,11 @@ class PersonalController extends Controller
         $this->autorizacion('Administrador');
 
         $status ='Eliminación exitosa';
-        try {
+        if($personal->usuario != null) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        } else {
             $personal->delete();
             return redirect('personal')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 'Registro relacionado, imposible de eliminar';
         }
         return redirect('personal')->with('err', $status);   
     }

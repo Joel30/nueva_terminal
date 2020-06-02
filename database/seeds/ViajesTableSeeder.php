@@ -12,7 +12,7 @@ class ViajesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Viaje::class, 30)->create();
+        factory(Viaje::class, 10)->create();
     }
 }
         

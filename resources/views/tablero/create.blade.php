@@ -20,7 +20,7 @@
         <div class="form-group row">
             <label for="departamento_id" class="col-md-4 col-form-label text-md-right">Destino:</label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" onchange="empresa(this.value)" required>
+                <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" onchange="empresa(this.value)" required autofocus>
                     <option> </option>
 
                     @foreach($destinos as $destino)

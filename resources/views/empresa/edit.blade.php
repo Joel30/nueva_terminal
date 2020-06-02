@@ -50,7 +50,7 @@
             <label for="telefono" class="col-md-4 col-form-label text-md-right">Teléfono: </label>
 
             <div class="col-md-6">
-                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{old('telefono', $empresa->telefono)}}" required autofocus>
+                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{old('telefono', $empresa->telefono)}}" autofocus>
 
                 @if ($errors->has('telefono'))
                     <span class="invalid-feedback">

@@ -113,10 +113,27 @@
                         <a href="{{route('home')}}" class="nav-link text-lb"><i class="fa fa-home fa-fw"
                                 aria-hidden="true"></i>Home</a>
                     </li>
-                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
-                        <a href="{{route('viaje.index')}}" class="nav-link text-lb"><i class="fa fa-desktop fa-fw text-primary"
-                                aria-hidden="true"></i>Tablero</a>
-                    </li>
+          
+                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
+                            <a class="nav-link text-lb" href="javascript:void(0)" aria-expanded="false" aria-hidden="true">
+                                <i class="fa fa-trash-o fa-fw"></i>
+                                <span class="">Papelera</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level in">
+                                <li class="sidebar-item">
+                                    <a href="{{route('papelera.personal')}}" class="nav-link">
+                                        <i class="mdi mdi-account-box"></i>
+                                        <span class=""> Personal </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{route('papelera.usuario')}}" class="nav-link">
+                                        <i class="mdi mdi-account-network"></i>
+                                        <span class="hide-menu"> Usuario </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
                         <a href="{{route('personal.index')}}" class="nav-link text-lb"><i class="fa fa-file-text fa-fw"
                                 aria-hidden="true"></i>Personal</a>
@@ -124,6 +141,10 @@
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
                         <a href="{{route('usuario.index')}}" class="nav-link text-lb"><i class="fa fa-users fa-fw"
                                 aria-hidden="true"></i>Usuarios</a>
+                    </li>
+                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
+                        <a href="{{route('viaje.index')}}" class="nav-link text-lb"><i class="fa fa-desktop fa-fw text-primary"
+                                aria-hidden="true"></i>Tablero</a>
                     </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? 'd-none' : '' }}">
                         <a href="{{route('reporte')}}" class="nav-link text-lb"><i class="fa fa-book fa-fw"
@@ -235,6 +256,7 @@
                     {data: 'tipo_bus'},
                     {data: 'placa'},
                     {data: 'modelo'},
+                    {data: 'marca'},
                     {data: 'color'},
                     {data: 'btn'}
                 ]            
@@ -269,6 +291,52 @@
             $('#nt_table2').parent().css('overflow-x', 'auto');
             $('#nt_table2_info').removeClass("dataTables_info");  
             $('#nt_table2_info').addClass("text-info text-center");  
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#nt_table_papelera_usuario').DataTable( {
+                //"processing": true,
+                "serverSide": true,
+                language: language_es,
+                ajax:{
+                    url : `{{route('usuario.papelera')}}`,
+                },
+                "columns": [
+                    {data: 'id'},
+                    {data: 'email'},
+                    {data: 'personal.nombre'},
+                    {data: 'btn'}
+                ]            
+            });
+            $('#nt_table_papelera_usuario').parent().css('overflow-x', 'auto');
+            $('#nt_table_papelera_usuario_info').removeClass("dataTables_info");  
+            $('#nt_table_papelera_usuario_info').addClass("text-info text-center");  
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#nt_table_papelera_personal').DataTable( {
+                //"processing": true,
+                "serverSide": true,
+                language: language_es,
+                ajax:{
+                    url : `{{route('personal.papelera')}}`,
+                },
+                "columns": [
+                    {data: 'id'},
+                    {data: 'nombre'},
+                    {data: 'ci'},
+                    {data: 'fecha_nacimiento'},
+                    {data: 'celular'},
+                    {data: 'direccion'},
+                    {data: 'cargo'},
+                    {data: 'btn'}
+                ]            
+            });
+            $('#nt_table_papelera_personal').parent().css('overflow-x', 'auto');
+            $('#nt_table_papelera_personal_info').removeClass("dataTables_info");  
+            $('#nt_table_papelera_personal_info').addClass("text-info text-center");  
         });
     </script>
 </body>

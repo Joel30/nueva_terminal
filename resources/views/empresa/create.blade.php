@@ -49,7 +49,7 @@
             <label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono: </label>
 
             <div class="col-md-6">
-                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono')}}" required autofocus>
+                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono')}}" autofocus>
 
                 @if ($errors->has('telefono'))
                     <span class="invalid-feedback">

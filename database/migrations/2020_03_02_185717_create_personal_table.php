@@ -16,13 +16,14 @@ class CreatePersonalTable extends Migration
         Schema::create('personal', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno');
-            $table->string('apellido_paterno');
             $table->string('ci');
             $table->date('fecha_nacimiento');
-            $table->integer('celular');
-            $table->string('direccion');
+            $table->integer('celular')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('cargo');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

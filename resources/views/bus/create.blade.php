@@ -71,7 +71,7 @@
             <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo: </label>
 
             <div class="col-md-6">
-                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{ old('modelo')}}" required autofocus>
+                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{ old('modelo')}}" autofocus>
 
                 @if ($errors->has('modelo'))
                     <span class="invalid-feedback">
@@ -82,10 +82,24 @@
         </div>
 
         <div class="form-group row">
+            <label for="marca" class="col-md-4 col-form-label text-md-right">Marca: </label>
+
+            <div class="col-md-6">
+                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{ old('marca')}}" autofocus>
+
+                @if ($errors->has('marca'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('marca') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="color" class="col-md-4 col-form-label text-md-right">Color: </label>
 
             <div class="col-md-6">
-                <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color')}}" required autofocus>
+                <input id="color" type="text" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" name="color" value="{{ old('color')}}" autofocus>
 
                 @if ($errors->has('color'))
                     <span class="invalid-feedback">

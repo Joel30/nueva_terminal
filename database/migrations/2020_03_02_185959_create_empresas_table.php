@@ -17,9 +17,10 @@ class CreateEmpresasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->integer('nro_oficina');
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->integer('celular');
             $table->string('responsable');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -59,11 +59,12 @@ class CarrilController extends Controller
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
-        try {
+        
+        if(count($carril->transportes) > 0){
+            $status = 'Registro relacionado, imposible de eliminar';
+        } else {
             $carril->delete();
             return redirect('carril')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 'Registro relacionado, imposible de eliminar';
         }
         return redirect('carril')->with('err', $status);
     }

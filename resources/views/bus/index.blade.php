@@ -18,6 +18,7 @@
                 <th>Tipo de Bus</th>
                 <th>Placa</th>
                 <th>Modelo</th>
+                <th>Marca</th>
                 <th>Color</th>
                 <th>Acciones</th>
             </tr>

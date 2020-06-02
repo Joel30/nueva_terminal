@@ -4,14 +4,16 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 use App\Personal;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     //protected $table = "users";
+    protected $dates = ['deleted_at'];
     
     public function personal(){
         return $this->belongsTo(Personal::class);
@@ -36,7 +38,7 @@ class User extends Authenticatable
 
     function guardar($request){
         $data = $request->validate([
-            'personal_id' => '',
+            'personal_id' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -48,13 +50,13 @@ class User extends Authenticatable
 
     function actualizar($request, $usuario){
         $data = $request->validate([
-            'personal_id' => '',
+            'personal_id' => 'required',
             'email' => [
                 'required',
                 'string',
                 'email',
                 Rule::unique('users')->ignore($usuario->id)
-                ],
+            ],
             'password' => '',
         ]);
         

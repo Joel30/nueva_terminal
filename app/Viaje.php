@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 //use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Viaje extends Model
 {
+    use SoftDeletes;
+
     protected $table = "viajes";
+    protected $dates = ['deleted_at'];
 
     public function transporte(){
         return $this->belongsTo(Transporte::class);
@@ -28,11 +32,10 @@ class Viaje extends Model
     function guardar($request){
         //dd($request);
         $data = $request->validate([
-            'transporte_id' => '',
-            'fecha'=> '', 
-            'hora'=> '', 
-            'estado' => '', 
-            'llegada_salida' => '',
+            'fecha'=> 'required', 
+            'hora'=> 'required', 
+            'estado' => 'required', 
+            'llegada_salida' => 'required',
         ]);
 
         $transporte_id = Transporte::where('departamento_id',$request->departamento_id)
@@ -52,11 +55,10 @@ class Viaje extends Model
     function actualizar($request, $viaje){
         //dd($request);
         $data = $request->validate([
-            'transporte_id' => '',  
-            'fecha'=> '', 
-            'hora'=> '', 
-            'estado' => '', 
-            'llegada_salida' => '',
+            'fecha'=> 'required', 
+            'hora'=> 'required', 
+            'estado' => 'required', 
+            'llegada_salida' => 'required',
         ]);
 
         $transporte_id = Transporte::where('departamento_id',$request->departamento_id)

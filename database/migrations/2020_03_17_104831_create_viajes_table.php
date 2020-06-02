@@ -25,6 +25,7 @@ class CreateViajesTable extends Migration
             $table->string('estado');
             $table->string('llegada_salida');
             $table->foreign('transporte_id')->references('id')->on('transportes');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

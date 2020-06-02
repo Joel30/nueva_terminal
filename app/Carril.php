@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 use App\Transporte;
 
 class Carril extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'carriles';
+    protected $dates = ['deleted_at'];
 
     public function transportes() {
         return $this->hasMany(Transporte::class);
@@ -21,8 +25,8 @@ class Carril extends Model
     function guardar($request){
         
         $data = $request->validate([
-            'carril' => 'unique:carriles',
-            'anden' => '',
+            'carril' => 'required|unique:carriles',
+            'anden' => 'required',
         ]);
         
         Carril::create($data);
@@ -30,8 +34,11 @@ class Carril extends Model
 
     function actualizar($request, Carril $carril){
         $data = $request->validate([
-            'carril' => [Rule::unique('carriles')->ignore($carril->id)],
-            'anden' => '', 
+            'carril' => [
+                'required',
+                Rule::unique('carriles')->ignore($carril->id)
+            ],
+            'anden' => 'required', 
         ]);
 
         $carril->update($data);

@@ -17,6 +17,7 @@ class CreateCarrilesTable extends Migration
             $table->increments('id');
             $table->integer('carril');
             $table->string('anden');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

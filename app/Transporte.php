@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 use App\Bus;
 use App\Departamento;
@@ -12,7 +13,10 @@ use App\Viaje;
 
 class Transporte extends Model
 {
+    use SoftDeletes;
+
     protected $table = "transportes";
+    protected $dates = ['deleted_at'];
 
     public function departamento(){
         return $this->belongsTo(Departamento::class);
@@ -37,11 +41,11 @@ class Transporte extends Model
     function guardar($request){
         //dd($request);
         $data = $request->validate([
-            'departamento_id' => '', 
-            'carril_id' => '', 
-            'bus_id' => 'unique:transportes',
-            'hora' => '', 
-            'estado' => '', 
+            'departamento_id' => 'required', 
+            'carril_id' => 'required', 
+            'bus_id' => 'required|unique:transportes',
+            'hora' => 'required', 
+            'estado' => 'required', 
         ]);
         
         Transporte::create($data);
@@ -50,11 +54,14 @@ class Transporte extends Model
     function actualizar($request, $transporte){
         //dd($request);
         $data = $request->validate([
-            'departamento_id' => '', 
-            'carril_id' => '', 
-            'bus_id' => [Rule::unique('transportes')->ignore($transporte->id)], 
-            'hora' => '', 
-            'estado' => '', 
+            'departamento_id' => 'required', 
+            'carril_id' => 'required', 
+            'bus_id' => [
+                'required',
+                Rule::unique('transportes')->ignore($transporte->id)
+            ], 
+            'hora' => 'required', 
+            'estado' => 'required', 
         ]);
         // llegada = 1(true) , salida = 0(false)
         $transporte->update($data);

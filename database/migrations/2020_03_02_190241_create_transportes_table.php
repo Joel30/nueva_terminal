@@ -23,6 +23,7 @@ class CreateTransportesTable extends Migration
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('carril_id')->references('id')->on('carriles');
             $table->foreign('bus_id')->references('id')->on('buses');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

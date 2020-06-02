@@ -99,11 +99,13 @@ class TransporteController extends Controller
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
-        try {
+
+        $transporte = Transporte::find($id);
+        if(count($transporte->viajes) > 0) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        } else {
             Transporte::destroy($id);
             return redirect('transporte')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 'Registro relacionado, imposible de eliminar';
         }
         return redirect('transporte')->with('err', $status);    
     }

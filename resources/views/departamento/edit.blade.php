@@ -33,7 +33,7 @@
         <div class="form-group row">
             <label for="tipo" class="col-md-4 col-form-label text-md-right">Transporte: </label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" name="tipo" id="tipo" required>
+                <select class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" name="tipo" id="tipo" required autofocus>
                     <option value="Nacional" {{ old('tipo', $departamento->tipo)=='Nacional' ? 'selected' : ''  }}>Nacional</option>
                     <option value="Internacional" {{ old('tipo', $departamento->tipo)=='Internacional' ? 'selected' : ''  }}>Internacional</option> 
                 </select>

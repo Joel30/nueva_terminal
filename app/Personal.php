@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 use App\User;
 
 class Personal extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'personal';
+    protected $dates = ['deleted_at'];
 
     public function usuario() {
         return $this->hasOne(User::class);
@@ -20,14 +24,14 @@ class Personal extends Model
 
     function guardar($request){
         $data = $request->validate([
-            'nombre' => '', 
+            'nombre' => 'required', 
             'apellido_paterno' => '',
             'apellido_materno' => '', 
-            'ci' => 'unique:personal', 
-            'fecha_nacimiento' => '', 
+            'ci' => 'required|unique:personal', 
+            'fecha_nacimiento' => 'required', 
             'celular' => '', 
             'direccion' => '', 
-            'cargo' => '',
+            'cargo' => 'required',
         ]);
 
         Personal::create($data);
@@ -35,14 +39,17 @@ class Personal extends Model
 
     function actualizar($request, Personal $personal){
         $data = $request->validate([
-            'nombre' => '', 
+            'nombre' => 'required', 
             'apellido_paterno' => '',
             'apellido_materno' => '', 
-            'ci' => [Rule::unique('personal')->ignore($personal->id)], 
-            'fecha_nacimiento' => '', 
+            'ci' => [
+                'required',
+                Rule::unique('personal')->ignore($personal->id)
+            ], 
+            'fecha_nacimiento' => 'required', 
             'celular' => '', 
             'direccion' => '', 
-            'cargo' => '',
+            'cargo' => 'required',
         ]);
         $personal->update($data);
     }

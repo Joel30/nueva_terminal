@@ -74,11 +74,13 @@ class BusController extends Controller
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
-        try {
-            Bus::destroy($id);
-            return redirect('bus')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
+
+        $bus = Bus::find($id);
+        if($bus->transporte != null) {
             $status = 'Registro relacionado, imposible de eliminar';
+        } else {
+            $bus->delete();
+            return redirect('bus')->with('good', $status);
         }
         return redirect('bus')->with('err', $status);
     }

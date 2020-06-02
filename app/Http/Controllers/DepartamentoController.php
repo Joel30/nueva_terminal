@@ -59,11 +59,11 @@ class DepartamentoController extends Controller
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
-        try {
+        if(count($departamento->transportes) > 0) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        } else {
             $departamento->delete();
             return redirect('departamento')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 'Registro relacionado, imposible de eliminar';
         }
         return redirect('departamento')->with('err', $status);  
     }

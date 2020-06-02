@@ -28,7 +28,7 @@
         @foreach($personal as $personal)
             <tr>
                 <td><b>{{ $cont++ }}</b></td>
-                <td>{{ $personal->nombre }}</td>
+                <td>{{ $personal->nombre.' '.$personal->apellido_paterno.' '.$personal->apellido_materno }}</td>
                 <td>{{ $personal->ci }}</td>
                 <td>{{ $personal->fecha_nacimiento }}</td>
                 <td>{{ $personal->celular }}</td>

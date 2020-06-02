@@ -36,7 +36,7 @@
             <label for="apellido_paterno" class="col-md-4 col-form-label text-md-right">Apellido Paterno: </label>
 
             <div class="col-md-6">
-                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{old('apellido_paterno', $personal->apellido_paterno)}}" required autofocus>
+                <input id="apellido_paterno" type="text" class="form-control{{ $errors->has('apellido_paterno') ? ' is-invalid' : '' }}" name="apellido_paterno" value="{{old('apellido_paterno', $personal->apellido_paterno)}}" autofocus>
 
                 @if ($errors->has('apellido_paterno'))
                     <span class="invalid-feedback">
@@ -92,7 +92,7 @@
             <label for="celular" class="col-md-4 col-form-label text-md-right">Celular: </label>
 
             <div class="col-md-6">
-                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{old('celular', $personal->celular)}}" required autofocus>
+                <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{old('celular', $personal->celular)}}" autofocus>
 
                 @if ($errors->has('celular'))
                     <span class="invalid-feedback">
@@ -106,7 +106,7 @@
             <label for="direccion" class="col-md-4 col-form-label text-md-right">Dirección: </label>
 
             <div class="col-md-6">
-                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" value="{{old('direccion', $personal->direccion)}}" required autofocus>
+                <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" value="{{old('direccion', $personal->direccion)}}" autofocus>
 
                 @if ($errors->has('direccion'))
                     <span class="invalid-feedback">

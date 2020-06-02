@@ -17,3 +17,5 @@ Route::get('bus/datatable', 'BusController@data_index')->name('bus.data_index');
 
 Route::get('transporte/datatable', 'TransporteController@data_index')->name('transporte.data_index');
 
+Route::get('personal/papelera', 'PapeleraController@personal_papelera')->name('personal.papelera');
+Route::get('usuario/papelera', 'PapeleraController@usuario_papelera')->name('usuario.papelera');

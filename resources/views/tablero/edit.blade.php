@@ -22,7 +22,7 @@
         <div class="form-group row">
             <label for="departamento_id" class="col-md-4 col-form-label text-md-right">Destino: </label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" onchange="empresa(this.value)" required>
+                <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" onchange="empresa(this.value)" required autofocus>
                     @foreach($destinos as $destino)
                         <option value="{{$destino->id}}" {{ old('departamento_id', $viaje->transporte->departamento_id) == $destino->id ? 'selected' : ''  }}>{{$destino->destino}}</option>
                     @endforeach

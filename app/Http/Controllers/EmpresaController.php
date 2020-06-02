@@ -61,11 +61,12 @@ class EmpresaController extends Controller
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
-        try {
+        
+        if(count($empresa->buses) > 0) {
+            $status = 'Registro relacionado, imposible de eliminar';
+        } else {
             $empresa->delete();
             return redirect('empresa')->with('good', $status);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $status = 'Registro relacionado, imposible de eliminar';
         }
         return redirect('empresa')->with('err', $status);   
     }

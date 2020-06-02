@@ -18,9 +18,11 @@ class CreateBusesTable extends Migration
             $table->unsignedInteger('empresa_id');
             $table->string('tipo_bus');
             $table->string('placa');
-            $table->string('modelo');
-            $table->string('color');
+            $table->string('modelo')->nullable();
+            $table->string('marca')->nullable();
+            $table->string('color')->nullable();
             $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

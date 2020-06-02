@@ -35,7 +35,7 @@
         <div class="form-group row">
             <label for="anden" class="col-md-4 col-form-label text-md-right">Anden: </label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('anden') ? ' is-invalid' : '' }}" name="anden" id="anden" required>
+                <select class="form-control{{ $errors->has('anden') ? ' is-invalid' : '' }}" name="anden" id="anden" required autofocus>
                     <option value="A" {{ old('anden', $carril->anden)=='A' ? 'selected' : ''  }}>A</option>
                     <option value="B" {{ old('anden', $carril->anden)=='B' ? 'selected' : ''  }}>B</option> 
                     <option value="C" {{ old('anden', $carril->anden)=='C' ? 'selected' : ''  }}>C</option>
