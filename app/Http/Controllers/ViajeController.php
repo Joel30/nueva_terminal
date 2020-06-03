@@ -12,6 +12,9 @@ use App\Departamento;
 
 use Yajra\Datatables\Datatables;
 use Yajra\DataTables\CollectionDataTable;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\ViajesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ViajeController extends Controller
 {
@@ -172,34 +175,88 @@ class ViajeController extends Controller
         return view('reporte.index', compact('viajes'));
     }
 
+    public function export_pdf()
+    {
+        $fecha_actual = request()->fecha_actual;
+        if ($fecha_actual != null) {
+            $viajes = Viaje::select()
+                ->whereDate('fecha', Carbon::today()
+                ->format('Y-m-d'))
+                ->get();
+        } else {
+            $registros = request()->registros;
+
+            if($registros != null){
+                $viajes = Viaje::all();
+            } else {
+                $fecha = request()->fecha;
+                $fecha_inicio = request()->fecha_inicio;
+                $fecha_fin = request()->fecha_fin;
+                if ($fecha != 0){
+                    $viajes = Viaje::whereYear('created_at',$fecha)
+                            ->whereMonth('created_at',substr($fecha, -2))
+                            ->get(); 
+                } else {
+                    if ($fecha_inicio != 0){
+                        if ($fecha_fin != 0){
+                            $viajes = Viaje::whereDate('created_at','>=',$fecha_inicio)
+                                ->whereDate('created_at', '<=', $fecha_fin)
+                                ->get();
+                        } else {
+                            $viajes = Viaje::whereDate('created_at',$fecha_inicio)
+                                ->get();
+                        }
+                    } else {
+                        $viajes = Viaje::whereDate('created_at',$fecha_fin)
+                            ->get();
+                    }
+                }
+            }
+        }
+      
+        $pdf = PDF::loadView('reporte.exportar', compact('viajes'));
+        $pdf->setPaper("letter", "portrait");
+        return $pdf->stream();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ViajesExport(), request()->archivo);
+    }
+
     public function buscar()
     {
         $this->autorizacion('Encargado');
 
-        $fecha = request()->fecha;
-        $fecha_inicio = request()->fecha_inicio;
-        $fecha_fin = request()->fecha_fin;
+        $registros = request()->registros;
 
-        if ($fecha != 0){
-            $viajes = Viaje::whereYear('created_at',$fecha)
-                    ->whereMonth('created_at',substr($fecha, -2))
-                    ->get(); 
+        if($registros != null){
+            $viajes = Viaje::all();
         } else {
-            if ($fecha_inicio != 0){
-                if ($fecha_fin != 0){
-                    $viajes = Viaje::whereDate('created_at','>=',$fecha_inicio)
-                        ->whereDate('created_at', '<=', $fecha_fin)
-                        ->get();
+            $fecha = request()->fecha;
+            $fecha_inicio = request()->fecha_inicio;
+            $fecha_fin = request()->fecha_fin;
+            if ($fecha != 0){
+                $viajes = Viaje::whereYear('created_at',$fecha)
+                        ->whereMonth('created_at',substr($fecha, -2))
+                        ->get(); 
+            } else {
+                if ($fecha_inicio != 0){
+                    if ($fecha_fin != 0){
+                        $viajes = Viaje::whereDate('created_at','>=',$fecha_inicio)
+                            ->whereDate('created_at', '<=', $fecha_fin)
+                            ->get();
+                    } else {
+                        $viajes = Viaje::whereDate('created_at',$fecha_inicio)
+                            ->get();
+                    }
                 } else {
-                    $viajes = Viaje::whereDate('created_at',$fecha_inicio)
+                    $viajes = Viaje::whereDate('created_at',$fecha_fin)
                         ->get();
                 }
-            } else {
-                $viajes = Viaje::whereDate('created_at',$fecha_fin)
-                    ->get();
             }
         }
-    
+
         return datatables()->of($viajes)->toJson();
     }
 }

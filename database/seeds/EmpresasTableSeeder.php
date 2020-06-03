@@ -12,7 +12,7 @@ class EmpresasTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Empresa::class, 5)->create();
+        factory(Empresa::class, 5)->create(); //max 43
 
     }
 }

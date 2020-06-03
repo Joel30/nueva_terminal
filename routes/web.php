@@ -69,6 +69,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reporte','ViajeController@reporte')->name('reporte');
     Route::get('reporte/buscar','ViajeController@buscar')->name('reporte.buscar');
 
+    Route::get('reporte/exportar','ViajeController@export_pdf')->name('export.pdf');
+    Route::get('reporte/export','ViajeController@export')->name('export');
+
 
     Route::get('papelera/personal', 'PapeleraController@personal')->name('papelera.personal');
     Route::get('papelera/usuario', 'PapeleraController@usuario')->name('papelera.usuario');
