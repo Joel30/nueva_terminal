@@ -1,25 +1,31 @@
 @extends('layouts.app')
 
 @section('title')
-
- 
-        <a id="pdf" href="{{route('export.pdf')}}?fecha_actual=true" target="_blank" class="btn btn-outline-danger btn-sm text-center">
-            <i class="fa fa-file-pdf-o fa-fw"aria-hidden="true"></i>PDF
-        </a>
-        <a id="excel" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.xlsx" target="_blank" class="btn btn-outline-success btn-sm text-center">
-            <i class="fa fa-file-excel-o fa-fw"aria-hidden="true"></i>EXCEL
-        </a>
-        <a id="csv" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.csv" target="_blank" class="btn btn-outline-primary btn-sm text-center">
-            <i class="fa fa-file-excel-o fa-fw"aria-hidden="true"></i>CSV
-        </a>
-  
-
+    REPORTES
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">Reportes</li>
 @endsection
 
+@section('options')
+    <div class="white-box" style="padding-top:8px;padding-bottom:8px">
+        <h5 class="box-title">Exportar Reportes</h5>
+        <div class="row justify-content-center">
+            <div class="btn-group btn-group-toggle">
+                <a id="pdf" href="{{route('export.pdf')}}?fecha_actual=true" target="_blank" class="btn btn-danger btn-sm text-center px-2 px-sm-4">
+                    <i class="fa fa-download fa-fw"aria-hidden="true"></i>PDF
+                </a>
+                <a id="excel" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.xlsx" target="_blank" class="btn btn-success btn-sm text-center px-2 px-sm-4">
+                    <i class="fa fa-download fa-fw"aria-hidden="true"></i>EXCEL
+                </a>
+                <a id="csv" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.csv" target="_blank" class="btn btn-primary btn-sm text-center px-2 px-sm-4">
+                    <i class="fa fa-download fa-fw"aria-hidden="true"></i>CSV
+                </a>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
 <div>   
     <div>
@@ -36,7 +42,7 @@
                 </div>
                 <input type="month" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info fa fa-plus py-0 ml-0" onclick="dos()"></button> 
+                    <button class="btn btn-outline-info  py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
                 </div> 
             </div>
         </div>
@@ -61,17 +67,16 @@
         </thead>
         <tbody>
         @if(isset($viajes))
-            <?php $cont = 1; ?>
             @foreach($viajes as $viaje)
             <tr>
-                <td><b>{{ $cont++ }}</b></td>
+                <td></td>
                 <td>{{ array_get($viaje->departamento,'destino','') }}</td>
                 <td>{{ array_get($viaje->empresa,'nombre','') }}</td>
                 <td>{{ array_get($viaje->carril,'anden','') }}</td>
                 <td>{{ array_get($viaje->carril,'carril','') }}</td>
                 <td>{{ array_get($viaje->bus,'tipo_bus','') }}</td>
-                <td>{{ $viaje->fecha }}</td>
-                <td>{{ $viaje->hora }}</td>
+                <td>{{ Carbon\Carbon::parse($viaje->fecha)->format('d/m/Y')}}</td>
+                <td>{{ Carbon\Carbon::parse($viaje->hora)->format('H:i') }}</td>
                 <td>{{ $viaje->estado }}</td>
                 <td>{{ $viaje->llegada_salida }}</td>
 
@@ -117,8 +122,13 @@
                 ajax:{
                     url : reporte_url,
                 },
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],  
                 "columns": [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'departamento.destino'},
                     {data: 'empresa.nombre'},
                     {data: 'carril.anden'},
@@ -128,7 +138,8 @@
                     {data: 'hora'},
                     {data: 'estado'},
                     {data:  'llegada_salida'}
-                ]            
+                ],  
+                "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table').parent().css('overflow-x', 'auto');
             $('#nt_table_info').addClass("text-info"); 
@@ -143,7 +154,7 @@
                 </div>
                 <input type="month" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info fa fa-plus py-0 ml-0" onclick="dos()"></button> 
+                    <button class="btn btn-outline-info py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
                 </div> 
             </div>
         </div>`; 
@@ -157,7 +168,7 @@
                 <input type="date" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha-inicio">
                 <input type="date" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{date('Y-m-d')}}" id="fecha-fin">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info fa fa-chevron-left py-0 ml-0" onclick="uno()"></button> 
+                    <button class="btn btn-outline-info py-0 ml-0" onclick="uno()"><i class="fa fa fa-chevron-left"></i></button> 
                 </div> 
             </div>
         </div>`;

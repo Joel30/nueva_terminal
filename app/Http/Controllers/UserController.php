@@ -56,11 +56,13 @@ class UserController extends Controller
         return redirect('usuario')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(User $usuario)
+    public function destroy($id)
     {
         $this->autorizacion('Administrador');
 
         $status ='Eliminación exitosa';
+
+        $usuario = User::find($id);
         try {
             $usuario->delete();
             return redirect('usuario')->with('good', $status);

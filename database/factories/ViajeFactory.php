@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Viaje::class, function (Faker $faker) {
-    $transporte_id = $faker->randomElement($array = App\Transporte::pluck('id'));
+    $transporte_id = $faker->randomElement($array = App\Transporte::where('estado','activo')->pluck('id'));
     $t = App\Transporte::find($transporte_id);
     $departamento = json_decode($t->departamento);
     $empresa = json_decode($t->bus->empresa);

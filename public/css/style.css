@@ -1,3 +1,39 @@
+.edit-body{
+    font-family:Rubik,sans-serif !important;
+    font-weight: 390 !important;
+    font-size: 15px !important;
+}
+table {
+    font-family:Rubik,sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 370;
+}
+tr, td {
+    padding: 8px 6px !important;
+    color: #666666;
+    
+    vertical-align:middle!important;
+    border-bottom: 1px solid #eaeff1 !important;
+    border-top: 0px solid #eaeff1 !important;
+}
+th {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    vertical-align:middle!important
+}
+td:first-letter {
+    text-transform: uppercase;
+}
+
+td:first-child, th:first-child {
+    text-align: center;
+}
+
+td:last-of-type, th:last-of-type, .th-dark th:last-of-type{
+    text-align: center;
+    border-right: 0px solid #eaeff1 !important;
+}
+
 .th-dark tr{
     color:#e9ebed;
     background-color:#1d96b2;
@@ -50,8 +86,13 @@ a.bg-light-blue:focus,a.bg-light-blue:hover,button.bg-light-blue:focus,button.bg
     box-shadow:0 0 0 .1rem #f74a33a2 !important;
 }
 
+/*---------------Buttons---------------*/
+.btn, .form-control{
+    font-size: 15px !important;
+    font-family:Rubik,sans-serif !important;
+}
 
-/* ------------------------- */
+/* ---------------Pagination---------- */
 .pagination {
     display: inline-block;
     padding-left: 0;
@@ -126,6 +167,3 @@ a.bg-light-blue:focus,a.bg-light-blue:hover,button.bg-light-blue:focus,button.bg
     border-color: #ddd;
 }
 
-td:first-letter {
-    text-transform: uppercase;
-}

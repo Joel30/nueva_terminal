@@ -1,3 +1,3 @@
-<a href="{{route('transporte.editar', $id)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
 
-<a href="{{route('transporte.eliminar', $id)}}" class="float-left pr-4"><input type=image src="{{asset('images/delete.png')}}" width="20" height="20" title="Editar" onclick="return confirm('Esta seguro de eliminar el Transporte con id: {{$id}}')"></a>
+<a href="{{route('transporte.editar', $id)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+<a href="{{route('transporte.eliminar', $id)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el Transporte con destino: {{App\Transporte::find($id)->departamento->destino}}')"><i class="fa fa-trash"></i></a>

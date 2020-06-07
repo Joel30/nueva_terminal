@@ -56,12 +56,13 @@ class EmpresaController extends Controller
         return redirect('empresa')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Empresa $empresa)
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
         
+        $empresa = Empresa::find($id);
         if(count($empresa->buses) > 0) {
             $status = 'Registro relacionado, imposible de eliminar';
         } else {

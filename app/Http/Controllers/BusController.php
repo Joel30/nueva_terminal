@@ -21,6 +21,7 @@ class BusController extends Controller
         $buses = Bus::with('empresa:id,nombre')->get();
         return datatables()
             ->of($buses)
+            ->addIndexColumn()
             ->addColumn('btn','/bus/actions')
             ->rawColumns(['btn'])
             ->toJson();

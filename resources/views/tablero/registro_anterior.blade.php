@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Tablero
+    Tablero ({{Carbon\Carbon::now()->subDays(1)->format('d-m-y')}})
 @endsection
 
 @section('breadcrumb')
@@ -9,29 +9,23 @@
 @endsection
 
 @section('box')
-    <div class="mr-3">
-        <a href="{{route('viaje.nuevo')}}" class="btn btn-success py-1 mb-3">
-            <i class="fa fa-plus fa-fw"></i>
-            Agregar Registro
-        </a>
-    </div>
-    <div class="mr-3">
-        <a href="{{route('viaje.registro_anterior')}}" class="btn btn-light  py-1 mb-3">
-            <i class="fa fa-table fa-fw"></i>
-            Registro Anterior
-        </a>
-    </div>
     <div class="">
-        <a href="{{route('viaje.tablero')}}" class="btn btn-outline-danger py-1 px-2" target="_blank" title="Visualizar Monitor"><i class="fa fa-eye" aria-hidden="true"></i></a>
-    </div> 
+        <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
+<form method="POST" action="{{route('viaje.copia_registros')}}" onsubmit="prevent_multiple_submits()">
+    {{ csrf_field() }}
+    <div style="overflow-x:auto">
 
-    <table class="table table-striped" id="nt_table">
+    <table class="table table-striped">
         <thead class="th-dark">
             <tr>
-                <th>#</th>
+                <th><input type="checkbox" id="selectall" name="item"></th>
                 <th>Destino</th>
                 <th>Empresa de Transporte</th>
                 <th>Teléfono</th>
@@ -46,9 +40,10 @@
             </tr>
         </thead>
         <tbody >
+        <?php $cont = 1; ?>
         @foreach($viajes as $viaje)
             <tr>
-                <td></td>
+                <td><input type="checkbox" name="item{{$cont++}}" class="case" value="{{$viaje->id}}"></td>
                 <td>{{ $viaje->transporte->departamento->destino }}</td>
                 <td>{{ $viaje->transporte->bus->empresa->nombre }}</td>
                 <td>{{ $viaje->transporte->bus->empresa->telefono }}</td>
@@ -61,12 +56,21 @@
                 <td>{{ $viaje->llegada_salida}}</td>
 
                 <td>
-                    <a href="{{route('viaje.editar', $viaje)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('viaje.eliminar', $viaje)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el registro?')"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('viaje.editar', $viaje)}}?copia=true" class="btn btn-outline-info py-0 px-1 my-0 mr-3" title="Copear"><i class="fa fa-copy"></i></a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    </div>
+
+    <div class="row justify-content-center">
+    <button id="copy_btn" type="submit" class="btn btn-info py-1 mt-2 mr-3">
+            <i class="fa fa-edit fa-fw p-0"></i>
+        Copear a hoy
+    </button>
+</div>
+</form>
+
 
 @endsection

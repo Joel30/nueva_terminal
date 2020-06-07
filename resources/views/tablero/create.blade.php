@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('title') 
-    <a href="{{route('viaje.index')}}" class="btn btn-danger py-1 ">
-        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-        Regresar
-    </a> 
+    Nuevo Registro 
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"> <a href="{{route('viaje.index')}}">Tablero</a></li>
     <li class="breadcrumb-item active">Nuevo</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="{{route('viaje.index')}}" class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -135,6 +141,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
                 <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4">
+                    <i class="fa fa-save fa-fw"></i>
                     Guardar
                 </button>
             </div>

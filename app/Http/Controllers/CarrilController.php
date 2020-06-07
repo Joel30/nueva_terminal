@@ -54,12 +54,13 @@ class CarrilController extends Controller
         return redirect('carril')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Carril $carril)
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
         
+        $carril = Carril::find($id);
         if(count($carril->transportes) > 0){
             $status = 'Registro relacionado, imposible de eliminar';
         } else {

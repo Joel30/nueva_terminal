@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('title') 
-    <a href="{{route('usuario.index')}}" class="btn btn-danger py-1 ">
-        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-        Regresar
-    </a> 
+    Editar Usuario
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"> <a href="{{route('usuario.index')}}">Usuario</a></li>
     <li class="breadcrumb-item active">Editar</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="{{route('usuario.index')}}" class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -24,7 +30,7 @@
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('personal_id') ? ' is-invalid' : '' }}" name="personal_id" id="personal_id" required autofocus>
                     @foreach($usuario->personal->all() as $personal)
-                        <option value="{{$personal->id}}" {{ old('personal_id', $usuario->personal_id) == $personal->id ? 'selected' : ''  }}>{{$personal->nombre}} {{$personal->apellido_paterno}} {{$personal->apellido_materno}}</option>
+                        <option value="{{$personal->id}}" {{ old('personal_id', $usuario->personal_id) == $personal->id ? 'selected' : ''  }}>{{$personal->nombre.' '.$personal->apellido_paterno.' '.$personal->apellido_materno.' : [ '.$personal->cargo.' ]'}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('personal_id'))
@@ -62,6 +68,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
                 <button id="register_btn" type="submit" class="btn btn-warning btn-block mt-4">
+                    <i class="fa fa-edit fa-fw"></i>
                     Actualizar
                 </button>
             </div>

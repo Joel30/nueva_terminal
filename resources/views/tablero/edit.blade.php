@@ -1,22 +1,30 @@
 @extends('layouts.app')
 
-@section('title') 
-    <a href="{{route('viaje.index')}}" class="btn btn-danger py-1 ">
-        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-        Regresar
-    </a> 
+@section('title')
+    {{$viaje->copia == true ? 'Copiar Registro' : 'Editar registro'}}
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"> <a href="{{route('viaje.index')}}">viaje</a></li>
-    <li class="breadcrumb-item active">Editar</li>
+    <li class="breadcrumb-item active">{{$viaje->copia == true ? 'Copia' : 'Editar'}}</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="javascript:history.back(-1);"  class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
 
-    <form method="POST" action="{{route('viaje.actualizar', $viaje)}}" onsubmit="prevent_multiple_submits()">
+    <form method="POST" action="{{$viaje->copia == true ? route('viaje.copia') : route('viaje.actualizar', $viaje)}}" onsubmit="prevent_multiple_submits()">
         
-        {{ method_field('PUT') }}
+        @if ($viaje->copia != true) 
+            {{ method_field('PUT') }}
+        @endif
         {{ csrf_field() }}
 
         <div class="form-group row">
@@ -76,7 +84,7 @@
         <div class="form-group row">
             <label for="fecha" class="col-md-4 col-form-label text-md-right">Fecha: </label>
             <div class="col-md-6">
-                <input id="fecha" type="date" class="form-control{{ $errors->has('fecha') ? ' is-invalid' : '' }}" name="fecha" value="{{$viaje->fecha}}" required autofocus>
+                <input id="fecha" type="date" class="form-control{{ $errors->has('fecha') ? ' is-invalid' : '' }}" name="fecha" value="{{$viaje->fecha >= Carbon\Carbon::now()->format('Y-m-d') ? $viaje->fecha : Carbon\Carbon::now()->format('Y-m-d')}}" required autofocus>
                 @if ($errors->has('fecha'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('fecha') }}</strong>
@@ -132,9 +140,17 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
+            @if ($viaje->copia != true) 
                 <button id="register_btn" type="submit" class="btn btn-warning btn-block mt-4">
+                    <i class="fa fa-edit fa-fw"></i>
                     Actualizar
                 </button>
+            @else
+                <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4">
+                    <i class="fa fa-copy fa-fw"></i>
+                    Copear
+                </button>
+            @endif
             </div>
         </div>
     </form>
@@ -171,18 +187,14 @@
                 }
             @endforeach    
             document.getElementById("empresa_id").innerHTML = html;  
-            
         }
 
         function bus(val){       
             var cod = document.getElementById("departamento_id").value; 
             console.log(cod);
 
-            //let departamento = false; 
             var html ="<option></option>";
             @foreach($buses as $bus)
-                //departamento = {{$bus->transporte->where('bus_id',$bus->id)->pluck('departamento_id')}}.includes(parseInt(cod, 10));
-
                 if({{$bus->empresa->id}} == val && {{$bus->transporte->departamento_id}} == cod){
                     html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
                 }

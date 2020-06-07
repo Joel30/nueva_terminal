@@ -37,7 +37,7 @@
 <![endif]-->
 </head>
 
-<body class="fix-header">
+<body class="fix-header edit-body">
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>{{ Auth::user()->personal->nombre.' '.Auth::user()->personal->apellido_paterno }}</b>
+                                    {{ Auth::user()->personal->nombre.' '.Auth::user()->personal->apellido_paterno }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="nav-link" href="{{ route('logout') }}"
@@ -113,27 +113,6 @@
                         <a href="{{route('home')}}" class="nav-link text-lb"><i class="fa fa-home fa-fw"
                                 aria-hidden="true"></i>Home</a>
                     </li>
-          
-                    <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
-                            <a class="nav-link text-lb" href="javascript:void(0)" aria-expanded="false" aria-hidden="true">
-                                <i class="fa fa-trash-o fa-fw"></i>
-                                <span class="">Papelera</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level in">
-                                <li class="sidebar-item">
-                                    <a href="{{route('papelera.personal')}}" class="nav-link">
-                                        <i class="mdi mdi-account-box"></i>
-                                        <span class=""> Personal </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="{{route('papelera.usuario')}}" class="nav-link">
-                                        <i class="mdi mdi-account-network"></i>
-                                        <span class="hide-menu"> Usuario </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                     <li class="{{ Auth::user()->personal->cargo == 'Administrador' ? '' : 'd-none' }}">
                         <a href="{{route('personal.index')}}" class="nav-link text-lb"><i class="fa fa-file-text fa-fw"
                                 aria-hidden="true"></i>Personal</a>
@@ -184,7 +163,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-0 col-sm-6 col-md-4 col-lg-3">
-                        @yield('title')
+                        <h4 class="page-title">@yield('title')</h4>
                     </div>
                     <div class="col-12 col-sm-6 col-md-8 col-lg-9">
                         <ol class="breadcrumb">
@@ -195,12 +174,21 @@
 
                     <!-- /.col-lg-12 -->
                 </div>
+
+                <div class="row m-0">
+                        @yield('box') 
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
                             @if (session('good'))
                                 <div class="alert alert-success">
                                     <i class="fa fa-check-circle fa-fw" aria-hidden="true"></i>{{ session('good') }}
+                                </div>
+                            @elseif (session('info'))
+                                <div class="alert alert-info">
+                                    <i class="fa fa-check-circle fa-fw" aria-hidden="true"></i>{{ session('info') }}
                                 </div>
                             @endif
                             @if (session('err'))
@@ -211,6 +199,12 @@
                             
                             @yield('content')
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @yield('options')
                     </div>
                 </div>
             </div>
@@ -251,15 +245,21 @@
                     url : `{{route('bus.data_index')}}`,
                 },
                 "columns": [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'empresa.nombre'},
                     {data: 'tipo_bus'},
                     {data: 'placa'},
-                    {data: 'modelo'},
                     {data: 'marca'},
+                    {data: 'modelo'},
                     {data: 'color'},
                     {data: 'btn'}
-                ]            
+                ],
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],             
+                "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table1').parent().css('overflow-x', 'auto');
             $('#nt_table1_info').removeClass("dataTables_info");  
@@ -276,7 +276,7 @@
                     url : `{{route('transporte.data_index')}}`,
                 },
                 "columns": [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'departamento.destino'},
                     {data: 'bus.empresa.nombre'},
                     {data: 'bus.empresa.telefono'},
@@ -286,7 +286,13 @@
                     {data: 'hora'},
                     {data: 'estado'},
                     {data: 'btn'}
-                ]            
+                ],
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],             
+                "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table2').parent().css('overflow-x', 'auto');
             $('#nt_table2_info').removeClass("dataTables_info");  
@@ -303,11 +309,19 @@
                     url : `{{route('usuario.papelera')}}`,
                 },
                 "columns": [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'email'},
-                    {data: 'personal.nombre'},
+                    {data: 'nombre'},
+                    {data: 'cargo'},
+                    {data: 'hora'},
                     {data: 'btn'}
-                ]            
+                ],
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],             
+                "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table_papelera_usuario').parent().css('overflow-x', 'auto');
             $('#nt_table_papelera_usuario_info').removeClass("dataTables_info");  
@@ -324,21 +338,54 @@
                     url : `{{route('personal.papelera')}}`,
                 },
                 "columns": [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'nombre'},
                     {data: 'ci'},
                     {data: 'fecha_nacimiento'},
                     {data: 'celular'},
                     {data: 'direccion'},
                     {data: 'cargo'},
+                    {data: 'hora'},
                     {data: 'btn'}
-                ]            
+                ],
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],             
+                "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table_papelera_personal').parent().css('overflow-x', 'auto');
             $('#nt_table_papelera_personal_info').removeClass("dataTables_info");  
             $('#nt_table_papelera_personal_info').addClass("text-info text-center");  
         });
     </script>
+    <script>
+        $(document).ready(function(){boton()});
+        function boton(){
+            if( $('.case').is(':checked') ) {
+                $('#copy_btn').attr('disabled', false);
+            }else{
+                $('#copy_btn').attr('disabled','disabled');
+            }
+        }
+
+        $("#selectall").on("click", function() {  
+            $(".case").prop("checked", this.checked);  
+            boton();
+        });  
+
+            // if all checkbox are selected, check the selectall checkbox and viceversa  
+        $(".case").on("click", function() {  
+            if ($(".case").length == $(".case:checked").length) {  
+                $("#selectall").prop("checked", true);
+                boton();
+            } else {  
+                $("#selectall").prop("checked", false);
+                boton();  
+            }  
+        });
+</script>
 </body>
 
 </html>

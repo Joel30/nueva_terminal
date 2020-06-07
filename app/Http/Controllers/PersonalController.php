@@ -53,11 +53,13 @@ class PersonalController extends Controller
         return redirect('personal')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Personal $personal)
+    public function destroy($id)
     {
         $this->autorizacion('Administrador');
 
         $status ='Eliminación exitosa';
+
+        $personal = Personal::find($id);
         if($personal->usuario != null) {
             $status = 'Registro relacionado, imposible de eliminar';
         } else {

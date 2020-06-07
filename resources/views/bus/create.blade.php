@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('title') 
-    <a href="{{route('bus.index')}}" class="btn btn-danger py-1 ">
-        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-        Regresar
-    </a> 
+    Nuevo Bus
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('bus.index')}}">Buses</a></li>
     <li class="breadcrumb-item active">Nuevo</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="{{route('bus.index')}}" class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -68,20 +74,6 @@
         </div>
 
         <div class="form-group row">
-            <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo: </label>
-
-            <div class="col-md-6">
-                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{ old('modelo')}}" autofocus>
-
-                @if ($errors->has('modelo'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('modelo') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group row">
             <label for="marca" class="col-md-4 col-form-label text-md-right">Marca: </label>
 
             <div class="col-md-6">
@@ -90,6 +82,20 @@
                 @if ($errors->has('marca'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('marca') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo: </label>
+
+            <div class="col-md-6">
+                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{ old('modelo')}}" autofocus>
+
+                @if ($errors->has('modelo'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('modelo') }}</strong>
                     </span>
                 @endif
             </div>
@@ -112,6 +118,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
                 <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4" >
+                    <i class="fa fa-save fa-fw"></i>
                     Guardar
                 </button>
             </div>

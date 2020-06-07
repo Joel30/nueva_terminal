@@ -16,7 +16,7 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
     
     public function personal(){
-        return $this->belongsTo(Personal::class);
+        return $this->belongsTo(Personal::class)->withTrashed();;
     }
     /**
      * The attributes that are mass assignable.

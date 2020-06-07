@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 //use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 use App\Transporte;
 
 class Viaje extends Model
@@ -42,7 +43,6 @@ class Viaje extends Model
             ->where('bus_id', $request->bus_id)
             ->get()[0]->id; 
         $t = Transporte::find($transporte_id);
-        //dd($re);
         $data['transporte_id'] = $transporte_id;
         $data['departamento'] = $t->departamento;
         $data['empresa'] = $t->bus->empresa;
@@ -50,6 +50,29 @@ class Viaje extends Model
         $data['bus'] = $t->bus;
         
         Viaje::create($data);
+    }
+
+    function copear($request){
+        //dd(($request->all()));
+        $viajes = $request->all();
+        unset($viajes['_token'],$viajes['item']);
+
+        foreach ($viajes as $valor){
+            $v = Viaje::find($valor);
+            $t = Transporte::find($v->transporte_id);
+            $data = [
+                'transporte_id' => $t->id,
+                'departamento' => $t->departamento,
+                'empresa' => $t->bus->empresa,
+                'carril' => $t->carril,
+                'bus' => $t->bus,
+                'fecha' => Carbon::now(),
+                'hora' => $v->hora,
+                'estado' => $v->estado,
+                'llegada_salida' => $v->llegada_salida,
+            ];
+            Viaje::create($data);
+        }
     }
 
     function actualizar($request, $viaje){

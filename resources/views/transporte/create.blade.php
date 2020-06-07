@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('title') 
-    <a href="{{route('transporte.index')}}" class="btn btn-danger py-1 ">
-        <i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i>
-        Regresar
-    </a> 
+    Nuevo Transporte
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"> <a href="{{route('transporte.index')}}">Transporte</a></li>
     <li class="breadcrumb-item active">Nuevo</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="{{route('transporte.index')}}" class="btn btn-info py-1 mb-3">
+            <i class="fa fa-chevron-left fa-fw"></i>
+            Regresar
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -117,6 +123,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
                 <button type="submit" class="btn btn-primary1 btn-block mt-4" id="register_btn">
+                    <i class="fa fa-save fa-fw"></i>
                     Guardar
                 </button>
             </div>
@@ -124,18 +131,6 @@
     </form>
 
     <script>
-
-        /*window.onload = function(){
-            var genderOldValue = '{{ old('bus_id') }}';
-            
-            if(genderOldValue !== '') {
-                console.log(genderOldValue);
-            } else {
-                console.log(genderOldValue);
-                
-            }
-        }*/
-        
         function empresa(val){         
             var html ="<option></option>";
             @foreach($buses as $bus)
@@ -145,8 +140,6 @@
             @endforeach    
             document.getElementById("bus_id").innerHTML = html;   
             
-        }
-
-        
+        } 
     </script>
 @endsection

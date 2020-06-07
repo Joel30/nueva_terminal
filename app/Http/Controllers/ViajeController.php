@@ -66,9 +66,42 @@ class ViajeController extends Controller
         return redirect('viaje/nuevo')->with('good', 'Registro exitoso');
     }
 
-    public function show($id)
+    public function registro_anterior()
     {
-        //
+        $this->autorizacion('Encargado');
+
+        $fecha_actual = Viaje::whereDate('fecha', Carbon::now()
+                        ->format('Y-m-d'))
+                    ->pluck('transporte_id');
+
+        //dd($fecha_actual);
+        $viajes = Viaje::whereDate('fecha', Carbon::now()
+                    ->subDays(1)
+                    ->format('Y-m-d'))
+                ->whereNotIn('transporte_id', $fecha_actual)
+                ->get();
+
+        return view('tablero.registro_anterior', compact('viajes'));
+    }
+
+    public function copear_registros()
+    {
+        $this->autorizacion('Encargado');
+
+        $viaje = new Viaje;
+        $viaje->copear(request());
+        // dd(request());
+        return redirect('viaje')->with('info', 'Copia exitosa');
+    }
+
+    public function copear() {
+        $this->autorizacion('Encargado');
+   
+        $viaje = new Viaje;
+        //dd(request());
+        $viaje->guardar(request());
+
+        return redirect('viaje')->with('info', 'Copia exitosa');
     }
 
     public function edit($id)
@@ -91,6 +124,11 @@ class ViajeController extends Controller
         $buses = Bus::whereIn('id', $bus_id)->orderBy('tipo_bus','asc')->get();
 
         $viaje = Viaje::find($id);
+
+        $copia = request()->copia;
+        if($copia == true){
+            $viaje['copia'] = true;
+        } 
         return view('tablero.edit', compact('viaje', 'destinos', 'empresas', 'buses')); 
     }
 
@@ -103,11 +141,13 @@ class ViajeController extends Controller
         return redirect('viaje')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Viaje $viaje)
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
+
+        $viaje = Viaje::find($id);
         try {
             $viaje->delete();
             return redirect('viaje')->with('good', $status);
@@ -121,40 +161,14 @@ class ViajeController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        /*$fecha = Carbon::now()->format('Y-m-d');
-        $number = 7;
-        $cont = 10;
-        do {
-            $hora = Carbon::now()->addHour($number--)->addMinutes(0)->format('H:i');
-            $viajes = Viaje::select()
-                    ->where('hora','>=',$hora)
-                    ->where('fecha',$fecha)
-                    ->orderBy('hora','asc')
-                    ->take(7)
-                    ->get();
-            //dd($viajes);        
-        } while($viajes->count()<7 && $cont-- <= 0);*/
+        $fecha = Carbon::now()->subMinutes(25);
+        $viajes = Viaje::select()
+                ->where('hora','>=',$fecha->format('H:i'))
+                ->where('fecha','>=',$fecha->format('Y-m-d'))
+                ->orderBy('hora','asc')
+                ->take(7)
+                ->get();
 
-        $fecha = Carbon::now()->format('Y-m-d');
-        $number = 0;
-        $cont = 24;
-        $hora = null;
-        do {
-            $hora = Carbon::now()->subHour($number++)->subMinutes(0);
-            $viajes = Viaje::select()
-                    ->where('hora','>=',$hora->format('H:i'))
-                    ->where('fecha',$fecha)
-                    ->orderBy('hora','asc')
-                    ->take(7)
-                    ->get();
-           
-            if($hora->format('H') == "00"){
-                break;
-            }  
-            $cont --;    
-            
-        } while($viajes->count() <= 7 && $cont >= 0); 
-        //dd(Carbon::now()->subHour(7)->addMinutes(35)->format('h:i'));
         return view('tablero.datos_tablero', compact('viajes'));
     }
 
@@ -231,7 +245,7 @@ class ViajeController extends Controller
         $registros = request()->registros;
 
         if($registros != null){
-            $viajes = Viaje::all();
+            $viajes = Viaje::select('id', 'transporte_id', 'departamento', 'empresa', 'carril', 'bus', (DB::raw('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha')), (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado', 'llegada_salida')->get();
         } else {
             $fecha = request()->fecha;
             $fecha_inicio = request()->fecha_inicio;
@@ -239,24 +253,28 @@ class ViajeController extends Controller
             if ($fecha != 0){
                 $viajes = Viaje::whereYear('created_at',$fecha)
                         ->whereMonth('created_at',substr($fecha, -2))
+                        ->select('id', 'transporte_id', 'departamento', 'empresa', 'carril', 'bus', (DB::raw('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha')), (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado', 'llegada_salida')
                         ->get(); 
             } else {
                 if ($fecha_inicio != 0){
                     if ($fecha_fin != 0){
                         $viajes = Viaje::whereDate('created_at','>=',$fecha_inicio)
                             ->whereDate('created_at', '<=', $fecha_fin)
+                            ->select('id', 'transporte_id', 'departamento', 'empresa', 'carril', 'bus', (DB::raw('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha')), (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado', 'llegada_salida')
                             ->get();
                     } else {
                         $viajes = Viaje::whereDate('created_at',$fecha_inicio)
+                            ->select('id', 'transporte_id', 'departamento', 'empresa', 'carril', 'bus', (DB::raw('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha')), (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado', 'llegada_salida')
                             ->get();
                     }
                 } else {
                     $viajes = Viaje::whereDate('created_at',$fecha_fin)
+                        ->select('id', 'transporte_id', 'departamento', 'empresa', 'carril', 'bus', (DB::raw('DATE_FORMAT(fecha, "%d/%m/%Y") as fecha')), (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado', 'llegada_salida')
                         ->get();
                 }
             }
         }
 
-        return datatables()->of($viajes)->toJson();
+        return datatables()->of($viajes)->addIndexColumn()->toJson();
     }
 }

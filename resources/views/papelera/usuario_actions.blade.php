@@ -1,1 +1,1 @@
-<a href="{{route('restaurar.usuario', $id)}}" class="btn btn-success btn-sm text-center" title="Restaurar"><i class="fa fa-reply"aria-hidden="true"></i></a>
+<a href="{{route('restaurar.usuario', $id)}}" class="btn btn-outline-success btn-sm text-center py-0 px-1" title="Restaurar" onclick="return confirm('Está seguro de restaurar al usuario: {{App\User::onlyTrashed()->find($id)->email}}? Además, es posible que se restaure el registro de Personal correspondiente.')"><i class="fa fa-reply"aria-hidden="true"></i></a>

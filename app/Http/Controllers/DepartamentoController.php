@@ -54,11 +54,13 @@ class DepartamentoController extends Controller
         return redirect('departamento')->with('good', 'Modificación exitosa');
     }
 
-    public function destroy(Departamento $departamento )
+    public function destroy($id)
     {
         $this->autorizacion('Encargado');
 
         $status ='Eliminación exitosa';
+
+        $departamento = Departamento::find($id);
         if(count($departamento->transportes) > 0) {
             $status = 'Registro relacionado, imposible de eliminar';
         } else {

@@ -1,11 +1,28 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('usuario.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar Usuario</a>
+    Usuarios
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">Usuarios</li>
+@endsection
+
+@section('box')
+    <div class="mr-3">
+        <a href="{{route('usuario.nuevo')}}" class="btn btn-success py-1 mb-3">
+            <i class="fa fa-plus fa-fw"></i>
+            Agregar Usuario
+        </a>
+    </div>
+    <div class="">
+      
+        <a href="{{route('papelera.usuario')}}" class="btn btn-outline-light py-1 mb-3">
+            <i class="fa fa-trash-o fa-fw"></i>
+            Registros Eliminados
+        </a>
+
+    </div>
 @endsection
 
 @section('content')
@@ -17,28 +34,20 @@
                 <th>E-mail</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
+                <th class="bg-secondary">Cargo</th>
             </tr>
         </thead>
         <tbody>
-        <?php $cont = 1; ?>
         @foreach($usuarios as $usuario)
             <tr>
-                <td><b>{{ $cont++ }}</b</td>
+                <td></td>
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->personal->nombre.' '.$usuario->personal->apellido_paterno.' '.$usuario->personal->apellido_materno}}</td>
-
-                <td> 
-
-                    <a href="{{route('usuario.editar', $usuario)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
-
-                    <form action="{{route('usuario.eliminar', $usuario)}}" method="POST">
-                        {{method_field('DELETE')}}
-                        {{csrf_field()}}
-
-                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar al Usuario con id: {{ $usuario->id}}')" title="Eliminar">
-                    </form>
-                    
+                <td class="text-center">
+                    <a href="{{route('usuario.editar', $usuario)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('usuario.eliminar', $usuario)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar al Usuario: {{$usuario->email}}?')"><i class="fa fa-trash"></i></a>
                 </td>
+                <td>{{ $usuario->personal->cargo }}</td>
             </tr>
         @endforeach
         </tbody>

@@ -23,11 +23,13 @@ class TransporteController extends Controller
 
     public function data_index()
     {
-        $transportes = Transporte::with(['departamento:id,destino', 'carril:id,carril,anden'])
-            ->with('bus.empresa:id,nombre,telefono')->get();
+        $transportes = Transporte::select('id','departamento_id','carril_id', 'bus_id', (DB::raw('DATE_FORMAT(hora, "%H:%i") as hora')), 'estado')
+            ->with(['departamento:id,destino', 'carril:id,carril,anden', 'bus.empresa:id,nombre,telefono'])
+            ->get();
         
         return datatables()
             ->of($transportes)
+            ->addIndexColumn()
             ->addColumn('btn','/transporte/actions')
             ->rawColumns(['btn'])
             ->toJson();

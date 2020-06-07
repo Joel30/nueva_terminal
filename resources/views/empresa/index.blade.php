@@ -1,11 +1,20 @@
 @extends('layouts.app')
 
 @section('title')
-    <a href="{{route('empresa.nuevo')}}" class="btn btn-success py-1 btn-block">Agregar Empresa</a>
+    Empresa de Transporte
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">Empresa de Transporte</li>
+@endsection
+
+@section('box')
+    <div class="">
+        <a href="{{route('empresa.nuevo')}}" class="btn btn-success py-1 mb-3">
+            <i class="fa fa-plus fa-fw"></i>
+            Agregar Empresa
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -23,26 +32,17 @@
             </tr>
         </thead>
         <tbody>
-        <?php $cont = 1;?>
         @foreach($empresas as $empresa)
             <tr>
-                <td><b>{{ $cont++ }}</b></td>
+                <td></td>
                 <td>{{ $empresa->nombre }}</td>
                 <td>{{ $empresa->nro_oficina }}</td>
                 <td>{{ $empresa->telefono }}</td>
                 <td>{{ $empresa->celular }}</td>
                 <td>{{ $empresa->responsable }}</td>
                 <td>  
-
-                    <a href="{{route('empresa.editar', $empresa)}}" class="float-left pr-4"><input type=image src="{{asset('images/edit.png')}}" width="20" height="20" title="Editar"></a>
-
-                    <form action="{{route('empresa.eliminar', $empresa)}}" method="POST">
-                        {{method_field('DELETE')}}
-                        {{csrf_field()}}
-
-                        <input type=image src="{{asset('images/delete.png')}}" width="20" height="20" onclick="return confirm('Esta seguro de eliminar la Empresa de Transporte con id: {{ $empresa->id}}')" title="Eliminar">
-                    </form>
-                 
+                    <a href="{{route('empresa.editar', $empresa)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('empresa.eliminar', $empresa)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar la Empresa de transporte: {{$empresa->nombre}}?')"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         @endforeach

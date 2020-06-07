@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="mb-4 mx-0 px-0 col-sm-8 col-md-7 col-lg-5 col-xl-4">
-        <select class="form-control form-control-lg select-color text-capitalize" name="departamento" id="departamento" onchange="search(this.value)" required>
+        <select class="form-control select-color text-capitalize" name="departamento" id="departamento" onchange="search(this.value)" required>
         @if(sizeof($departamentos) != 0)
             @foreach($departamentos as $id => $destino)
                 <option style="color:#003f62" value="{{$destino}}" {{ old('departamento')=='$destino' ? 'selected' : ''  }}>{{$destino}}</option>

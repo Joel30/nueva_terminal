@@ -31,8 +31,20 @@ var my_data_table = "";
 
 function data_table() {
     my_data_table = $('#nt_table').DataTable({
-        language : language_es
+        language : language_es,
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]], 
     });
+
+    my_data_table.on( 'order.dt search.dt', function () {
+        my_data_table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
 
     $('#nt_table').parent().css('overflow-x', 'auto');
     $('#nt_table_info').removeClass("dataTables_info");  
