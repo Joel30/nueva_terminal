@@ -27,6 +27,8 @@
         @endif
         {{ csrf_field() }}
 
+        <input type="hidden" name="previous_url" value="{{url()->previous()}}">
+
         <div class="form-group row">
             <label for="departamento_id" class="col-md-4 col-form-label text-md-right">Destino: </label>
             <div class="col-md-6">
@@ -148,7 +150,7 @@
             @else
                 <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4">
                     <i class="fa fa-copy fa-fw"></i>
-                    Copear
+                    Copiar
                 </button>
             @endif
             </div>

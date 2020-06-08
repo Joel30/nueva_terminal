@@ -9,21 +9,38 @@
 @endsection
 
 @section('box')
-    <div class="mr-3">
-        <a href="{{route('viaje.nuevo')}}" class="btn btn-success py-1 mb-3">
-            <i class="fa fa-plus fa-fw"></i>
-            Agregar Registro
-        </a>
-    </div>
-    <div class="mr-3">
-        <a href="{{route('viaje.registro_anterior')}}" class="btn btn-light  py-1 mb-3">
-            <i class="fa fa-table fa-fw"></i>
-            Registro Anterior
-        </a>
-    </div>
-    <div class="">
-        <a href="{{route('viaje.tablero')}}" class="btn btn-outline-danger py-1 px-2" target="_blank" title="Visualizar Monitor"><i class="fa fa-eye" aria-hidden="true"></i></a>
-    </div> 
+    @if(request()->otros == null)
+        <div class="mr-3">
+            <a href="{{route('viaje.nuevo')}}" class="btn btn-success py-1 mb-3">
+                <i class="fa fa-plus fa-fw"></i>
+                Agregar Registro
+            </a>
+        </div>
+        <div class="mr-5">
+            <a href="{{route('viaje.tablero')}}" class="btn btn-outline-danger py-1 px-2" target="_blank" title="Visualizar Monitor"><i class="fa fa-eye" aria-hidden="true"></i></a>
+        </div>
+        <div class="row ml-0">
+            <form method="get" action="{{route('viaje.registro_anterior')}}" class="form-inline" onsubmit="prevent_multiple_submits()">
+                <input type="hidden" name="fecha" value="fecha_actual">
+                <button type="submit" class="btn btn-light  py-1 mb-3 mr-3" id="register_btn">
+                    <i class="fa fa-table fa-fw"></i>
+                    registros anteriores
+                </button>
+            </form>
+        
+            <a href="{{route('viaje.index')}}?otros=true" class="btn btn-light py-1 mb-3">
+                <i class="fa fa-table fa-fw"></i>
+                Otros
+            </a>        
+        </div>
+    @else 
+        <div class="">
+            <a href="{{route('viaje.index')}}"  class="btn btn-info py-1 mb-3">
+                <i class="fa fa-chevron-left fa-fw"></i>
+                Regresar
+            </a>
+        </div>
+    @endif 
 @endsection
 
 @section('content')

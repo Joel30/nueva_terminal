@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Tablero ({{Carbon\Carbon::now()->subDays(1)->format('d-m-y')}})
+    Tablero ({{$fecha}})
 @endsection
 
 @section('breadcrumb')
@@ -10,10 +10,20 @@
 
 @section('box')
     <div class="">
-        <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-3">
+        <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-3 mr-4">
             <i class="fa fa-chevron-left fa-fw"></i>
             Regresar
         </a>
+    </div>
+    <div class="">
+        <form class="form-inline" method="get" action="{{route('viaje.registro_anterior')}}" onsubmit="prevent_multiple_submits()">
+            <div class="input-group input-group-sm mb-3">
+                <input type="date" class="form-control" name="fecha" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-dark " id="register_btn" type="submit" ><i class="fa fa-search fa-fw"></i></button>
+                </div>
+            </div>
+        </form>
     </div>
 @endsection
 
@@ -56,7 +66,7 @@
                 <td>{{ $viaje->llegada_salida}}</td>
 
                 <td>
-                    <a href="{{route('viaje.editar', $viaje)}}?copia=true" class="btn btn-outline-info py-0 px-1 my-0 mr-3" title="Copear"><i class="fa fa-copy"></i></a>
+                    <a href="{{route('viaje.editar', $viaje)}}?copia=true" class="btn btn-outline-info py-0 px-1 my-0 mr-3" title="Copiar"><i class="fa fa-copy"></i></a>
                 </td>
             </tr>
             @endforeach
@@ -67,7 +77,7 @@
     <div class="row justify-content-center">
     <button id="copy_btn" type="submit" class="btn btn-info py-1 mt-2 mr-3">
             <i class="fa fa-edit fa-fw p-0"></i>
-        Copear a hoy
+        Copiar a hoy
     </button>
 </div>
 </form>

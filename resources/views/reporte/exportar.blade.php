@@ -19,7 +19,7 @@
 
         th, td {
             text-align: center;
-            padding: 2px 0px 2px 0px;
+            padding: 10px 0px 10px 0px;
             font-size:14px
         }
 

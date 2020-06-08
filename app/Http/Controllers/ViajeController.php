@@ -23,10 +23,13 @@ class ViajeController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        $viajes = Viaje::select()
-                    ->whereDate('fecha', Carbon::today()
-                        ->format('Y-m-d'))
-                    ->get();
+        $fecha = Carbon::today()->format('Y-m-d');
+
+        if(request()->otros != null){
+            $viajes = Viaje::whereDate('fecha', '>', $fecha)->get();
+        } else {
+            $viajes = Viaje::whereDate('fecha', $fecha)->get();
+        }
 
         return view('tablero.index', compact('viajes'));
     }
@@ -70,18 +73,23 @@ class ViajeController extends Controller
     {
         $this->autorizacion('Encargado');
 
+        $fecha = request()->fecha;
+    
+        if ($fecha == 'fecha_actual'){
+            $fecha = Carbon::now()->subDays(1)->format('Y-m-d');
+        }
+
         $fecha_actual = Viaje::whereDate('fecha', Carbon::now()
                         ->format('Y-m-d'))
                     ->pluck('transporte_id');
 
-        //dd($fecha_actual);
-        $viajes = Viaje::whereDate('fecha', Carbon::now()
-                    ->subDays(1)
-                    ->format('Y-m-d'))
+        $viajes = Viaje::whereDate('fecha', $fecha)
                 ->whereNotIn('transporte_id', $fecha_actual)
                 ->get();
 
-        return view('tablero.registro_anterior', compact('viajes'));
+        $fecha = Carbon::createFromFormat('Y-m-d',$fecha)->format('d-m-Y');
+
+        return view('tablero.registro_anterior', compact('viajes','fecha'));
     }
 
     public function copear_registros()
@@ -138,7 +146,7 @@ class ViajeController extends Controller
         
         $new_viaje = new Viaje;
         $new_viaje->actualizar(request(), $viaje);
-        return redirect('viaje')->with('good', 'Modificación exitosa');
+        return redirect(request()->previous_url)->with('good', 'Modificación exitosa');
     }
 
     public function destroy($id)
@@ -150,11 +158,11 @@ class ViajeController extends Controller
         $viaje = Viaje::find($id);
         try {
             $viaje->delete();
-            return redirect('viaje')->with('good', $status);
+            return redirect()->back()->with('good', $status);
         } catch (\Illuminate\Database\QueryException $e) {
             $status = 'Registro relacionado, imposible de eliminar';
         }
-        return redirect('viaje')->with('err', $status);  
+        return redirect()->back()->with('err', $status);  
     }
 
     public function datos_tablero()
@@ -162,9 +170,9 @@ class ViajeController extends Controller
         $this->autorizacion('Encargado');
 
         $fecha = Carbon::now()->subMinutes(25);
-        $viajes = Viaje::select()
-                ->where('hora','>=',$fecha->format('H:i'))
+        $viajes = Viaje::where('hora','>=',$fecha->format('H:i'))
                 ->where('fecha','>=',$fecha->format('Y-m-d'))
+                ->where('created_at', '<=', Carbon::now()->subMinutes(5))
                 ->orderBy('hora','asc')
                 ->take(7)
                 ->get();
