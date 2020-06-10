@@ -12,24 +12,24 @@
     <div class="white-box" style="padding-top:8px;padding-bottom:8px">
         <h5 class="box-title">Exportar Reportes</h5>
         <div class="row justify-content-center">
-            <div class="btn-group btn-group-toggle">
-                <a id="pdf" href="{{route('export.pdf')}}?fecha_actual=true" target="_blank" class="btn btn-danger btn-sm text-center px-2 px-sm-4">
+            
+                <a id="pdf" href="{{route('export.pdf')}}?fecha_actual=true" target="_blank" class="btn btn-outline-danger text-center py-1 px-2 px-sm-4 mr-2">
                     <i class="fa fa-download fa-fw"aria-hidden="true"></i>PDF
                 </a>
-                <a id="excel" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.xlsx" target="_blank" class="btn btn-success btn-sm text-center px-2 px-sm-4">
+                <a id="excel" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.xlsx" target="_blank" class="btn btn-outline-success text-center py-1 px-2 px-sm-4 mr-2">
                     <i class="fa fa-download fa-fw"aria-hidden="true"></i>EXCEL
                 </a>
-                <a id="csv" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.csv" target="_blank" class="btn btn-primary btn-sm text-center px-2 px-sm-4">
+                <a id="csv" href="{{route('export')}}?fecha_actual=true&archivo=reporte_de_viajes.csv" target="_blank" class="btn btn-outline-primary text-center py-1 px-2 px-sm-4">
                     <i class="fa fa-download fa-fw"aria-hidden="true"></i>CSV
                 </a>
-            </div>
+            
         </div>
     </div>
 @endsection
 @section('content')
 <div>   
     <div>
-        <button class="btn btn-outline-primary btn-sm text-center mb-3 mb-md-0" onclick="buscar(1)">
+        <button class="boton btn-green-let btn-sm text-center mb-3 mb-md-0" onclick="buscar(1)">
             <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Ver todos los registros
         </button>
     </div>
@@ -38,11 +38,11 @@
         <div class="col col-sm-8 col-md-6 col-lg-4">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <label class="input-group-text input-color1" for="fecha" id="buscar" onclick="buscar()"><i class="fa fa-search"></i></label>
+                    <button class="btn btn-secondary" for="fecha" id="buscar" onclick="buscar()"><i class="fa fa-search"></i></button>
                 </div>
                 <input type="month" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info  py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
+                    <button class="btn btn-outline-secondary  py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
                 </div> 
             </div>
         </div>
@@ -150,11 +150,11 @@
         document.getElementById("buscador").innerHTML =`<div class="col col-sm-8 col-md-6 col-lg-4">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <label class="input-group-text input-color1" for="fecha" onclick="buscar()"><i class="fa fa-search"></i></label>
+                    <button class="btn btn-dark" for="fecha" onclick="buscar()"><i class="fa fa-search"></i></button>
                 </div>
                 <input type="month" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
+                    <button class="btn btn-outline-secondary py-0 ml-0" onclick="dos()"><i class="fa fa fa-plus"></i></button> 
                 </div> 
             </div>
         </div>`; 
@@ -163,12 +163,12 @@
         document.getElementById("buscador").innerHTML = `<div class="col col-sm-8 col-md-7 col-lg-5">
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <label class="input-group-text input-color1" for="fecha-inicio" onclick="buscar()"><i class="fa fa-search"></i></label>
+                    <button class="btn btn-dark" for="fecha-inicio" onclick="buscar()"><i class="fa fa-search"></i></button>
                 </div>
-                <input type="date" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha-inicio">
-                <input type="date" class="form-control borde" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{date('Y-m-d')}}" id="fecha-fin">
+                <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="fecha-inicio">
+                <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{date('Y-m-d')}}" id="fecha-fin">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info py-0 ml-0" onclick="uno()"><i class="fa fa fa-chevron-left"></i></button> 
+                    <button class="btn btn-outline-secondary py-0 ml-0" onclick="uno()"><i class="fa fa fa-chevron-left"></i></button> 
                 </div> 
             </div>
         </div>`;

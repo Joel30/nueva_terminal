@@ -10,7 +10,7 @@
 
 @section('box')
     <div class="">
-        <a href="{{route('bus.nuevo')}}" class="btn btn-success py-1 mb-3">
+        <a href="{{route('bus.nuevo')}}" class="boton btn-green py-1 mb-3">
             <i class="fa fa-plus fa-fw"></i>
             Agregar Bus
         </a>

@@ -10,7 +10,7 @@
 
 @section('box')
     <div class="">
-        <a href="{{route('usuario.index')}}" class="btn btn-info py-1 mb-3">
+        <a href="{{route('usuario.index')}}" class="boton btn-blue py-1 mb-3">
             <i class="fa fa-chevron-left fa-fw"></i>
             Regresar
         </a>

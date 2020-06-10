@@ -24,7 +24,7 @@
         <div align="center" class="div1">
             <iframe src="https://www.youtube.com/embed/wLnyRcJHlhc?autoplay=1&controls=0&start=40&rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="div2">
+        <div class="div2 bg-dark">
             <table class="table">
                 <thead class="text-center">
                     <tr style="background-color:#077afe; border: hidden">

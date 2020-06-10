@@ -11,7 +11,7 @@
 
 @section('box')
     <div class="">
-        <a href="javascript:history.back(-1);"  class="btn btn-info py-1 mb-3">
+        <a href="javascript:history.back(-1);"  class="boton btn-blue py-1 mb-3">
             <i class="fa fa-chevron-left fa-fw"></i>
             Regresar
         </a>
@@ -144,12 +144,12 @@
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
             @if ($viaje->copia != true) 
-                <button id="register_btn" type="submit" class="btn btn-warning btn-block mt-4">
+                <button id="register_btn" type="submit" class="boton btn-yellow btn-block mt-4">
                     <i class="fa fa-edit fa-fw"></i>
                     Actualizar
                 </button>
             @else
-                <button id="register_btn" type="submit" class="btn btn-primary1 btn-block mt-4">
+                <button id="register_btn" type="submit" class="boton btn-green-let btn-block mt-4">
                     <i class="fa fa-copy fa-fw"></i>
                     Copiar
                 </button>

@@ -11,7 +11,7 @@
 
 @section('box')
     <div class="">
-        <a href="{{route('carril.index')}}" class="btn btn-info py-1 mb-3">
+        <a href="{{route('carril.index')}}" class="boton btn-blue py-1 mb-3">
             <i class="fa fa-chevron-left fa-fw"></i>
             Regresar
         </a>
@@ -56,7 +56,7 @@
 
         <div class="form-group row mb-0">
             <div class="col-md-4 offset-md-4">
-                <button id="register_btn" type="submit" class="btn btn-warning btn-block mt-4">
+                <button id="register_btn" type="submit" class="boton btn-yellow btn-block mt-4">
                     <i class="fa fa-edit fa-fw"></i>
                     Actualizar
                 </button>

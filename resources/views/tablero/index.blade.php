@@ -13,13 +13,13 @@
         <div class="col-12 col-sm-6">
             <div class="row justify-content-sm-start">
                 <div class="mr-3 ">
-                    <a href="{{route('viaje.nuevo')}}" class="btn btn-success py-1 mb-3">
+                    <a href="{{route('viaje.nuevo')}}" class="boton btn-green py-1 mb-3">
                         <i class="fa fa-plus fa-fw"></i>
                         Agregar Registro
                     </a>
                 </div>
                 <div>
-                    <a href="{{route('viaje.tablero')}}" class="btn btn-outline-danger py-1 mb-3 px-2" target="_blank" title="Visualizar Monitor"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="{{route('viaje.tablero')}}" class="boton btn-outline-red py-1 mb-3 px-2" target="_blank" title="Visualizar Monitor"><i class="fa fa-eye" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -27,21 +27,21 @@
             <div class="row justify-content-sm-end">
                 <form method="get" action="{{route('viaje.registro_anterior')}}" class="form-inline" onsubmit="prevent_multiple_submits()">
                     <input type="hidden" name="fecha" value="fecha_actual">
-                    <button type="submit" class="btn btn-light  py-1 mb-3 mr-3" id="register_btn">
-                        <i class="fa fa-table fa-fw"></i>
+                    <button type="submit" class="boton btn-green-let  py-1 mb-3 mr-3" id="register_btn">
+                        <i class="fa fa-copy fa-fw"></i>
                         Registro Anterior
                     </button>
                 </form>
             
-                <a href="{{route('viaje.index')}}?otros=true" class="btn btn-light py-1 mb-3">
-                    <i class="fa fa-table fa-fw"></i>
+                <a href="{{route('viaje.index')}}?otros=true" class="boton btn-green-let py-1 mb-3">
+                    <i class="fa fa-calendar-o fa-fw"></i>
                     Otros
                 </a>        
             </div>
         </div>   
     @else 
         <div class="">
-            <a href="{{route('viaje.index')}}"  class="btn btn-info py-1 mb-3">
+            <a href="{{route('viaje.index')}}"  class="boton btn-blue py-1 mb-3">
                 <i class="fa fa-chevron-left fa-fw"></i>
                 Regresar
             </a>
@@ -84,8 +84,8 @@
                 <td>{{ $viaje->llegada_salida}}</td>
 
                 <td>
-                    <a href="{{route('viaje.editar', $viaje)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('viaje.eliminar', $viaje)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el registro?')"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('viaje.editar', $viaje)}}" class="boton btn-outline-yellow py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('viaje.eliminar', $viaje)}}" class="boton btn-outline-red py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el registro?')"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
             @endforeach

@@ -61,18 +61,18 @@
   
             <div class="sticky-top">
                 <div class="">
-                    <nav class="navbar navbar-dark py-1 " style="background-color:#259bff;">
-                        <b class="navbar-brand font-italic">Nueva Terminal</b>
+                    <nav class="navbar navbar-dark py-0" style="background-color:#ec0451;">
+                        <b class="navbar-brand font-italic mr-3 px-2 rounded-pill" >Nueva Terminal</b>
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                            <a class=" open-close nav-link pl-5 text-white"
-                                    href="javascript:void(0)"><i class="fa fa-bars"></i></a>
+                            <a class=" open-close nav-link pl-4 text-white"
+                                    href="javascript:void(0)"><i class="fa fa-bars p-2 rounded-circle" style="background:#db0451"></i></a>
                             </li>
                         </ul>
                         
                         <div class="row">
                             <div class="col-12">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-white py-0 px-3 rounded-pill" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background:#db0451">
                                     {{ Auth::user()->personal->nombre.' '.Auth::user()->personal->apellido_paterno }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -105,7 +105,7 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
 
-        <div  class="navbar-default sidebar bg-dark" style="background-image: url({{asset('images/fondo-negro.jpg')}});" role="navigation" >
+        <div  class="navbar-default sidebar" style="background:#213952;" role="navigation" >
             <div class="sidebar-nav slimscrollsidebar">
                 
                 <ul class="nav" id="side-menu">

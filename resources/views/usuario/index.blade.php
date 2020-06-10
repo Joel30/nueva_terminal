@@ -10,7 +10,7 @@
 
 @section('box')
     <div class="mr-3">
-        <a href="{{route('usuario.nuevo')}}" class="btn btn-success py-1 mb-3">
+        <a href="{{route('usuario.nuevo')}}" class="boton btn-green py-1 mb-3">
             <i class="fa fa-plus fa-fw"></i>
             Agregar Usuario
         </a>
@@ -34,7 +34,7 @@
                 <th>E-mail</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
-                <th class="bg-secondary">Cargo</th>
+                <th class="text-dark">Cargo</th>
             </tr>
         </thead>
         <tbody>
@@ -44,8 +44,8 @@
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->personal->nombre.' '.$usuario->personal->apellido_paterno.' '.$usuario->personal->apellido_materno}}</td>
                 <td class="text-center">
-                    <a href="{{route('usuario.editar', $usuario)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('usuario.eliminar', $usuario)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar al Usuario: {{$usuario->email}}?')"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('usuario.editar', $usuario)}}" class="boton btn-outline-yellow py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('usuario.eliminar', $usuario)}}" class="boton btn-outline-red py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar al Usuario: {{$usuario->email}}?')"><i class="fa fa-trash"></i></a>
                 </td>
                 <td>{{ $usuario->personal->cargo }}</td>
             </tr>

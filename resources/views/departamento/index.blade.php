@@ -10,7 +10,7 @@
 
 @section('box')
     <div class="">
-        <a href="{{route('departamento.nuevo')}}" class="btn btn-success py-1 mb-3">
+        <a href="{{route('departamento.nuevo')}}" class="boton btn-green py-1 mb-3">
             <i class="fa fa-plus fa-fw"></i>
             Agregar Departamento
         </a>
@@ -35,8 +35,8 @@
                 <td>{{ $departamento->destino }}</td>
                 <td>{{ $departamento->tipo }}</td>
                 <td>
-                    <a href="{{route('departamento.editar', $departamento)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('departamento.eliminar', $departamento)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el departamneto: {{$departamento->destino}}?')"><i class="fa fa-trash"></i></a>  
+                    <a href="{{route('departamento.editar', $departamento)}}" class="boton btn-outline-yellow py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('departamento.eliminar', $departamento)}}" class="boton btn-outline-red py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar el departamneto: {{$departamento->destino}}?')"><i class="fa fa-trash"></i></a>  
                 </td>
             </tr>
         @endforeach

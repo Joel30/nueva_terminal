@@ -10,7 +10,7 @@
 
 @section('box')
     <div class="">
-        <a href="{{route('empresa.nuevo')}}" class="btn btn-success py-1 mb-3">
+        <a href="{{route('empresa.nuevo')}}" class="boton btn-green py-1 mb-3">
             <i class="fa fa-plus fa-fw"></i>
             Agregar Empresa
         </a>
@@ -41,8 +41,8 @@
                 <td>{{ $empresa->celular }}</td>
                 <td>{{ $empresa->responsable }}</td>
                 <td>  
-                    <a href="{{route('empresa.editar', $empresa)}}" class="btn btn-outline-warning py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('empresa.eliminar', $empresa)}}" class="btn btn-outline-danger py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar la Empresa de transporte: {{$empresa->nombre}}?')"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('empresa.editar', $empresa)}}" class="boton btn-outline-yellow py-0 px-1 my-0 mr-3" title="Editar"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('empresa.eliminar', $empresa)}}" class="boton btn-outline-red py-0 px-1" title="Eliminar" onclick="return confirm('Esta seguro de eliminar la Empresa de transporte: {{$empresa->nombre}}?')"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         @endforeach

@@ -11,7 +11,7 @@
 @section('box')
     <div class="col-12 col-sm-6">
         <div class="row justify-content-sm-start">
-            <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-2 mr-4">
+            <a href="{{route('viaje.index')}}" class="boton btn-blue py-1 mb-2 mr-4">
                 <i class="fa fa-chevron-left fa-fw"></i>
                 Regresar
             </a>
@@ -21,9 +21,9 @@
         <div class="row justify-content-end">
             <form class="form-inline" method="get" action="{{route('viaje.registro_anterior')}}" onsubmit="prevent_multiple_submits()">
                 <div class="input-group input-group-sm mb-3">
-                    <input type="date" class="form-control" name="fecha" required>
+                    <input type="date" max="{{Carbon\Carbon::now()->subDays(1)->format('Y-m-d')}}" class="form-control" name="fecha" required>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-dark " id="register_btn" type="submit" ><i class="fa fa-search fa-fw"></i></button>
+                        <button class="btn btn-dark pr-1" id="register_btn" type="submit" ><i class="fa fa-search fa-fw"></i></button>
                     </div>
                 </div>
             </form>
@@ -70,7 +70,7 @@
                 <td>{{ $viaje->llegada_salida}}</td>
 
                 <td>
-                    <a href="{{route('viaje.editar', $viaje)}}?copia=true" class="btn btn-outline-info py-0 px-1 my-0 mr-3" title="Copiar"><i class="fa fa-copy"></i></a>
+                    <a href="{{route('viaje.editar', $viaje)}}?copia=true" class="boton btn-outline-green py-0 px-1 my-0 mr-3" title="Copiar"><i class="fa fa-copy"></i></a>
                 </td>
             </tr>
             @endforeach
@@ -79,7 +79,7 @@
     </div>
 
     <div class="row justify-content-center">
-    <button id="copy_btn" type="submit" class="btn btn-info py-1 mt-2 mr-3">
+    <button id="copy_btn" type="submit" class="boton btn-green-let py-1 mt-2 mr-3">
             <i class="fa fa-edit fa-fw p-0"></i>
         Copiar a hoy
     </button>
