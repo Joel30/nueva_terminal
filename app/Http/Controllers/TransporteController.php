@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Transporte;
 use App\Bus;
@@ -103,7 +104,7 @@ class TransporteController extends Controller
         $status ='Eliminación exitosa';
 
         $transporte = Transporte::find($id);
-        if(count($transporte->viajes) > 0) {
+        if(count($transporte->viajes->where('fecha','>=', Carbon::now()->format('Y-m-d'))) > 0) {
             $status = 'Registro relacionado, imposible de eliminar';
         } else {
             Transporte::destroy($id);

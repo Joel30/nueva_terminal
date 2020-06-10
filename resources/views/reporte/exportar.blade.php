@@ -49,7 +49,7 @@
                 <?php $cont = 1; ?>
                 @foreach($viajes as $viaje)
                 <tr>
-                    <td style="padding:0px 4px"><b>{{ $cont++ }}</b></td>
+                    <td style="padding:0px 4px">{{ $cont++ }}</td>
                     <td style="text-align: left;">{{ array_get($viaje->departamento,'destino','') }}</td>
                     <td style="text-align: left;">{{ array_get($viaje->empresa,'nombre','') }}</td>
                     <td>{{ array_get($viaje->carril,'anden','') }}</td>

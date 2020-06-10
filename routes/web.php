@@ -67,8 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('viaje/tablero','ViajeController@tablero')->name('viaje.tablero');
 
     Route::get('viaje/registro/anterior','ViajeController@registro_anterior')->name('viaje.registro_anterior');
-    Route::post('viaje/copias','ViajeController@copear_registros')->name('viaje.copia_registros');
-    Route::post('viaje/copia','ViajeController@copear')->name('viaje.copia');
+    Route::post('viaje/copias','ViajeController@copiar_registros')->name('viaje.copia_registros');
+    Route::post('viaje/copia','ViajeController@copiar')->name('viaje.copia');
 
 
     Route::get('reporte','ViajeController@reporte')->name('reporte');

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Viaje;
 use App\Transporte;
 use App\Bus;
+use App\Empresa;
 use App\Departamento;
 
 use Yajra\Datatables\Datatables;
@@ -42,20 +43,10 @@ class ViajeController extends Controller
 
         $departamento_id = Transporte::where('estado','activo')->pluck('departamento_id');
         $bus_id = Transporte::where('estado','activo')->pluck('bus_id');
-        $nombre_empresa = DB::table('buses')
-            ->join('transportes','transportes.bus_id','buses.id')
-            ->join('empresas','empresas.id','buses.empresa_id')
-            ->where('estado','activo')
-            ->select('nombre', 'empresa_id', 'departamento_id')
-            ->distinct()
-            ->orderBy('nombre','asc')
-            ->get();
-
         $destinos = Departamento::whereIn('id', $departamento_id)->orderBy('destino', 'asc')->get();
-        $empresas = $nombre_empresa;
         $buses = Bus::whereIn('id', $bus_id)->orderBy('tipo_bus','asc')->get();
 
-        return view('tablero.create', compact('destinos', 'empresas', 'buses', 'today'));
+        return view('tablero.create', compact('destinos', 'buses', 'today'));
     }
 
     public function store()
@@ -69,75 +60,21 @@ class ViajeController extends Controller
         return redirect('viaje/nuevo')->with('good', 'Registro exitoso');
     }
 
-    public function registro_anterior()
-    {
-        $this->autorizacion('Encargado');
-
-        $fecha = request()->fecha;
-    
-        if ($fecha == 'fecha_actual'){
-            $fecha = Carbon::now()->subDays(1)->format('Y-m-d');
-        }
-
-        $fecha_actual = Viaje::whereDate('fecha', Carbon::now()
-                        ->format('Y-m-d'))
-                    ->pluck('transporte_id');
-
-        $viajes = Viaje::whereDate('fecha', $fecha)
-                ->whereNotIn('transporte_id', $fecha_actual)
-                ->get();
-
-        $fecha = Carbon::createFromFormat('Y-m-d',$fecha)->format('d-m-Y');
-
-        return view('tablero.registro_anterior', compact('viajes','fecha'));
-    }
-
-    public function copear_registros()
-    {
-        $this->autorizacion('Encargado');
-
-        $viaje = new Viaje;
-        $viaje->copear(request());
-        // dd(request());
-        return redirect('viaje')->with('info', 'Copia exitosa');
-    }
-
-    public function copear() {
-        $this->autorizacion('Encargado');
-   
-        $viaje = new Viaje;
-        //dd(request());
-        $viaje->guardar(request());
-
-        return redirect('viaje')->with('info', 'Copia exitosa');
-    }
-
     public function edit($id)
     {
         $this->autorizacion('Encargado');
 
         $departamento_id = Transporte::where('estado','activo')->pluck('departamento_id');
         $bus_id = Transporte::where('estado','activo')->pluck('bus_id');
-        $nombre_empresa = DB::table('buses')
-            ->join('transportes','transportes.bus_id','buses.id')
-            ->join('empresas','empresas.id','buses.empresa_id')
-            ->where('estado','activo')
-            ->select('nombre', 'empresa_id', 'departamento_id')
-            ->distinct()
-            ->orderBy('nombre','asc')
-            ->get();
-
         $destinos = Departamento::whereIn('id', $departamento_id)->orderBy('destino', 'asc')->get();
-        $empresas = $nombre_empresa;
         $buses = Bus::whereIn('id', $bus_id)->orderBy('tipo_bus','asc')->get();
 
         $viaje = Viaje::find($id);
-
         $copia = request()->copia;
         if($copia == true){
             $viaje['copia'] = true;
         } 
-        return view('tablero.edit', compact('viaje', 'destinos', 'empresas', 'buses')); 
+        return view('tablero.edit', compact('viaje', 'destinos', 'buses')); 
     }
 
     public function update(Viaje $viaje)
@@ -164,6 +101,49 @@ class ViajeController extends Controller
         }
         return redirect()->back()->with('err', $status);  
     }
+    public function registro_anterior()
+    {
+        $this->autorizacion('Encargado');
+
+        $fecha = request()->fecha;
+    
+        if ($fecha == 'fecha_actual'){
+            $fecha = Carbon::now()->subDays(1)->format('Y-m-d');
+        }
+
+        $registros_eliminados = Transporte::onlyTrashed()->pluck('id');
+        $fecha_actual = Viaje::whereDate('fecha', Carbon::now()->format('Y-m-d'))
+                    ->pluck('transporte_id');
+
+        $viajes = Viaje::whereDate('fecha', $fecha)
+                ->whereNotIn('transporte_id', $fecha_actual)
+                ->whereNotIn('transporte_id', $registros_eliminados)
+                ->get();
+
+        $fecha = Carbon::createFromFormat('Y-m-d',$fecha)->format('d-m-Y');
+
+        return view('tablero.registro_anterior', compact('viajes','fecha'));
+    }
+
+    public function copiar_registros()
+    {
+        $this->autorizacion('Encargado');
+
+        $viaje = new Viaje;
+        $viaje->copiar(request());
+        // dd(request());
+        return redirect('viaje')->with('info', 'Copia exitosa');
+    }
+
+    public function copiar() {
+        $this->autorizacion('Encargado');
+   
+        $viaje = new Viaje;
+        //dd(request());
+        $viaje->guardar(request());
+
+        return redirect('viaje')->with('info', 'Copia exitosa');
+    }
 
     public function datos_tablero()
     {
@@ -172,6 +152,7 @@ class ViajeController extends Controller
         $fecha = Carbon::now()->subMinutes(25);
         $viajes = Viaje::where('hora','>=',$fecha->format('H:i'))
                 ->where('fecha','>=',$fecha->format('Y-m-d'))
+                ->where('fecha','<=',Carbon::now()->format('Y-m-d'))
                 ->where('created_at', '<=', Carbon::now()->subMinutes(5))
                 ->orderBy('hora','asc')
                 ->take(7)

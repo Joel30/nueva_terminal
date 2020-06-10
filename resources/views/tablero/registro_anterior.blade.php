@@ -9,21 +9,25 @@
 @endsection
 
 @section('box')
-    <div class="">
-        <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-3 mr-4">
-            <i class="fa fa-chevron-left fa-fw"></i>
-            Regresar
-        </a>
+    <div class="col-12 col-sm-6">
+        <div class="row justify-content-sm-start">
+            <a href="javascript:history.back(-1);" class="btn btn-info py-1 mb-2 mr-4">
+                <i class="fa fa-chevron-left fa-fw"></i>
+                Regresar
+            </a>
+        </div>
     </div>
-    <div class="">
-        <form class="form-inline" method="get" action="{{route('viaje.registro_anterior')}}" onsubmit="prevent_multiple_submits()">
-            <div class="input-group input-group-sm mb-3">
-                <input type="date" class="form-control" name="fecha" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-dark " id="register_btn" type="submit" ><i class="fa fa-search fa-fw"></i></button>
+    <div class="col-12 col-sm-6">
+        <div class="row justify-content-end">
+            <form class="form-inline" method="get" action="{{route('viaje.registro_anterior')}}" onsubmit="prevent_multiple_submits()">
+                <div class="input-group input-group-sm mb-3">
+                    <input type="date" class="form-control" name="fecha" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-dark " id="register_btn" type="submit" ><i class="fa fa-search fa-fw"></i></button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 @endsection
 

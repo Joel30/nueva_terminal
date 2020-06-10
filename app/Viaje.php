@@ -52,7 +52,7 @@ class Viaje extends Model
         Viaje::create($data);
     }
 
-    function copear($request){
+    function copiar($request){
         //dd(($request->all()));
         $viajes = $request->all();
         unset($viajes['_token'],$viajes['item']);

@@ -33,6 +33,7 @@
             <label for="departamento_id" class="col-md-4 col-form-label text-md-right">Destino: </label>
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id" id="departamento_id" onchange="empresa(this.value)" required autofocus>
+                    <option></option>
                     @foreach($destinos as $destino)
                         <option value="{{$destino->id}}" {{ old('departamento_id', $viaje->transporte->departamento_id) == $destino->id ? 'selected' : ''  }}>{{$destino->destino}}</option>
                     @endforeach
@@ -50,9 +51,9 @@
             <div class="col-md-6">
                 <select class="form-control{{ $errors->has('empresa_id') ? ' is-invalid' : '' }}" name="empresa_id" id="empresa_id" onchange="bus(this.value)" required>
                     <option> </option>
-                    @foreach($empresas as $empresa)
-                        @if(old('departamento_id', $viaje->transporte->departamento_id) == $empresa->departamento_id)
-                            <option value="{{$empresa->empresa_id}}" {{ old('empresa_id', $viaje->transporte->bus->empresa_id)== $empresa->empresa_id ? 'selected' : ''  }}>{{$empresa->nombre}}</option>
+                    @foreach($buses as $bus)
+                        @if(old('departamento_id', $viaje->transporte->departamento_id) == $bus->transporte->departamento_id)
+                            <option value="{{$bus->empresa_id}}" {{ old('empresa_id', $viaje->transporte->bus->empresa_id)== $bus->empresa_id ? 'selected' : ''  }}>{{$bus->empresa->nombre}}</option>
                         @endif
                     @endforeach
                 </select>
@@ -86,7 +87,7 @@
         <div class="form-group row">
             <label for="fecha" class="col-md-4 col-form-label text-md-right">Fecha: </label>
             <div class="col-md-6">
-                <input id="fecha" type="date" class="form-control{{ $errors->has('fecha') ? ' is-invalid' : '' }}" name="fecha" value="{{$viaje->fecha >= Carbon\Carbon::now()->format('Y-m-d') ? $viaje->fecha : Carbon\Carbon::now()->format('Y-m-d')}}" required autofocus>
+                <input id="fecha" type="date" min="{{Carbon\Carbon::now()->format('Y-m-d')}}" class="form-control{{ $errors->has('fecha') ? ' is-invalid' : '' }}" name="fecha" value="{{$viaje->fecha >= Carbon\Carbon::now()->format('Y-m-d') ? $viaje->fecha : Carbon\Carbon::now()->format('Y-m-d')}}" required autofocus onchange="cambiar_select()">
                 @if ($errors->has('fecha'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('fecha') }}</strong>
@@ -158,49 +159,99 @@
     </form>
 
     <script>
-        function hora_transporte(val){  
-            console.log(val);
+        window.addEventListener("load", function(event) {
+            empresa("{{$viaje->transporte->departamento_id}}", "selected");
+            bus("{{$viaje->transporte->bus->empresa_id}}", "selected")
+        });
+   
+        function cambiar_select(){
+            document.getElementById("departamento_id").options.item(0).selected = 'selected';
+            empresa(-1);
+        }
 
-            var inputNombre = document.getElementById("hora");
+        function fecha(){
+            let fecha = document.getElementById("fecha").value;
+            if(fecha.length == 0){
+                fecha = "{{Carbon\Carbon::now()->format('Y-m-d')}}";
+            } 
+            return fecha;
+        }
+        function hora_transporte(val){  
+            var input_hora = document.getElementById("hora");
 
             if (val == "salida") {
-                var cod = document.getElementById("bus_id").value; 
-                @foreach($buses as $bus)
-                    if({{$bus->id}} == cod){
-                        inputNombre.value = "{{$bus->transporte->hora}}";
-                    }
-                @endforeach  
+                var bus_id = document.getElementById("bus_id").value; 
+                if (bus_id == {{$viaje->transporte->bus_id}}) {
+                    input_hora.value = "{{$viaje->hora}}";
+                } else {
+                    @foreach($buses as $bus)
+                        if({{$bus->id}} == bus_id){
+                            input_hora.value = "{{$bus->transporte->hora}}";
+                        }
+                    @endforeach  
+                }
             } else if (val == "llegada"){
-                inputNombre.value = "";
+                input_hora.value = "";
             } else {
-                @foreach($buses as $bus)
-                    if({{$bus->id}} == val){
-                        inputNombre.value = "{{$bus->transporte->hora}}";
-                    }
-                @endforeach  
+                if (val == {{$viaje->transporte->bus_id}}) {
+                    input_hora.value = "{{$viaje->hora}}";
+                } else {
+                    @foreach($buses as $bus)
+                        if({{$bus->id}} == val){
+                            input_hora.value = "{{$bus->transporte->hora}}";
+                        }
+                    @endforeach
+                }  
             }
         }
         
-        function empresa(val){         
+        function empresa(val, seleccionar =""){             
             var html ="<option></option>";
-            @foreach($empresas as $empresa)
-                if({{$empresa->departamento_id}} == val){
-                    html = html + `<option value="{{$empresa->empresa_id}}" {{ old('empresa_id')=='$empresa->empresa_id' ? 'selected' : ''  }}>{{$empresa->nombre}}</option>`;
+            var nombre_empresa = [];
+            @foreach($buses as $bus)
+                if({{$bus->transporte->departamento_id}} == val){
+                    var is_now = false;
+                    @foreach(App\Transporte::find($bus->transporte->id)->viajes as $fecha)
+                        if ("{{$fecha->fecha}}" == fecha()) is_now = true;
+                    @endforeach
+                    if(is_now == false || {{$viaje->transporte_id}} == {{$bus->transporte->id}}){
+                        if (!nombre_empresa.includes("{{$bus->empresa->nombre}}")){
+                            html = html + `<option value="{{$bus->empresa_id}}" {{ old('empresa_id', $viaje->transporte->bus->empresa_id) == $bus->empresa_id ? '${seleccionar}' : ''  }}>{{$bus->empresa->nombre}}</option>`;
+                            nombre_empresa.push("{{$bus->empresa->nombre}}");
+                        } 
+                    }
                 }
-            @endforeach    
-            document.getElementById("empresa_id").innerHTML = html;  
+            @endforeach
+            if (html == "<option></option>" ){
+                if ({{$viaje->transporte->departamento_id}} == val) {
+                    html = html + `<option value="{{$viaje->transporte->bus->empresa_id}}" selected>{{$viaje->transporte->bus->empresa->nombre}}</option>`;
+                } else if (val != -1) html="<option> [ No disponibles para hoy ]</option>";  
+            }    
+            document.getElementById("empresa_id").innerHTML = html;
+            if (seleccionar == "") bus(-1);
         }
 
-        function bus(val){       
+        function bus(val, seleccionar =""){       
             var cod = document.getElementById("departamento_id").value; 
-            console.log(cod);
-
             var html ="<option></option>";
+            var option_bus = false;
             @foreach($buses as $bus)
                 if({{$bus->empresa->id}} == val && {{$bus->transporte->departamento_id}} == cod){
-                    html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
+                    var is_now = false;
+                    @foreach(App\Transporte::find($bus->transporte->id)->viajes as $fecha)
+                        if ("{{$fecha->fecha}}" == fecha()) is_now = true;
+                    @endforeach
+                    if(is_now == false || {{$viaje->transporte_id}} == {{$bus->transporte->id}}){
+                        html = html + `<option value="{{$bus->id}}" {{ old('bus_id', $viaje->transporte->bus_id)== $bus->id ? '${seleccionar}' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->placa}} - M: {{$bus->modelo}} )</option>`;
+                    }
                 }
             @endforeach    
+
+            if (html == "<option></option>" ){
+                if ({{$viaje->transporte->bus->empresa_id}} == val) {
+                    html = html + `<option value="{{$viaje->transporte->bus_id}}" >{{$viaje->transporte->bus->tipo_bus }} ( P: {{$viaje->transporte->bus->placa}} - M: {{$viaje->transporte->bus->modelo}} )</option>`;
+                } 
+            }   
             document.getElementById("bus_id").innerHTML = html;     
         }
 

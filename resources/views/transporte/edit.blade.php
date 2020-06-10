@@ -142,17 +142,14 @@
     <script>
         function empresa(val){         
             var html ="<option></option>";
-            
+            if(val == {{$transporte->bus->empresa_id}}){
+                html = html + `<option value="{{$transporte->bus->id}}" {{ old('bus_id')=='$transporte->bus->id' ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus }} ( P: {{$transporte->bus->placa}} - M: {{$transporte->bus->modelo}} )</option>`;
+            } 
             @foreach($buses as $bus)
                 if({{$bus->empresa->id}} == val){
                     html = html + `<option value="{{$bus->id}}" {{ old('bus_id')=='$bus->id' ? 'selected' : ''  }}>{{$bus->tipo_bus }} ( P: {{$bus->modelo}} - M: {{$bus->color}} )</option>`;
                 }
-            @endforeach
-            
-            if(val == {{$transporte->bus->empresa_id}}){
-                html = html + `<option value="{{$transporte->bus->id}}" {{ old('bus_id')=='$transporte->bus->id' ? 'selected' : ''  }}>{{$transporte->bus->tipo_bus }} ( P: {{$transporte->bus->placa}} - M: {{$transporte->bus->modelo}} )</option>`;
-            }   
-               
+            @endforeach 
             document.getElementById("bus_id").innerHTML = html;  
         }
     </script>
