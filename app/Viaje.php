@@ -31,7 +31,6 @@ class Viaje extends Model
     ];
 
     function guardar($request){
-        //dd($request);
         $data = $request->validate([
             'fecha'=> 'required', 
             'hora'=> 'required', 
@@ -53,7 +52,6 @@ class Viaje extends Model
     }
 
     function copiar($request){
-        //dd(($request->all()));
         $viajes = $request->all();
         unset($viajes['_token'],$viajes['item']);
 
@@ -76,7 +74,6 @@ class Viaje extends Model
     }
 
     function actualizar($request, $viaje){
-        //dd($request);
         $data = $request->validate([
             'fecha'=> 'required', 
             'hora'=> 'required', 
@@ -93,7 +90,6 @@ class Viaje extends Model
         $data['empresa'] = $t->bus->empresa;
         $data['carril'] = $t->carril;
         $data['bus'] = $t->bus;
-        
         $viaje->update($data);
     }
 }

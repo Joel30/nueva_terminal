@@ -147,7 +147,9 @@
             </div>
         </div>
     </form>
+@endsection
 
+@section('scripts')
     <script>
         function cambiar_select(){
             document.getElementById("departamento_id").options.item(0).selected = 'selected';

@@ -88,3 +88,33 @@
 
 
 @endsection
+
+@section('scripts')
+
+    <script>
+        $(document).ready(function(){boton()});
+        function boton(){
+            if( $('.case').is(':checked') ) {
+                $('#copy_btn').attr('disabled', false);
+            }else{
+                $('#copy_btn').attr('disabled','disabled');
+            }
+        }
+
+        $("#selectall").on("click", function() {  
+            $(".case").prop("checked", this.checked);  
+            boton();
+        });  
+            // if all checkbox are selected, check the selectall checkbox and viceversa  
+        $(".case").on("click", function() {  
+            if ($(".case").length == $(".case:checked").length) {  
+                $("#selectall").prop("checked", true);
+                boton();
+            } else {  
+                $("#selectall").prop("checked", false);
+                boton();  
+            }  
+        });
+    </script>
+
+@endsection

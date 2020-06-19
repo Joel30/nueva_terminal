@@ -38,3 +38,25 @@
     </table>
 
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+
+            let url ="{{route('transporte.data_index')}}";
+            let columns = [
+                    {data: 'DT_RowIndex'},
+                    {data: 'departamento.destino'},
+                    {data: 'bus.empresa.nombre'},
+                    {data: 'bus.empresa.telefono'},
+                    {data: 'carril.anden'},
+                    {data: 'carril.carril'},
+                    {data: 'bus.tipo_bus'},
+                    {data: 'hora'},
+                    {data: 'estado'},
+                    {data: 'btn'}
+                ];
+            laravel_data_table(url,columns,'nt_table2');
+        });
+    </script>
+@endsection

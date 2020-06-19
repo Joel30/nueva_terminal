@@ -34,3 +34,20 @@
         
     </table>
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            let url ="{{route('usuario.papelera')}}";
+            let columns = [
+                    {data: 'DT_RowIndex'},
+                    {data: 'email'},
+                    {data: 'nombre'},
+                    {data: 'cargo'},
+                    {data: 'hora'},
+                    {data: 'btn'}
+                ];
+            laravel_data_table(url,columns,'nt_table_papelera_usuario');
+        });
+    </script>
+@endsection

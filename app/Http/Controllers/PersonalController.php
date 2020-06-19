@@ -31,11 +31,6 @@ class PersonalController extends Controller
         return redirect('personal/nuevo')->with('good', 'Registro exitoso');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $this->autorizacion('Administrador');

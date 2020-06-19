@@ -43,13 +43,6 @@ class BusController extends Controller
         $bus->guardar(request());
 
         return redirect('bus/nuevo')->with('good', 'Registro exitoso');
-
-
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)

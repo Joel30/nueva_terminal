@@ -19,7 +19,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ViajeController extends Controller
 {
-    //
     public function index()
     {
         $this->autorizacion('Encargado');
@@ -54,7 +53,7 @@ class ViajeController extends Controller
         $this->autorizacion('Encargado');
    
         $viaje = new Viaje;
-        //dd(request());
+        
         $viaje->guardar(request());
 
         return redirect('viaje/nuevo')->with('good', 'Registro exitoso');
@@ -131,7 +130,7 @@ class ViajeController extends Controller
 
         $viaje = new Viaje;
         $viaje->copiar(request());
-        // dd(request());
+        
         return redirect('viaje')->with('info', 'Copia exitosa');
     }
 
@@ -139,7 +138,7 @@ class ViajeController extends Controller
         $this->autorizacion('Encargado');
    
         $viaje = new Viaje;
-        //dd(request());
+        
         $viaje->guardar(request());
 
         return redirect('viaje')->with('info', 'Copia exitosa');
@@ -174,7 +173,7 @@ class ViajeController extends Controller
 
         $viajes = Viaje::whereDate('created_at','>=',Carbon::now()->format('Y-m-d'))
                     ->get();
-        //dd($viajes);
+        
         return view('reporte.index', compact('viajes'));
     }
 

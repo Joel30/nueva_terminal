@@ -40,7 +40,6 @@ class TransporteController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        //$empresas =  Bus::whereNotIn('id',$bus_id)->select('empresa_id')->distinct()->get();
         $bus_id = Transporte::all()->pluck('bus_id');
 
         $empresa_id = Bus::whereNotIn('id',$bus_id)->select('empresa_id')->distinct()->pluck('empresa_id');
@@ -57,15 +56,10 @@ class TransporteController extends Controller
         $this->autorizacion('Encargado');
    
         $transporte = new Transporte;
-        //dd(request());
+
         $transporte->guardar(request());
 
         return redirect('transporte/nuevo')->with('good', 'Registro exitoso');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)
@@ -91,7 +85,6 @@ class TransporteController extends Controller
     {
         $this->autorizacion('Encargado');
 
-        //dd(request());
         $new_trasporte = new Transporte;
         $new_trasporte->actualizar(request(), $transporte);
         return redirect('transporte')->with('good', 'Modificación exitosa');

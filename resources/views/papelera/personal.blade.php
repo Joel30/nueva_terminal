@@ -38,3 +38,23 @@
     </table>
 
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            let url ="{{route('personal.papelera')}}";
+            let columns = [
+                    {data: 'DT_RowIndex'},
+                    {data: 'nombre'},
+                    {data: 'ci'},
+                    {data: 'fecha_nacimiento'},
+                    {data: 'celular'},
+                    {data: 'direccion'},
+                    {data: 'cargo'},
+                    {data: 'hora'},
+                    {data: 'btn'}
+                ];
+            laravel_data_table(url,columns,'nt_table_papelera_personal');  
+        });
+    </script>
+@endsection

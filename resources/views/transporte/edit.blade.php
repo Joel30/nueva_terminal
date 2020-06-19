@@ -138,7 +138,9 @@
             </div>
         </div>
     </form>
+@endsection
 
+@section('scripts')
     <script>
         function empresa(val){         
             var html ="<option></option>";

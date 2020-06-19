@@ -157,7 +157,9 @@
             </div>
         </div>
     </form>
+@endsection
 
+@section('scripts')
     <script>
         window.addEventListener("load", function(event) {
             empresa("{{$viaje->transporte->departamento_id}}", "selected");

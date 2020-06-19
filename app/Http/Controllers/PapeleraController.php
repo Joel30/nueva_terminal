@@ -25,8 +25,6 @@ class PapeleraController extends Controller
 
     public function usuario_papelera() 
     {
-        //$this->autorizacion('Administrador');
-
         $usuarios = User::onlyTrashed()
             ->join('personal', 'personal.id', '=', 'users.personal_id')
             ->select('users.id','email','personal_id', 'personal.cargo',
@@ -43,8 +41,6 @@ class PapeleraController extends Controller
 
     public function personal_papelera() 
     {
-        //$this->autorizacion('Administrador');
-
         $personal = Personal::onlyTrashed()
             ->select('id', 
                 (DB::raw('CONCAT(nombre," ",apellido_paterno," ",apellido_materno) as nombre')),
@@ -63,6 +59,8 @@ class PapeleraController extends Controller
 
     public function restore_usuario($id) 
     {
+        $this->autorizacion('Administrador');
+
         $user = User::onlyTrashed()->findOrFail($id);
         if($user->personal->deleted_at == null){
             $user->restore();
@@ -75,6 +73,8 @@ class PapeleraController extends Controller
 
     public function restore_personal($id) 
     {
+        $this->autorizacion('Administrador');
+
         Personal::onlyTrashed()->findOrFail($id)->restore();
         return redirect('personal/papelera')->with('good', 'Restauración exitosa');
     }

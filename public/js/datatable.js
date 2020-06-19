@@ -53,3 +53,23 @@ function data_table() {
 $(document).ready(data_table);
 
 
+function laravel_data_table(url, columns, name) {
+    $('#' + name).DataTable( {
+        //"processing": true,
+        "serverSide": true,
+        language: language_es,
+        ajax:{
+            url : url,
+        },
+        "columns": columns,
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],             
+        "order": [[ 1, 'asc' ]],     
+    });
+    $('#' + name ).parent().css('overflow-x', 'auto');
+    $('#' + name +'_info').removeClass("dataTables_info");  
+    $('#' + name +'_info').addClass("text-info text-center"); 
+}

@@ -34,6 +34,23 @@
         </thead>
         
     </table>
+@endsection
 
-
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            let url ="{{route('bus.data_index')}}";
+            let columns = [
+                    {data: 'DT_RowIndex'},
+                    {data: 'empresa.nombre'},
+                    {data: 'tipo_bus'},
+                    {data: 'placa'},
+                    {data: 'marca'},
+                    {data: 'modelo'},
+                    {data: 'color'},
+                    {data: 'btn'}
+                ];
+            laravel_data_table(url,columns,'nt_table1');
+        });
+    </script>
 @endsection

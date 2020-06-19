@@ -39,7 +39,6 @@ class Transporte extends Model
     ];
 
     function guardar($request){
-        //dd($request);
         $data = $request->validate([
             'departamento_id' => 'required', 
             'carril_id' => 'required', 
@@ -52,7 +51,6 @@ class Transporte extends Model
     }
 
     function actualizar($request, $transporte){
-        //dd($request);
         $data = $request->validate([
             'departamento_id' => 'required', 
             'carril_id' => 'required', 
@@ -63,7 +61,6 @@ class Transporte extends Model
             'hora' => 'required', 
             'estado' => 'required', 
         ]);
-        // llegada = 1(true) , salida = 0(false)
         $transporte->update($data);
     }
 }

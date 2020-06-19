@@ -33,11 +33,6 @@ class UserController extends Controller
         return redirect('usuario')->with('good', 'Registro exitoso');
     }
 
-    public function show($id)
-    {
-
-    }
-
     public function edit($id)
     {
         $this->autorizacion('Administrador');

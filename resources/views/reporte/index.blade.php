@@ -86,7 +86,9 @@
         </tbody>
     </table>
 </div>
+@endsection
 
+@section('scripts')
 <script>
     function buscar(val = 0){
         var fecha = document.getElementById("fecha");
@@ -142,7 +144,8 @@
                 "order": [[ 1, 'asc' ]],     
             });
             $('#nt_table').parent().css('overflow-x', 'auto');
-            $('#nt_table_info').addClass("text-info"); 
+            $('#nt_table_info').removeClass("dataTables_info");  
+            $('#nt_table_info').addClass("text-info text-center"); 
         } 
     }
         
